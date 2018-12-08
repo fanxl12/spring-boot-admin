@@ -1,0 +1,17 @@
+server:
+  port: 8086
+
+spring:
+  thymeleaf:
+    cache: false
+    suffix: .html
+    mode: HTML
+    prefix: classpath:/templates/
+    servlet:
+      content-type: text/html
+  resources:
+    chain:
+      strategy:
+        content:
+          enabled: true
+          paths: /**
