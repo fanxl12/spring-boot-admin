@@ -24,6 +24,9 @@
 
     <modules>
         <module>web</module>
+        <module>admin-service</module>
+        <module>admin-dao</module>
+        <module>admin-core</module>
     </modules>
 
 
