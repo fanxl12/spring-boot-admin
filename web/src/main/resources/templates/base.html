@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="common_header(title, links, scripts)">
+    <meta charset="UTF-8" content="text/html"/>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title th:utext="${title}">Admin管理平台</title>
+
+    <link type="image/x-icon" th:href="@{/static/images/favicon.ico}" rel="shortcut icon">
+
+    <!-- 引入 layui css -->
+    <link th:href="@{/static/layui/2.4.5/css/layui.css}" rel="stylesheet"/>
+
+    <!--/* Per-page placeholder for additional links */-->
+    <th:block th:replace="${links} ?: ~{}" />
+    <th:block th:replace="${scripts} ?: ~{}" />
+
+</head>
+<body>
+
+<div th:fragment="top_header" class="layui-header">
+    <div class="layui-logo">Admin管理平台</div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <ul class="layui-nav layui-layout-left">
+        <li class="layui-nav-item"><a href="">控制台</a></li>
+        <li class="layui-nav-item"><a href="">商品管理</a></li>
+        <li class="layui-nav-item"><a href="">用户</a></li>
+        <li class="layui-nav-item layui-this">
+            <a href="javascript:;">产品</a>
+            <dl class="layui-nav-child">
+                <dd><a href="">选项1</a></dd>
+                <dd><a href="">选项2</a></dd>
+                <dd><a href="">选项3</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item"><a href="javascript:;">其它系统</a>
+            <dl class="layui-nav-child">
+                <dd>
+                    <a href="">邮件管理</a>
+                </dd>
+                <dd>
+                    <a href="">消息管理</a>
+                </dd>
+                <dd>
+                    <a href="">授权管理</a>
+                </dd>
+            </dl>
+        </li>
+    </ul>
+    <ul class="layui-nav layui-layout-right">
+        <li class="layui-nav-item"><a href="javascript:;"> fanxl12 </a>
+            <dl class="layui-nav-child">
+                <dd>
+                    <a href="">基本资料</a>
+                </dd>
+                <dd>
+                    <a href="">安全设置</a>
+                </dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item"><a href="">退出</a></li>
+    </ul>
+</div>
+
+<div th:fragment="left_nav" class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+        <ul class="layui-nav layui-nav-tree" lay-filter="test">
+            <li class="layui-nav-item layui-nav-itemed"><a class=""
+                                                           href="javascript:;">所有商品</a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a href="javascript:;">列表一</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:;">列表二</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:;">列表三</a>
+                    </dd>
+                    <dd>
+                        <a href="">超链接</a>
+                    </dd>
+                </dl></li>
+            <li class="layui-nav-item"><a href="javascript:;">解决方案</a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a href="javascript:;">列表一</a>
+                    </dd>
+                    <dd>
+                        <a href="javascript:;">列表二</a>
+                    </dd>
+                    <dd>
+                        <a href="">超链接</a>
+                    </dd>
+                </dl></li>
+            <li class="layui-nav-item"><a href="">云市场</a></li>
+            <li class="layui-nav-item"><a href="">发布商品</a></li>
+        </ul>
+    </div>
+</div>
+
+<footer th:fragment="footer">
+    <div class="layui-footer">
+        <div class="layui-main" style="text-align: center">
+            <p>&copy; 2018 <a href="/">www.fanxl.cn</a></p>
+        </div>
+    </div>
+</footer>
+
+<th:block th:fragment="bottom_script">
+    <!-- 引入 layui核心 JavaScript 文件 -->
+    <script th:src="@{/static/layui/2.4.5/layui.js}"></script>
+    <script>
+        //JavaScript代码区域
+        layui.use('element', function() {
+            var element = layui.element;
+            //一些事件监听
+            element.on('tab(demo)', function(data){
+                console.log(data);
+            });
+        });
+    </script>
+</th:block>
+
+</body>
+</html>

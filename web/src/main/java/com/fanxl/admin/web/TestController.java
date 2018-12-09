@@ -16,9 +16,15 @@ public class TestController {
 
     @GetMapping("")
     public ModelAndView test(ModelAndView mv) {
-        mv.setViewName("test");
+        mv.setViewName("home");
         mv.addObject("title", "你好");
         return mv;
+    }
+
+    @GetMapping("login")
+    public String login(ModelAndView mv) {
+        mv.addObject("title", "你好");
+        return "index";
     }
 
 }

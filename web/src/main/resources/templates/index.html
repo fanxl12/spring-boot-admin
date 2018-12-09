@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base :: common_header(~{::title/text()},~{::link},~{::script})">
+
+    <title>Admin管理后台</title>
+
+</head>
+<body class="layui-layout-body">
+
+<div class="layui-layout layui-layout-admin">
+    <div th:replace="base :: top_header"></div>
+
+    <div th:replace="base :: left_nav"></div>
+
+    <div class="layui-body">
+        <div style="background-color: gainsboro; padding: 15px">
+            <span class="layui-breadcrumb">
+                <a href="/">首页</a>
+                <a><cite>导航元素</cite></a>
+            </span>
+        </div>
+        <!--内容主体区域 -->
+        <div style="padding: 15px;">我是登录页面的主体区域</div>
+    </div>
+
+    <div th:replace="base :: footer"></div>
+</div>
+
+<th:block th:replace="base :: bottom_script" />
+
+</body>
+</html>

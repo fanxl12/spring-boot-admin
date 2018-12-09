@@ -9,6 +9,7 @@ spring:
     prefix: classpath:/templates/
     servlet:
       content-type: text/html
+    check-template-location: true
   resources:
     chain:
       strategy:
