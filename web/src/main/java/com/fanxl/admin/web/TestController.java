@@ -16,7 +16,7 @@ public class TestController {
 
     @GetMapping("")
     public ModelAndView test(ModelAndView mv) {
-        mv.setViewName("home");
+        mv.setViewName("index");
         mv.addObject("title", "你好");
         return mv;
     }
@@ -24,7 +24,7 @@ public class TestController {
     @GetMapping("login")
     public String login(ModelAndView mv) {
         mv.addObject("title", "你好");
-        return "index";
+        return "login";
     }
 
 }
