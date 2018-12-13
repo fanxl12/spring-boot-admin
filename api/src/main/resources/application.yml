@@ -1,5 +1,5 @@
 server:
-  port: 8086
+  port: 8072
 
 spring:
   datasource:
@@ -36,22 +36,6 @@ spring:
     druid:
       web-stat-filter:
         enabled: false
-  thymeleaf:
-    cache: false
-    suffix: .html
-    mode: HTML
-    prefix: classpath:/templates/
-    servlet:
-      content-type: text/html
-    check-template-location: true
-  resources:
-    chain:
-      strategy:
-        content:
-          enabled: true
-          paths: /**
-  session:
-    store-type: none
 
 mybatis:
   type-aliases-package: com.fanxl.admin.entity
@@ -64,9 +48,3 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
-
-soft:
-  security:
-    browser:
-      signInPage: /login
-      signInResponseType: REDIRECT

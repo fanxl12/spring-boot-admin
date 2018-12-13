@@ -10,4 +10,11 @@
                 #{email}, #{lastLoginTime}, #{accountExpired});
     </insert>
 
+    <!--查找详情-->
+    <select id="get" parameterType="String" resultType="User">
+        select id, username, phone, head, email
+        from admin_user
+        where id =#{id};
+    </select>
+
 </mapper>

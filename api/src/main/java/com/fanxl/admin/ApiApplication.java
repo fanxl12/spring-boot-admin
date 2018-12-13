@@ -10,12 +10,12 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
  * @author: fanxl
  * @date: 2018/12/8 0008 22:50
  */
+@SpringBootApplication
 @ServletComponentScan
 @MapperScan("com.fanxl.admin.dao")
-@SpringBootApplication(scanBasePackages = {"com.fanxl.admin", "com.fanxl.security"})
-public class WebApplication {
+public class ApiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WebApplication.class, args);
+        SpringApplication.run(ApiApplication.class, args);
     }
 }

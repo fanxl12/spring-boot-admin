@@ -16,4 +16,11 @@ public interface UserService {
      */
     boolean create(User user);
 
+    /**
+     * 查询用户
+     * @param id
+     * @return
+     */
+    User get(String id);
+
 }

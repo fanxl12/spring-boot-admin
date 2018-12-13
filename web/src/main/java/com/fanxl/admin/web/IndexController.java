@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author: fanxl
  * @date: 2018/12/8 0008 22:58
  */
-@RequestMapping("index")
+@RequestMapping("")
 @Controller
 public class IndexController {
 

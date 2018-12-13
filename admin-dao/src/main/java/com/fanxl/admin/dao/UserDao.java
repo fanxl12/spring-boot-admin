@@ -18,4 +18,11 @@ public interface UserDao {
      */
     int create(User user);
 
+    /**
+     * 查找用户详情
+     * @param id
+     * @return
+     */
+    User get(String id);
+
 }
