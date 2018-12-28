@@ -23,23 +23,7 @@
     <div class="layui-logo">Admin管理平台</div>
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
-        <li class="layui-nav-item"><a href="">控制台</a></li>
-        <li class="layui-nav-item"><a href="">商品管理</a></li>
-        <li class="layui-nav-item"><a href="">用户</a></li>
-        <li class="layui-nav-item layui-this">
-            <a href="javascript:;">其它系统</a>
-            <dl class="layui-nav-child">
-                <dd>
-                    <a href="">邮件管理</a>
-                </dd>
-                <dd>
-                    <a href="">消息管理</a>
-                </dd>
-                <dd>
-                    <a href="">授权管理</a>
-                </dd>
-            </dl>
-        </li>
+        <li class="layui-nav-item layui-this"><a href="">基础数据</a></li>
     </ul>
     <ul class="layui-nav layui-layout-right">
         <li class="layui-nav-item">
@@ -56,27 +40,29 @@
     </ul>
 </div>
 
-<div th:fragment="left_nav" class="layui-side layui-bg-black">
+<div th:fragment="left_nav(parent, child)" class="layui-side layui-bg-black">
     <div class="layui-side-scroll">
-        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+        <!-- 左侧导航区域（可配合layui已有的垂直导航）  -->
         <ul class="layui-nav layui-nav-tree" lay-filter="test">
-            <li class="layui-nav-item layui-nav-itemed"><a class=""
-                                                           href="javascript:;">所有商品</a>
+            <li class="layui-nav-item" th:classappend="${child == ''}?'layui-this' : ''"><a href="/">控制台</a></li>
+            <li class="layui-nav-item" th:classappend="${parent=='product'}?'layui-nav-itemed':''">
+                <a href="javascript:;">商品</a>
                 <dl class="layui-nav-child">
-                    <dd>
-                        <a href="javascript:;">列表一</a>
+                    <dd th:class="${child == 'category'}? 'layui-this' : ''">
+                        <a href="/category">分类管理</a>
                     </dd>
-                    <dd>
-                        <a href="javascript:;">列表二</a>
+                    <dd th:class="${child=='food'}?'layui-this':''">
+                        <a href="javascript:;">商品管理</a>
                     </dd>
-                    <dd>
-                        <a href="javascript:;">列表三</a>
+                    <dd th:class="${child=='price'}?'layui-this':''">
+                        <a href="javascript:;">指导菜价</a>
                     </dd>
-                    <dd>
-                        <a href="">超链接</a>
+                    <dd th:class="${child=='specil-price'}?'layui-this':''">
+                        <a href="">今日特价</a>
                     </dd>
                 </dl></li>
-            <li class="layui-nav-item"><a href="javascript:;">解决方案</a>
+            <li class="layui-nav-item">
+                <a href="javascript:;">解决方案</a>
                 <dl class="layui-nav-child">
                     <dd>
                         <a href="javascript:;">列表一</a>
