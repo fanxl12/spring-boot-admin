@@ -5,13 +5,17 @@ import com.fanxl.admin.utils.MockQueue;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 
 /**
  * @description 异步调用是为了解决tomcat的容器线程占用问题，
@@ -35,7 +39,7 @@ public class AsyncRestController {
     @GetMapping("sync")
     public String sync() throws Exception {
         log.info("主线程开始...");
-        TimeUnit.SECONDS.sleep(2000);
+        TimeUnit.SECONDS.sleep(2);
         log.info("主线程返回...");
         return "success";
     }
@@ -73,5 +77,46 @@ public class AsyncRestController {
         log.info("主线程返回...");
         return result;
     }
+
+    /**
+     * Mono 返回一个元素
+     * @return
+     */
+    @GetMapping("mono")
+    public Mono<String> mono() {
+        log.info("主线程开始...");
+        Mono<String> result = Mono.fromSupplier(() -> doSomething());
+        log.info("主线程返回...");
+        return result;
+    }
+
+    /**
+     * Flux 返回 0 - n个元素, 并且以流的形式一个个的返回
+     * @return
+     */
+    @GetMapping(value = "flux", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<String> flux() {
+        log.info("主线程开始...");
+        Flux<String> result = Flux.fromStream(IntStream.range(0, 8).mapToObj(i -> {
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "flux data --" + i;
+        }));
+        log.info("主线程返回...");
+        return result;
+    }
+
+    private String doSomething() {
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "i am ok";
+    }
+
 
 }
