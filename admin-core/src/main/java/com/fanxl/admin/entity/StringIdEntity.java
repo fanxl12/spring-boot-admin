@@ -2,6 +2,9 @@ package com.fanxl.admin.entity;
 
 import lombok.Data;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * @description
  * @author: Fanxl
@@ -10,6 +13,8 @@ import lombok.Data;
 @Data
 public abstract class StringIdEntity extends BaseEntity {
 
+    @Id
+    @GeneratedValue(generator = "UUID")
     private String id;
 
 }

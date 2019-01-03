@@ -39,4 +39,11 @@ public interface CategoryService {
      */
     boolean update(Category category);
 
+    /**
+     * 查询详情
+     * @param id
+     * @return
+     */
+    Category getById(Long id);
+
 }

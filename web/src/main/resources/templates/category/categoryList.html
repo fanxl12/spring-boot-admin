@@ -38,9 +38,13 @@
                 <tbody>
 
                 <tr th:each="item : ${pageInfo.getList()}">
-                    <td th:text="${item.id}"></td>
+                    <td>
+                        <a th:href="|/category/update/${item.id}|" th:text="${item.id}"></a>
+                    </td>
                     <td th:text="${item.name}"></td>
-                    <td>人生就像是一场修行</td>
+                    <td>
+                        <a th:href="|/category/delete/${item.id}|" class="layui-btn layui-btn-danger">删除</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -58,7 +62,7 @@
 <th:block th:replace="base :: bottom_script"/>
 <script th:inline="javascript">
     //JavaScript代码区域
-    layui.use(['element', 'laypage'], function () {
+    layui.use(['element', 'laypage', 'layer'], function () {
         var layPage = layui.laypage;
         var pageInfo = [[${pageInfo}]];
         layPage.render({
@@ -72,6 +76,15 @@
                 }
             }
         });
+
+        var layer = layui.layer;
+        var message = [[${msg}]];
+        if (message) {
+            layer.msg(message, {
+                offset: '15px',
+                icon: 1
+            });
+        }
     });
 </script>
 

@@ -25,23 +25,28 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public PageInfo<Category> findAll(Pageable pageable) {
         PageHelper.startPage(pageable.getPageNumber(), 4);
-        List<Category> list = categoryDao.findAll();
+        List<Category> list = categoryDao.selectAll();
         PageInfo pageInfo = new PageInfo<>(list, 6);
         return pageInfo;
     }
 
     @Override
     public boolean create(Category category) {
-        return false;
+        return categoryDao.insert(category)>0;
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        return categoryDao.deleteByPrimaryKey(id)>0;
     }
 
     @Override
     public boolean update(Category category) {
-        return false;
+        return categoryDao.updateByPrimaryKeySelective(category)>0;
+    }
+
+    @Override
+    public Category getById(Long id) {
+        return categoryDao.selectByPrimaryKey(id);
     }
 }

@@ -26,5 +26,10 @@ public class UserRestController {
         return ResultUtil.success(userService.get(id));
     }
 
+    @GetMapping("")
+    public ApiResponse test() {
+        return ResultUtil.success("ok");
+    }
+
 
 }

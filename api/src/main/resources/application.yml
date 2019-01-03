@@ -48,3 +48,14 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+
+mapper:
+  mappers: tk.mybatis.mapper.common.Mapper
+  not-empty: true
+
+logging:
+  level:
+    com:
+      fanxl:
+        admin:
+          dao: DEBUG

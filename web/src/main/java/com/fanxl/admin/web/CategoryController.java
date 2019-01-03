@@ -9,7 +9,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -42,28 +44,49 @@ public class CategoryController {
 
     @PostMapping(value = "/create", produces = MediaType.TEXT_HTML_VALUE)
     public String create(Category category, RedirectAttributes ra, Model model){
-        model.addAttribute("msg", "创建失败");
+
+        if (categoryService.create(category)) {
+            ra.addFlashAttribute("msg", "创建成功");
+            return "redirect:/category";
+        } else {
+            model.addAttribute("msg", "创建失败");
+            model.addAttribute("category", category);
+            model.addAttribute("action", "create");
+            return "category/categoryForm";
+        }
+    }
+
+    @GetMapping("update/{id}")
+    public String updateForm(@PathVariable(value = "id") Long id, Model model){
+        Category category = categoryService.getById(id);
         model.addAttribute("category", category);
-        model.addAttribute("action", "create");
+        model.addAttribute("action", "update");
         return "category/categoryForm";
+    }
 
 
-//        if (categoryService.save(category)){
-//            ra.addFlashAttribute("msg", "创建成功");
-//            if (category.getParentId()!=null){
-//                return "redirect:/category/"+category.getParentId();
-//            }else {
-//                return "redirect:/category";
-//            }
-//        }else {
-//            model.addAttribute("msg", "创建失败");
-//            model.addAttribute("category", category);
-//            if (category.getParentId()!=null){
-//                return "category/typeForm";
-//            }else {
-//                return "category/categoryForm";
-//            }
-//        }
+    @PostMapping(value = "/update", produces = MediaType.TEXT_HTML_VALUE)
+    public String update(Category category, BindingResult result,
+                         RedirectAttributes ra, Model model){
+        if (categoryService.update(category)){
+            ra.addFlashAttribute("msg", "更新成功");
+            return "redirect:/category";
+        }else {
+            model.addAttribute("msg", "更新失败");
+            model.addAttribute("category", category);
+            model.addAttribute("action", "update");
+            return "category/categoryForm";
+        }
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(RedirectAttributes ra, @PathVariable(value = "id") Long id){
+        if (categoryService.delete(id)){
+            ra.addFlashAttribute("msg", "删除成功");
+        }else {
+            ra.addFlashAttribute("msg", "删除失败");
+        }
+        return "redirect:/category/";
     }
 
 }

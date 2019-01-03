@@ -65,8 +65,19 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 
+
 soft:
   security:
     browser:
       signInPage: /login
       signInResponseType: REDIRECT
+mapper:
+  mappers: tk.mybatis.mapper.common.Mapper
+  not-empty: true
+
+logging:
+  level:
+    com:
+      fanxl:
+        admin:
+          dao: DEBUG
