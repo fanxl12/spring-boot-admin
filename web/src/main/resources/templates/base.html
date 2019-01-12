@@ -45,6 +45,17 @@
         <!-- 左侧导航区域（可配合layui已有的垂直导航）  -->
         <ul class="layui-nav layui-nav-tree" lay-filter="test">
             <li class="layui-nav-item" th:classappend="${child == ''}?'layui-this' : ''"><a href="/">控制台</a></li>
+            <li class="layui-nav-item" th:classappend="${parent=='home'}?'layui-nav-itemed':''">
+                <a href="javascript:;">首页</a>
+                <dl class="layui-nav-child">
+                    <dd th:class="${child == 'wheel'}? 'layui-this' : ''">
+                        <a href="/wheel">轮播图管理</a>
+                    </dd>
+                    <dd th:class="${child=='advert'}?'layui-this':''">
+                        <a href="/advert">底部图片管理</a>
+                    </dd>
+                </dl>
+            </li>
             <li class="layui-nav-item" th:classappend="${parent=='product'}?'layui-nav-itemed':''">
                 <a href="javascript:;">商品</a>
                 <dl class="layui-nav-child">
@@ -60,7 +71,8 @@
                     <dd th:class="${child=='specil-price'}?'layui-this':''">
                         <a href="">今日特价</a>
                     </dd>
-                </dl></li>
+                </dl>
+            </li>
             <li class="layui-nav-item">
                 <a href="javascript:;">解决方案</a>
                 <dl class="layui-nav-child">

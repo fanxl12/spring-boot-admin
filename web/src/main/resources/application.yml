@@ -82,6 +82,6 @@ logging:
         admin:
           dao: DEBUG
 
+# 文件上传地址路径
 admin:
-  file:
-    upload: C:/resources/images/
+  fileUpload: C:/resources/

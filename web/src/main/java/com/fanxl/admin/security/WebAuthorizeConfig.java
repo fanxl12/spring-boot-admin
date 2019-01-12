@@ -20,7 +20,6 @@ public class WebAuthorizeConfig implements AuthorizeConfigProvider {
     public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
         config.antMatchers(HttpMethod.GET,"/resources/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/error/**").permitAll()
-                .antMatchers(HttpMethod.GET,"/static/**").permitAll()
                 .anyRequest();
         return false;
     }

@@ -63,3 +63,7 @@ logging:
       fanxl:
         admin:
           dao: DEBUG
+
+# 文件上传地址路径
+admin:
+  fileUpload: C:/resources/

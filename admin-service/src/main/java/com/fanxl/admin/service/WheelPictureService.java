@@ -1,6 +1,9 @@
 package com.fanxl.admin.service;
 
+import com.fanxl.admin.entity.WheelPicture;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * @description
@@ -15,5 +18,18 @@ public interface WheelPictureService {
      * @return
      */
     boolean saveList(MultipartFile[] fileList);
+
+    /**
+     * 获取所有图片
+     * @return
+     */
+    List<WheelPicture> getAll();
+
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
+    boolean delete(Long id);
 
 }

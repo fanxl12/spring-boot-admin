@@ -1,5 +1,7 @@
 package com.fanxl.admin.config;
 
+import com.fanxl.admin.properties.AdminProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -11,6 +13,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
+    @Autowired
+    private AdminProperties adminProperties;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
@@ -21,7 +26,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/");
 
         registry.addResourceHandler("/resources/**")
-                .addResourceLocations("file:///C:/resources/");
+                .addResourceLocations("file:///" + adminProperties.getFileUpload());
 
     }
 }

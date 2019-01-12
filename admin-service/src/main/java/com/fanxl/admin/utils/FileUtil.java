@@ -9,6 +9,11 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class FileUtil {
 
+	/**
+	 * 获取文件后缀
+	 * @param originalFilename
+	 * @return
+	 */
 	public static String getFileType(String originalFilename) {
 		if (StringUtils.isNotEmpty(originalFilename)){
 			int dotPosition = originalFilename.lastIndexOf(".");
