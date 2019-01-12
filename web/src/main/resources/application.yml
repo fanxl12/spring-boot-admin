@@ -1,5 +1,5 @@
 server:
-  port: 8086
+  port: 8092
 
 spring:
   datasource:
@@ -81,3 +81,7 @@ logging:
       fanxl:
         admin:
           dao: DEBUG
+
+admin:
+  file:
+    upload: C:/resources/images/

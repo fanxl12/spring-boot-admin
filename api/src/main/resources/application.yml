@@ -36,6 +36,10 @@ spring:
     druid:
       web-stat-filter:
         enabled: false
+  resources:
+    static-locations: C:/upload/images
+  mvc:
+    static-path-pattern: /resources/**
 
 mybatis:
   type-aliases-package: com.fanxl.admin.entity

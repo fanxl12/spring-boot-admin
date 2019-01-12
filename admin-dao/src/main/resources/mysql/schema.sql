@@ -26,6 +26,27 @@ create table `admin_category` (
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '分类表';
 
+create table `admin_wheel_picture` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `url` varchar(128) not null comment '地址',
+  `width` int not null comment '宽',
+  `height` int not null comment '高',
+  `create_date` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+  `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '轮播图表';
+
+create table `admin_home_picture` (
+   `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
+   `url` varchar(128) not null comment '地址',
+   `width` int not null comment '宽',
+   `height` int not null comment '高',
+   `create_date` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+   `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
+   PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '主页底部图表';
+
+
 CREATE TABLE persistent_logins (
   username VARCHAR(64) NOT NULL,
   series VARCHAR(64) PRIMARY KEY,
