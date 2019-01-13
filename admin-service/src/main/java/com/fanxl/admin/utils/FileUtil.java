@@ -61,7 +61,11 @@ public class FileUtil {
 	 */
 	public static boolean deleteFile(String filePath) {
 		File file = new File(filePath);
-		return file.delete();
+		if (file.exists()) {
+			return file.delete();
+		}
+		return true;
+
 	}
 
 }

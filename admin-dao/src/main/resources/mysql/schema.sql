@@ -46,24 +46,38 @@ create table `admin_home_picture` (
    PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '主页底部图表';
 
-create table `admin_star_booth` (
+create table `admin_booth` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
   `category_id` int not null comment '分类id',
+  `market_region_id` int not null comment '区域id',
+  `position` varchar(32) not null comment '摊位位置',
   `name` varchar(32) not null comment '名称',
   `url` varchar(128) not null comment '地址',
+  `business_license` varchar(128) comment '营业执照',
+  `license` varchar(128) comment '许可证',
+  `heath_license` varchar(128) comment '健康证',
   `star` int not null comment '评星',
   `create_date` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
   `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
   PRIMARY KEY (`id`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '明星摊位表';
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '摊位表';
 
 create table `admin_market_region` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
   `name` varchar(32) not null comment '名称',
+  `market_id` int not null comment '菜场id',
   `create_date` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
   `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '菜场区域表';
+
+create table `admin_market` (
+   `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
+   `name` varchar(32) not null comment '名称',
+   `create_date` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+   `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
+   PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '菜场表';
 
 
 CREATE TABLE persistent_logins (

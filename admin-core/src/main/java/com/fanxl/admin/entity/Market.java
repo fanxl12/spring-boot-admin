@@ -5,14 +5,12 @@ import lombok.Data;
 import javax.persistence.Table;
 
 /**
- * @description 菜场区域
+ * @description 菜场
  * @author: fanxl
  * @date: 2019/1/13 0013 11:24
  */
-@Table(name = "admin_market_region")
+@Table(name = "admin_market")
 @Data
-public class MarketRegion extends IdNameEntity {
-
-    private Long marketId;
+public class Market extends IdNameEntity {
 
 }

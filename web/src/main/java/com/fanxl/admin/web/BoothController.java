@@ -1,9 +1,10 @@
 package com.fanxl.admin.web;
 
-import com.fanxl.admin.dto.StarBoothDTO;
-import com.fanxl.admin.entity.StarBooth;
+import com.fanxl.admin.dto.BoothDTO;
+import com.fanxl.admin.entity.Booth;
 import com.fanxl.admin.service.CategoryService;
-import com.fanxl.admin.service.StarBoothService;
+import com.fanxl.admin.service.BoothService;
+import com.fanxl.admin.service.MarketRegionService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -21,80 +22,88 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author: fanxl
  * @date: 2018/12/28 0028 19:36
  */
-@RequestMapping("starBooth")
+@RequestMapping("booth")
 @Controller
-public class StarBoothController {
+public class BoothController {
 
     @Autowired
-    private StarBoothService starBoothService;
+    private BoothService boothService;
 
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private MarketRegionService marketRegionService;
+
     @GetMapping("")
     public String list(Model model, @PageableDefault(page = 1) Pageable pageable){
-        PageInfo<StarBoothDTO> pageInfo = starBoothService.getWebList(pageable);
+        PageInfo<BoothDTO> pageInfo = boothService.getWebList(pageable);
         model.addAttribute("pageInfo", pageInfo);
-        return "starBooth/starBoothList";
+        return "booth/boothList";
     }
 
     @GetMapping("/create")
     public String createForm(Model model){
-        model.addAttribute("starBooth", new StarBooth());
+        model.addAttribute("booth", new Booth());
         model.addAttribute("action", "create");
         getCommonData(model);
-        return "starBooth/starBoothForm";
+        return "booth/boothForm";
     }
 
     private void getCommonData(Model model) {
         model.addAttribute("categoryList", categoryService.getAll());
+        model.addAttribute("marketRegionList", marketRegionService.getByMarkId(1L));
     }
 
     @PostMapping(value = "/create", produces = MediaType.TEXT_HTML_VALUE)
-    public String create(StarBooth starBooth, @RequestParam("file") MultipartFile file, RedirectAttributes ra, Model model){
-        if (starBoothService.create(starBooth, file)) {
+    public String create(Booth booth, @RequestParam("file") MultipartFile file,
+                         @RequestParam("businessLicenseFile") MultipartFile businessLicense,
+                         @RequestParam(value = "licenseFile", required = false) MultipartFile license,
+                         @RequestParam(value = "heathLicenseFile", required = false) MultipartFile heathLicense,
+                         RedirectAttributes ra, Model model){
+        if (boothService.create(booth, file, businessLicense, license, heathLicense)) {
             ra.addFlashAttribute("msg", "创建成功");
-            return "redirect:/starBooth";
+            return "redirect:/booth";
         } else {
             model.addAttribute("msg", "创建失败");
-            model.addAttribute("starBooth", starBooth);
+            model.addAttribute("booth", booth);
             model.addAttribute("action", "create");
-            return "starBooth/starBoothForm";
+            return "booth/boothForm";
         }
     }
 
     @GetMapping("update/{id}")
     public String updateForm(@PathVariable(value = "id") Long id, Model model){
-        StarBooth starBooth = starBoothService.getById(id);
-        model.addAttribute("starBooth", starBooth);
+        Booth booth = boothService.getById(id);
+        model.addAttribute("booth", booth);
         model.addAttribute("action", "update");
         getCommonData(model);
-        return "starBooth/starBoothForm";
+        return "booth/boothForm";
     }
 
 
     @PostMapping(value = "/update", produces = MediaType.TEXT_HTML_VALUE)
-    public String update(StarBooth starBooth, BindingResult result,
+    public String update(Booth booth, BindingResult result,
                          RedirectAttributes ra, Model model){
-        if (starBoothService.update(starBooth)){
+        if (boothService.update(booth)){
             ra.addFlashAttribute("msg", "更新成功");
-            return "redirect:/starBooth";
+            return "redirect:/booth";
         }else {
             model.addAttribute("msg", "更新失败");
-            model.addAttribute("starBooth", starBooth);
+            model.addAttribute("booth", booth);
             model.addAttribute("action", "update");
-            return "starBooth/starBoothForm";
+            return "booth/boothForm";
         }
     }
 
     @GetMapping("/delete/{id}")
     public String delete(RedirectAttributes ra, @PathVariable(value = "id") Long id){
-        if (starBoothService.delete(id)){
+        if (boothService.delete(id)){
             ra.addFlashAttribute("msg", "删除成功");
         }else {
             ra.addFlashAttribute("msg", "删除失败");
         }
-        return "redirect:/starBooth/";
+        return "redirect:/booth/";
     }
 
 }

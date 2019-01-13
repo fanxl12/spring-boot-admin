@@ -5,6 +5,7 @@ import com.fanxl.admin.entity.MarketRegion;
 import com.fanxl.admin.service.MarketRegionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -18,6 +19,13 @@ public class MarketRegionServiceImpl implements MarketRegionService {
 
     @Autowired
     private MarketRegionDao marketRegionDao;
+
+    @Override
+    public List<MarketRegion> getByMarkId(Long marketId) {
+        Example example = new Example(MarketRegion.class);
+        example.createCriteria().andEqualTo("marketId", marketId);
+        return marketRegionDao.selectByExample(example);
+    }
 
     @Override
     public List<MarketRegion> getAll() {

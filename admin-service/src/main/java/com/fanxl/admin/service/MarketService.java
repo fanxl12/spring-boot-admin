@@ -1,6 +1,6 @@
 package com.fanxl.admin.service;
 
-import com.fanxl.admin.entity.MarketRegion;
+import com.fanxl.admin.entity.Market;
 
 import java.util.List;
 
@@ -9,28 +9,21 @@ import java.util.List;
  * @author: fanxl
  * @date: 2018/12/9 0009 21:55
  */
-public interface MarketRegionService {
-
-    /**
-     * 查询所有分类
-     * @param marketId
-     * @return
-     */
-    List<MarketRegion> getByMarkId(Long marketId);
+public interface MarketService {
 
     /**
      * 查询所有分类
      * @return
      */
-    List<MarketRegion> getAll();
+    List<Market> getAll();
 
     
     /**
      * 创建分类
-     * @param marketRegion
+     * @param market
      * @return
      */
-    boolean create(MarketRegion marketRegion);
+    boolean create(Market market);
 
     /**
      * 删除
@@ -41,16 +34,16 @@ public interface MarketRegionService {
 
     /**
      * 更新
-     * @param marketRegion
+     * @param market
      * @return
      */
-    boolean update(MarketRegion marketRegion);
+    boolean update(Market market);
 
     /**
      * 查询详情
      * @param id
      * @return
      */
-    MarketRegion getById(Long id);
+    Market getById(Long id);
 
 }

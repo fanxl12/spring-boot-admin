@@ -59,8 +59,14 @@
             <li class="layui-nav-item" th:classappend="${parent=='market'}?'layui-nav-itemed':''">
                 <a href="javascript:;">菜市场</a>
                 <dl class="layui-nav-child">
+                    <dd th:class="${child == 'market'}? 'layui-this' : ''">
+                        <a href="/market">菜市场</a>
+                    </dd>
                     <dd th:class="${child == 'marketRegion'}? 'layui-this' : ''">
                         <a href="/marketRegion">区域</a>
+                    </dd>
+                    <dd th:class="${child=='booth'}?'layui-this':''">
+                        <a href="/booth">摊位</a>
                     </dd>
                 </dl>
             </li>
@@ -78,9 +84,6 @@
                     </dd>
                     <dd th:class="${child=='specil-price'}?'layui-this':''">
                         <a href="">今日特价</a>
-                    </dd>
-                    <dd th:class="${child=='star-booth'}?'layui-this':''">
-                        <a href="/starBooth">明星摊位</a>
                     </dd>
                 </dl>
             </li>

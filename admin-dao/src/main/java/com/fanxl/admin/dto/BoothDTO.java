@@ -8,7 +8,7 @@ import lombok.Data;
  * @date: 2019/1/13 0013 10:51
  */
 @Data
-public class StarBoothDTO {
+public class BoothDTO {
 
     private Long id;
 
