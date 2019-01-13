@@ -46,6 +46,25 @@ create table `admin_home_picture` (
    PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '主页底部图表';
 
+create table `admin_star_booth` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `category_id` int not null comment '分类id',
+  `name` varchar(32) not null comment '名称',
+  `url` varchar(128) not null comment '地址',
+  `star` int not null comment '评星',
+  `create_date` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+  `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '明星摊位表';
+
+create table `admin_market_region` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `name` varchar(32) not null comment '名称',
+  `create_date` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+  `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '菜场区域表';
+
 
 CREATE TABLE persistent_logins (
   username VARCHAR(64) NOT NULL,

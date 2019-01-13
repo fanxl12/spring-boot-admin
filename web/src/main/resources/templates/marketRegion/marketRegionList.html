@@ -2,7 +2,7 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="base :: common_header(~{::title/text()},~{::link},~{::script})">
 
-    <title>轮播图列表</title>
+    <title>分类列表</title>
 
 </head>
 <body class="layui-layout-body">
@@ -10,10 +10,10 @@
 <div class="layui-layout layui-layout-admin">
     <div th:replace="base :: top_header"></div>
 
-    <div th:replace="base :: left_nav ('home','wheel')"></div>
+    <div th:replace="base :: left_nav ('market','marketRegion')"></div>
 
     <div class="layui-body">
-        <div th:replace="base :: breadcrumb ('wheel', '首页', '轮播图管理')"></div>
+        <div th:replace="base :: breadcrumb ('marketRegion', '菜市场', '区域')"></div>
 
         <!--内容主体区域 -->
         <div style="padding: 15px;">
@@ -33,22 +33,19 @@
                 </thead>
                 <tbody>
 
-                <tr th:each="item : ${wheelList}">
+                <tr th:each="item : ${list}">
                     <td>
-                        <a th:href="|/wheel/update/${item.id}|" th:text="${item.id}"></a>
+                        <a th:href="|/marketRegion/update/${item.id}|" th:text="${item.id}"></a>
                     </td>
-                    <td th:text="${item.url}"></td>
+                    <td th:text="${item.name}"></td>
                     <td>
-                        <a th:href="|/wheel/delete/${item.id}|" class="layui-btn layui-btn-danger">删除</a>
-                        <a th:href="|resources/${item.url}|" target="_blank" class="layui-btn layui-btn-normal">预览</a>
+                        <a th:href="|/marketRegion/delete/${item.id}|" class="layui-btn layui-btn-danger">删除</a>
                     </td>
                 </tr>
                 </tbody>
             </table>
 
-            <a href="/wheel/create" class="layui-btn">添加轮播图</a>
-
-            <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 30px">轮播图前台最多显示10张</blockquote>
+            <a href="/marketRegion/create" class="layui-btn">创建区域</a>
 
         </div>
     </div>

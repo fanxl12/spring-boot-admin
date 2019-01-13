@@ -23,7 +23,12 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryDao categoryDao;
 
     @Override
-    public PageInfo<Category> findAll(Pageable pageable) {
+    public List<Category> getAll() {
+        return categoryDao.selectAll();
+    }
+
+    @Override
+    public PageInfo<Category> getList(Pageable pageable) {
         PageHelper.startPage(pageable.getPageNumber(), 4);
         List<Category> list = categoryDao.selectAll();
         PageInfo pageInfo = new PageInfo<>(list, 6);

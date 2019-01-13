@@ -15,8 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +28,7 @@ import java.util.List;
 @Service
 public class WheelPictureServiceImpl implements WheelPictureService {
 
-    public static final String FOLDER_NAME = "images/wheel/";
+    private static final String FOLDER_NAME = "images/wheel/";
 
     @Autowired
     private WheelPictureDao wheelPictureDao;
@@ -45,24 +43,13 @@ public class WheelPictureServiceImpl implements WheelPictureService {
         }
         List<WheelPicture> dataList = new ArrayList<>();
         for (MultipartFile multipartFile : fileList) {
-            String originalFilename = multipartFile.getOriginalFilename();
-            String fileType = FileUtil.getFileType(originalFilename);
-
-            File folder = new File(adminProperties.getFileUpload() + FOLDER_NAME);
-            if (!folder.exists() && !folder.mkdirs()) {
-                log.error("文件夹创建失败");
-                throw new AdminException(ResultEnum.FILE_CREATE_FAIL);
-            }
-
-            String fileName = System.currentTimeMillis() + fileType;
-            File file = new File(folder.getAbsolutePath() + "/" +fileName);
             try {
-                log.info("路径:" + file.getAbsolutePath());
-                multipartFile.transferTo(file);
                 WheelPicture wheelPicture = new WheelPicture();
-                BufferedImage sourceImg = ImageIO.read(new FileInputStream(file));
+                BufferedImage sourceImg = ImageIO.read(multipartFile.getInputStream());
                 wheelPicture.setWidth(sourceImg.getWidth());
                 wheelPicture.setHeight(sourceImg.getHeight());
+
+                String fileName = FileUtil.saveFile(multipartFile, adminProperties.getFileUpload() + FOLDER_NAME);
                 wheelPicture.setUrl(FOLDER_NAME + fileName);
                 dataList.add(wheelPicture);
             } catch (IOException e) {
@@ -88,9 +75,7 @@ public class WheelPictureServiceImpl implements WheelPictureService {
             throw new AdminException(ResultEnum.FILE_NOT_FOUND);
         }
         if (wheelPictureDao.deleteByPrimaryKey(id)>0) {
-            File file = new File(adminProperties.getFileUpload() + wheelPicture.getUrl());
-            file.deleteOnExit();
-            return true;
+            return FileUtil.deleteFile(adminProperties.getFileUpload() + wheelPicture.getUrl());
         }
         throw new AdminException(ResultEnum.FAIL);
     }

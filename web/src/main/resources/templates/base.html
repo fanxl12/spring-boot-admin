@@ -56,6 +56,14 @@
                     </dd>
                 </dl>
             </li>
+            <li class="layui-nav-item" th:classappend="${parent=='market'}?'layui-nav-itemed':''">
+                <a href="javascript:;">菜市场</a>
+                <dl class="layui-nav-child">
+                    <dd th:class="${child == 'marketRegion'}? 'layui-this' : ''">
+                        <a href="/marketRegion">区域</a>
+                    </dd>
+                </dl>
+            </li>
             <li class="layui-nav-item" th:classappend="${parent=='product'}?'layui-nav-itemed':''">
                 <a href="javascript:;">商品</a>
                 <dl class="layui-nav-child">
@@ -70,6 +78,9 @@
                     </dd>
                     <dd th:class="${child=='specil-price'}?'layui-this':''">
                         <a href="">今日特价</a>
+                    </dd>
+                    <dd th:class="${child=='star-booth'}?'layui-this':''">
+                        <a href="/starBooth">明星摊位</a>
                     </dd>
                 </dl>
             </li>
@@ -89,6 +100,15 @@
             <li class="layui-nav-item"><a href="">云市场</a></li>
             <li class="layui-nav-item"><a href="">发布商品</a></li>
         </ul>
+    </div>
+</div>
+
+<div th:fragment="breadcrumb(parent, parentName, childName)">
+    <div style="background-color: gainsboro; padding: 15px">
+        <span class="layui-breadcrumb">
+            <a th:href="|/${parent}|" th:text="${parentName}"></a>
+            <a><cite th:text="${childName}"></cite></a>
+        </span>
     </div>
 </div>
 

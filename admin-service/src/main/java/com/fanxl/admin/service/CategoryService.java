@@ -4,6 +4,8 @@ import com.fanxl.admin.entity.Category;
 import com.github.pagehelper.PageInfo;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * @description
  * @author: fanxl
@@ -13,10 +15,16 @@ public interface CategoryService {
 
     /**
      * 查询所有分类
+     * @return
+     */
+    List<Category> getAll();
+
+    /**
+     * 查询所有分类 分页
      * @param pageable
      * @return
      */
-    PageInfo<Category> findAll(Pageable pageable);
+    PageInfo<Category> getList(Pageable pageable);
 
     /**
      * 创建分类

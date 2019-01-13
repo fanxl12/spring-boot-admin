@@ -1,11 +1,8 @@
 package com.fanxl.admin.web;
 
-import com.fanxl.admin.entity.Category;
-import com.fanxl.admin.service.CategoryService;
-import com.github.pagehelper.PageInfo;
+import com.fanxl.admin.entity.MarketRegion;
+import com.fanxl.admin.service.MarketRegionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,72 +18,70 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author: fanxl
  * @date: 2018/12/28 0028 19:36
  */
-@RequestMapping("category")
+@RequestMapping("marketRegion")
 @Controller
-public class CategoryController {
+public class MarketRegionController {
 
     @Autowired
-    private CategoryService categoryService;
+    private MarketRegionService marketRegionService;
 
     @GetMapping("")
-    public String list(Model model, @PageableDefault(page = 1) Pageable pageable){
-        PageInfo<Category> pageInfo = categoryService.getList(pageable);
-        model.addAttribute("pageInfo", pageInfo);
-        return "category/categoryList";
+    public String list(Model model){
+        model.addAttribute("list", marketRegionService.getAll());
+        return "marketRegion/marketRegionList";
     }
 
     @GetMapping("/create")
     public String createForm(Model model){
-        model.addAttribute("category", new Category());
+        model.addAttribute("marketRegion", new MarketRegion());
         model.addAttribute("action", "create");
-        return "category/categoryForm";
+        return "marketRegion/marketRegionForm";
     }
 
     @PostMapping(value = "/create", produces = MediaType.TEXT_HTML_VALUE)
-    public String create(Category category, RedirectAttributes ra, Model model){
-
-        if (categoryService.create(category)) {
+    public String create(MarketRegion marketRegion, RedirectAttributes ra, Model model){
+        if (marketRegionService.create(marketRegion)) {
             ra.addFlashAttribute("msg", "创建成功");
-            return "redirect:/category";
+            return "redirect:/marketRegion";
         } else {
             model.addAttribute("msg", "创建失败");
-            model.addAttribute("category", category);
+            model.addAttribute("marketRegion", marketRegion);
             model.addAttribute("action", "create");
-            return "category/categoryForm";
+            return "marketRegion/marketRegionForm";
         }
     }
 
     @GetMapping("update/{id}")
     public String updateForm(@PathVariable(value = "id") Long id, Model model){
-        Category category = categoryService.getById(id);
-        model.addAttribute("category", category);
+        MarketRegion marketRegion = marketRegionService.getById(id);
+        model.addAttribute("marketRegion", marketRegion);
         model.addAttribute("action", "update");
-        return "category/categoryForm";
+        return "marketRegion/marketRegionForm";
     }
 
 
     @PostMapping(value = "/update", produces = MediaType.TEXT_HTML_VALUE)
-    public String update(Category category, BindingResult result,
+    public String update(MarketRegion marketRegion, BindingResult result,
                          RedirectAttributes ra, Model model){
-        if (categoryService.update(category)){
+        if (marketRegionService.update(marketRegion)){
             ra.addFlashAttribute("msg", "更新成功");
-            return "redirect:/category";
+            return "redirect:/marketRegion";
         }else {
             model.addAttribute("msg", "更新失败");
-            model.addAttribute("category", category);
+            model.addAttribute("marketRegion", marketRegion);
             model.addAttribute("action", "update");
-            return "category/categoryForm";
+            return "marketRegion/marketRegionForm";
         }
     }
 
     @GetMapping("/delete/{id}")
     public String delete(RedirectAttributes ra, @PathVariable(value = "id") Long id){
-        if (categoryService.delete(id)){
+        if (marketRegionService.delete(id)){
             ra.addFlashAttribute("msg", "删除成功");
         }else {
             ra.addFlashAttribute("msg", "删除失败");
         }
-        return "redirect:/category/";
+        return "redirect:/marketRegion/";
     }
 
 }
