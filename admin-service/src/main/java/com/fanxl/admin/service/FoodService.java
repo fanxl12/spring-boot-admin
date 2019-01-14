@@ -3,8 +3,7 @@ package com.fanxl.admin.service;
 import com.fanxl.admin.entity.Food;
 import com.github.pagehelper.PageInfo;
 import org.springframework.data.domain.Pageable;
-
-import java.io.File;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @description
@@ -18,7 +17,7 @@ public interface FoodService {
      * @param file
      * @return
      */
-    boolean importData(File file);
+    boolean importData(MultipartFile file);
 
     /**
      * 查询所有分类 分页

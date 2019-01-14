@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base :: common_header(~{::title/text()},~{::link},~{::script})">
+
+    <title>文件管理</title>
+
+</head>
+<body class="layui-layout-body">
+
+<div class="layui-layout layui-layout-admin">
+    <div th:replace="base :: top_header"></div>
+
+    <div th:replace="base :: left_nav ('product','import')"></div>
+
+    <div class="layui-body">
+        <div th:replace="base :: breadcrumb ('product', '商品', '导入')"></div>
+        <!--内容主体区域 -->
+        <div style="padding: 15px;">
+            <form class="layui-form" action="#" th:action="|/import/${action}|" method="post" enctype="multipart/form-data">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">导入文件</label>
+                    <div class="layui-input-block">
+                        <input type="file" name="file"/>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div th:replace="base :: footer"></div>
+</div>
+
+<th:block th:replace="base :: bottom_script"/>
+<script th:inline="javascript">
+    layui.use(['layer', 'form'], function () {
+        var layer = layui.layer;
+
+        var message = [[${msg}]];
+        if (message) {
+            layer.msg(message, {
+                offset: '15px',
+                icon: 1
+            });
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -13,12 +13,16 @@ import com.fanxl.admin.service.FoodService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @description
@@ -33,26 +37,30 @@ public class FoodServiceImpl implements FoodService {
     private FoodDao foodDao;
 
     @Override
-    public boolean importData(File file) {
-
-        if (!file.exists()) {
-            throw new AdminException(ResultEnum.FILE_NOT_FOUND);
-        }
-
+    public boolean importData(MultipartFile multipartFile) {
         InputStream inputStream = null;
         try {
-            inputStream = new FileInputStream(file);
+            inputStream = multipartFile.getInputStream();
 
             // 解析每行结果在listener中处理
             AnalysisEventListener listener = new FoodExcelListener();
 
             ExcelReader excelReader = new ExcelReader(inputStream, null, listener);
 
-            excelReader.read(new Sheet(1, 2, FoodExcelBean.class));
+            excelReader.read(new Sheet(1, 1, FoodExcelBean.class));
 
             List<FoodExcelBean> foodList = ((FoodExcelListener) listener).getDatas();
             log.info("数据:{}", foodList.size());
-        } catch (FileNotFoundException e) {
+            if (foodList.size()==0) {
+                throw new AdminException(ResultEnum.FILE_NOT_FOUND.getCode(), "未解析出数据");
+            }
+            List<Food> foods = foodList.stream().map(item -> {
+                Food food = new Food();
+                BeanUtils.copyProperties(item, food);
+                return food;
+            }).collect(Collectors.toList());
+            return foodDao.saveList(foods)>0;
+        } catch (IOException e) {
             e.printStackTrace();
         }finally {
             try {
@@ -68,7 +76,7 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     public PageInfo<Food> getList(Pageable pageable) {
-        PageHelper.startPage(pageable.getPageNumber(), 4);
+        PageHelper.startPage(pageable.getPageNumber(), pageable.getPageSize());
         List<Food> list = foodDao.selectAll();
         PageInfo pageInfo = new PageInfo<>(list, 6);
         return pageInfo;

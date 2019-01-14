@@ -4,6 +4,8 @@ import com.fanxl.admin.entity.Food;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.util.List;
+
 /**
  * @description
  * @author: fanxl
@@ -11,5 +13,12 @@ import tk.mybatis.mapper.common.Mapper;
  */
 @Repository
 public interface FoodDao extends Mapper<Food> {
+
+    /**
+     * 批量保存
+     * @param list
+     * @return
+     */
+    int saveList(List<Food> list);
 
 }

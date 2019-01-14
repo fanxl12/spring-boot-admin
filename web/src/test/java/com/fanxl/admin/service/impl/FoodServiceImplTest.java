@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.File;
-
 /**
  * @description
  * @author: fanxl
@@ -25,7 +23,7 @@ public class FoodServiceImplTest {
 
     @Test
     public void importData() {
-        File file = new File("E://123.xlsx");
-        foodService.importData(file);
+//        File file = new File("E://123.xlsx");
+//        foodService.importData(file);
     }
 }
