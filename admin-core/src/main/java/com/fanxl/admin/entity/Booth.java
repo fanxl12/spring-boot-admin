@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.persistence.Table;
 
 /**
- * @description 明星摊位
+ * @description 摊位
  * @author: fanxl
  * @date: 2018/12/28 0028 19:35
  */

@@ -1,5 +1,9 @@
 package com.fanxl.admin.service;
 
+import com.fanxl.admin.entity.Food;
+import com.github.pagehelper.PageInfo;
+import org.springframework.data.domain.Pageable;
+
 import java.io.File;
 
 /**
@@ -15,5 +19,12 @@ public interface FoodService {
      * @return
      */
     boolean importData(File file);
+
+    /**
+     * 查询所有分类 分页
+     * @param pageable
+     * @return
+     */
+    PageInfo<Food> getList(Pageable pageable);
 
 }

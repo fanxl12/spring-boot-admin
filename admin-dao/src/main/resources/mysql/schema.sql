@@ -79,6 +79,15 @@ create table `admin_market` (
    PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '菜场表';
 
+create table `admin_food` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `name` varchar(32) not null comment '名称',
+  `category_id` int not null comment '分类id',
+  `create_date` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+  `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '食品表';
+
 
 CREATE TABLE persistent_logins (
   username VARCHAR(64) NOT NULL,
