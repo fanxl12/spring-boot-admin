@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base :: common_header(~{::title/text()},~{::link},~{::script})">
+
+    <title>优惠活动列表</title>
+
+</head>
+<body class="layui-layout-body">
+
+<div class="layui-layout layui-layout-admin">
+    <div th:replace="base :: top_header"></div>
+
+    <div th:replace="base :: left_nav ('coupon','couponExercise')"></div>
+
+    <div class="layui-body">
+        <div th:replace="base :: breadcrumb ('couponExercise', '优惠', '')"></div>
+
+        <!--内容主体区域 -->
+        <div style="padding: 15px;">
+
+            <table class="layui-table">
+                <colgroup>
+                    <col width="150">
+                    <col width="200">
+                    <col>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>名称</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="item : ${list}">
+                    <td>
+                        <a th:href="|/couponExercise/update/${item.id}|" th:text="${item.id}"></a>
+                    </td>
+                    <td th:text="${item.url}"></td>
+                    <td>
+                        <a th:href="|/couponExercise/delete/${item.id}|" class="layui-btn layui-btn-danger">删除</a>
+                        <a th:href="|resources/${item.url}|" target="_blank" class="layui-btn layui-btn-normal">预览</a>
+                        <a th:href="|/couponExercise/download/${item.id}|" target="_blank" class="layui-btn">下载</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <a href="/couponExercise/create" class="layui-btn">创建</a>
+
+            <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 30px">前台显示最新的一个优惠</blockquote>
+
+        </div>
+    </div>
+
+    <div th:replace="base :: footer"></div>
+</div>
+
+<th:block th:replace="base :: bottom_script"/>
+<script th:inline="javascript">
+    //JavaScript代码区域
+    layui.use(['element', 'layer'], function () {
+        var layer = layui.layer;
+        var message = [[${msg}]];
+        if (message) {
+            layer.msg(message, {
+                offset: '15px',
+                icon: 1
+            });
+        }
+    });
+</script>
+
+</body>
+</html>

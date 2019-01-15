@@ -51,8 +51,8 @@
                     <dd th:class="${child == 'wheel'}? 'layui-this' : ''">
                         <a href="/wheel">轮播图管理</a>
                     </dd>
-                    <dd th:class="${child=='advert'}?'layui-this':''">
-                        <a href="/advert">底部图片管理</a>
+                    <dd th:class="${child=='advertImage'}?'layui-this':''">
+                        <a href="/advertImage">底部图片管理</a>
                     </dd>
                 </dl>
             </li>
@@ -87,21 +87,9 @@
                     </dd>
                 </dl>
             </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">解决方案</a>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a href="javascript:;">列表一</a>
-                    </dd>
-                    <dd>
-                        <a href="javascript:;">列表二</a>
-                    </dd>
-                    <dd>
-                        <a href="">超链接</a>
-                    </dd>
-                </dl></li>
-            <li class="layui-nav-item"><a href="">云市场</a></li>
-            <li class="layui-nav-item"><a href="">发布商品</a></li>
+            <li th:class="${child == 'couponExercise'}? 'layui-nav-item layui-this' : 'layui-nav-item'">
+                <a href="/templates/couponExercise" >优惠活动</a>
+            </li>
         </ul>
     </div>
 </div>
