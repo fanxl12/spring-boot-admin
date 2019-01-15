@@ -134,6 +134,34 @@ create table `admin_advert_image` (
    PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '广告图片表';
 
+create table `admin_food_menu_category` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `name` varchar(32) not null comment '名称',
+  `create_date` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+  `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '食物菜单分类表';
+
+create table `admin_food_menu` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `food_menu_category_id` int not null comment '分类id',
+  `url` varchar(128) not null comment '图片',
+  `popular` tinyint(2) not null default 0 comment '本周流行 默认0不流行 1流行',
+  `difficulty` tinyint(4) not null default 0 comment '难度 默认0 简单 1普通 2困难',
+  `main_material` varchar(128) not null comment '主料',
+  `second_material` varchar(128) not null comment '辅料',
+  `pick_material` varchar(128) comment '调料',
+  `effect` varchar(256) comment '功效',
+  `step` varchar(512) comment '功效',
+  `width` int not null comment '宽',
+  `height` int not null comment '高',
+  `name` varchar(32) not null comment '名称',
+  `cuisine` varchar(32) not null comment '菜系',
+  `cooking` varchar(32) not null comment '烹饪方式',
+  `create_date` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+  `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '食物菜单表';
 
 CREATE TABLE persistent_logins (
   username VARCHAR(64) NOT NULL,

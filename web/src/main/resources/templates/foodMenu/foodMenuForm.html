@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base :: common_header(~{::title/text()},~{::link},~{::script})">
+
+    <title>分类管理</title>
+
+</head>
+<body class="layui-layout-body">
+
+<div class="layui-layout layui-layout-admin">
+    <div th:replace="base :: top_header"></div>
+
+    <div th:replace="base :: left_nav ('product','foodMenu')"></div>
+
+    <div class="layui-body">
+        <div style="background-color: gainsboro; padding: 15px">
+            <span class="layui-breadcrumb">
+                <a href="/foodMenu">商品</a>
+                <a><cite>分类管理</cite></a>
+            </span>
+        </div>
+        <!--内容主体区域 -->
+        <div style="padding: 15px;">
+            <form class="layui-form" action="#" th:action="|/foodMenu/${action}|" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" th:if="${foodMenu.id !=null }" th:value="${foodMenu.id}"/>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="name" required lay-verify="required"
+                               placeholder="请输入名称" autocomplete="off" class="layui-input" th:value="${foodMenu.name}">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">菜谱分类</label>
+                    <div class="layui-input-block">
+                        <select name="foodMenuCategoryId" lay-verify="required">
+                            <option value=""></option>
+                            <option th:value="${item.id}" th:each="item : ${categoryList}"  th:text="${item.name}"
+                                    th:selected="${item.id == foodMenu.foodMenuCategoryId}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">选择难度</label>
+                    <div class="layui-input-block">
+                        <select name="difficulty" lay-verify="required">
+                            <option value="0">简单</option>
+                            <option value="1">普通</option>
+                            <option value="2">困难</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">本周流行</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="popular" value="1" title="流行" th:checked="${foodMenu.popular}">
+                        <input type="radio" name="popular" value="0" title="不流行" th:checked="${!foodMenu.popular}">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">菜系</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="cuisine" placeholder="请输入菜系" class="layui-input"
+                               th:value="${foodMenu.cuisine}">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">烹饪方式</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="cooking" placeholder="请输入烹饪方式" class="layui-input"
+                               th:value="${foodMenu.cooking}">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">主料</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="mainMaterial" required lay-verify="required"
+                               placeholder="请输入主料" class="layui-input" th:value="${foodMenu.mainMaterial}">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">辅料</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="secondMaterial" required lay-verify="required"
+                               placeholder="请输入辅料" class="layui-input" th:value="${foodMenu.secondMaterial}">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">调料</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="pickMaterial" placeholder="请输入调料" class="layui-input"
+                               th:value="${foodMenu.pickMaterial}">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">功效</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="effect" placeholder="请输入功效" class="layui-input"
+                               th:value="${foodMenu.effect}">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">步骤</label>
+                    <div class="layui-input-block">
+                        <textarea name="step" placeholder="请输入功效" class="layui-textarea" th:text="${foodMenu.step}">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">上传图片</label>
+                    <div class="layui-input-block">
+                        <input type="file" name="file"/>
+                    </div>
+                </div>
+                <div class="layui-form-item" th:if="${not #strings.isEmpty(foodMenu.url)}">
+                    <label class="layui-form-label">菜谱图片</label>
+                    <div class="layui-input-block">
+                        <img th:src="|/resources/${foodMenu.url}|" style="height: 100px">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div th:replace="base :: footer"></div>
+</div>
+
+<th:block th:replace="base :: bottom_script"/>
+<script th:inline="javascript">
+    layui.use(['layer', 'form'], function () {
+        var layer = layui.layer;
+
+        var message = [[${msg}]];
+        if (message) {
+            layer.msg(message, {
+                offset: '15px',
+                icon: 1
+            });
+        }
+    });
+</script>
+
+</body>
+</html>

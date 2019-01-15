@@ -85,6 +85,12 @@
                     <dd th:class="${child=='todayPrice'}?'layui-this':''">
                         <a href="/todayPrice">今日特价</a>
                     </dd>
+                    <dd th:class="${child=='foodMenuCategory'}?'layui-this':''">
+                        <a href="/foodMenuCategory">菜谱分类</a>
+                    </dd>
+                    <dd th:class="${child=='foodMenu'}?'layui-this':''">
+                        <a href="/foodMenu">菜谱</a>
+                    </dd>
                 </dl>
             </li>
             <li th:class="${child == 'couponExercise'}? 'layui-nav-item layui-this' : 'layui-nav-item'">
