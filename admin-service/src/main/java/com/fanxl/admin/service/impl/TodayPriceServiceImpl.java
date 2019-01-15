@@ -3,13 +3,13 @@ package com.fanxl.admin.service.impl;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.metadata.Sheet;
-import com.fanxl.admin.dao.FoodDao;
-import com.fanxl.admin.entity.Food;
+import com.fanxl.admin.dao.TodayPriceDao;
+import com.fanxl.admin.entity.TodayPrice;
 import com.fanxl.admin.enums.ResultEnum;
-import com.fanxl.admin.excel.bean.FoodExcelBean;
-import com.fanxl.admin.excel.listener.FoodExcelListener;
+import com.fanxl.admin.excel.bean.TodayPriceExcelBean;
+import com.fanxl.admin.excel.listener.ExcelTodayPriceListener;
 import com.fanxl.admin.exception.AdminException;
-import com.fanxl.admin.service.FoodService;
+import com.fanxl.admin.service.TodayPriceService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,10 +32,10 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Service
-public class FoodServiceImpl implements FoodService {
+public class TodayPriceServiceImpl implements TodayPriceService {
 
     @Autowired
-    private FoodDao foodDao;
+    private TodayPriceDao todayPriceDao;
 
     @Override
     public boolean importData(MultipartFile multipartFile) {
@@ -43,23 +44,26 @@ public class FoodServiceImpl implements FoodService {
             inputStream = multipartFile.getInputStream();
 
             // 解析每行结果在listener中处理
-            AnalysisEventListener listener = new FoodExcelListener();
+            AnalysisEventListener listener = new ExcelTodayPriceListener();
 
             ExcelReader excelReader = new ExcelReader(inputStream, null, listener);
 
-            excelReader.read(new Sheet(1, 1, FoodExcelBean.class));
+            excelReader.read(new Sheet(1, 1, TodayPriceExcelBean.class));
 
-            List<FoodExcelBean> foodList = ((FoodExcelListener) listener).getDatas();
-            log.info("数据:{}", foodList.size());
-            if (foodList.size()==0) {
+            List<TodayPriceExcelBean> todayPriceList = ((ExcelTodayPriceListener) listener).getDataList();
+            if (todayPriceList.size()==0) {
                 throw new AdminException(ResultEnum.FILE_NOT_FOUND.getCode(), "未解析出数据");
             }
-            List<Food> foods = foodList.stream().map(item -> {
-                Food food = new Food();
-                BeanUtils.copyProperties(item, food);
-                return food;
+
+            List<TodayPrice> todayPrices = todayPriceList.stream().map(item -> {
+                TodayPrice todayPrice = new TodayPrice();
+                BeanUtils.copyProperties(item, todayPrice);
+                if (todayPrice.getPriceDate()==null) {
+                    todayPrice.setPriceDate(new Date());
+                }
+                return todayPrice;
             }).collect(Collectors.toList());
-            return foodDao.saveList(foods)>0;
+            return todayPriceDao.saveList(todayPrices)>0;
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
@@ -75,9 +79,9 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public PageInfo<Food> getList(Pageable pageable) {
+    public PageInfo<TodayPrice> getList(Pageable pageable) {
         PageHelper.startPage(pageable.getPageNumber(), pageable.getPageSize());
-        List<Food> list = foodDao.selectAll();
+        List<TodayPrice> list = todayPriceDao.selectAll();
         PageInfo pageInfo = new PageInfo<>(list, 6);
         return pageInfo;
     }

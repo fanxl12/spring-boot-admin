@@ -88,6 +88,42 @@ create table `admin_food` (
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '食品表';
 
+create table `admin_guide_price` (
+   `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
+   `price_date` DATETIME not null comment '价格时间',
+   `food_id` int not null comment '食品id',
+   `max_price` decimal(8, 2) default 0 comment '最高价',
+   `max_price_trend` tinyint(2) default 0 comment '最高价趋势 默认0无变化 1走高 -1走低',
+   `average_price` decimal(8, 2) default 0 comment '平均价',
+   `low_price` decimal(8, 2) default 0 comment '最低价',
+   `low_price_trend` tinyint(2) default 0 comment '最低价趋势 默认0无变化 1走高 -1走低',
+   `create_date` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+   `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
+   PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '指导价格表';
+
+create table `admin_today_price` (
+   `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
+   `price_date` DATETIME not null comment '价格时间',
+   `food_id` int not null comment '食品id',
+   `booth_id` int not null comment '商铺id',
+   `price` decimal(8, 2) default 0 comment '价格',
+   `special_price` decimal(8, 2) default 0 comment '特价',
+   `create_date` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+   `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
+   PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '今日特价表';
+
+create table `admin_coupon_exercise` (
+   `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
+   `url` varchar(128) not null comment '地址',
+   `width` int not null comment '宽',
+   `height` int not null comment '高',
+   `create_date` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+   `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
+   PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '优惠活动表';
+
 
 CREATE TABLE persistent_logins (
   username VARCHAR(64) NOT NULL,

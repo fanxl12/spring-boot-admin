@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.Table;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @description 指导菜价
@@ -14,10 +15,19 @@ import java.math.BigDecimal;
 @Data
 public class GuidePrice extends IdEntity {
 
+    private Long foodId;
+
+    private Date priceDate;
+
     /**
      * 平均价
      */
     private BigDecimal averagePrice;
+
+    /**
+     * 最高价趋势 默认0无变化 1走高 -1走低
+     */
+    private Integer maxPriceTrend;
 
     /**
      * 最高价
@@ -28,5 +38,10 @@ public class GuidePrice extends IdEntity {
      * 最低价
      */
     private BigDecimal lowPrice;
+
+    /**
+     * 最低价趋势 默认0无变化 1走高 -1走低
+     */
+    private Integer lowPriceTrend;
 
 }

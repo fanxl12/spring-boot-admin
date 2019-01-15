@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fanxl.admin.dao.GuidePriceDao">
+
+    <!--批量创建-->
+    <insert id="saveList" parameterType="List">
+        insert into admin_guide_price (food_id, price_date, max_price, max_price_trend, average_price, low_price, low_price_trend)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.foodId}, #{item.priceDate}, #{item.maxPrice}, #{item.maxPriceTrend}, #{item.averagePrice},
+             #{item.lowPrice}, #{item.lowPriceTrend})
+        </foreach>;
+    </insert>
+
+    <!--获取上一次的价格日期的价格-->
+    <select id="getLastGuidePrice" parameterType="Date" resultType="GuidePrice">
+        select food_id, max_price, low_price
+        from admin_guide_price
+        where price_date =#{lastPriceDate};
+    </select>
+
+</mapper>
