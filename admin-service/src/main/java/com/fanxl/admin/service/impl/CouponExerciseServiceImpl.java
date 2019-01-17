@@ -7,7 +7,9 @@ import com.fanxl.admin.exception.AdminException;
 import com.fanxl.admin.properties.AdminProperties;
 import com.fanxl.admin.service.CouponExerciseService;
 import com.fanxl.admin.utils.FileUtil;
+import com.fanxl.admin.vo.CouponExerciseVO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -122,5 +124,16 @@ public class CouponExerciseServiceImpl implements CouponExerciseService {
             }
         }
         return false;
+    }
+
+    @Override
+    public CouponExerciseVO getCouponUrl() {
+        CouponExercise exercise = couponExerciseDao.getCoupon();
+        if (exercise == null) {
+            return null;
+        }
+        CouponExerciseVO couponExerciseVO = new CouponExerciseVO();
+        BeanUtils.copyProperties(exercise, couponExerciseVO);
+        return couponExerciseVO;
     }
 }

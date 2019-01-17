@@ -9,6 +9,13 @@
         left join admin_category b on b.id = a.category_id
     </select>
 
+    <!--获取5星级摊位-->
+    <select id="getList" resultType="com.fanxl.admin.vo.BoothVO">
+        select a.id, a.star, a.name, a.url
+        from admin_booth a
+        where a.star = 5
+    </select>
+
 
 
 </mapper>

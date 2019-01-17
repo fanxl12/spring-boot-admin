@@ -4,17 +4,26 @@ import com.fanxl.admin.dao.FoodMenuDao;
 import com.fanxl.admin.entity.FoodMenu;
 import com.fanxl.admin.enums.ResultEnum;
 import com.fanxl.admin.exception.AdminException;
+import com.fanxl.admin.form.FoodMenuForm;
 import com.fanxl.admin.properties.AdminProperties;
 import com.fanxl.admin.service.FoodMenuService;
 import com.fanxl.admin.utils.FileUtil;
+import com.fanxl.admin.vo.FoodMenuIDetailVO;
+import com.fanxl.admin.vo.FoodMenuItemVO;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @description
@@ -74,5 +83,29 @@ public class FoodMenuServiceImpl implements FoodMenuService {
     @Override
     public FoodMenu getById(Long id) {
         return foodMenuDao.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public PageInfo<FoodMenuItemVO> getList(FoodMenuForm form, Pageable pageable) {
+        PageHelper.startPage(pageable.getPageNumber(), pageable.getPageSize());
+        List<FoodMenuItemVO> list;
+        if (form.getCategoryId() == null) {
+            list = foodMenuDao.getPopularList(form.getKeyword());
+        } else {
+            Map<String, Object> param = new HashMap<>();
+            param.put("categoryId", form.getCategoryId());
+            param.put("keyword", form.getKeyword());
+            list = foodMenuDao.getList(param);
+        }
+        PageInfo pageInfo = new PageInfo<>(list, 6);
+        return pageInfo;
+    }
+
+    @Override
+    public FoodMenuIDetailVO getDetail(Long id) {
+        FoodMenu foodMenu = foodMenuDao.selectByPrimaryKey(id);
+        FoodMenuIDetailVO detail = new FoodMenuIDetailVO();
+        BeanUtils.copyProperties(foodMenu, detail);
+        return detail;
     }
 }

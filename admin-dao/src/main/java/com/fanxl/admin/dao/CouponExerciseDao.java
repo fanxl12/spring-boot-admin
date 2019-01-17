@@ -12,4 +12,10 @@ import tk.mybatis.mapper.common.Mapper;
 @Repository
 public interface CouponExerciseDao extends Mapper<CouponExercise> {
 
+    /**
+     * 获取优惠活动
+     * @return
+     */
+    CouponExercise getCoupon();
+
 }

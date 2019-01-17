@@ -2,6 +2,7 @@ package com.fanxl.admin.service;
 
 import com.fanxl.admin.dto.BoothDTO;
 import com.fanxl.admin.entity.Booth;
+import com.fanxl.admin.vo.BoothVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
@@ -59,5 +60,14 @@ public interface BoothService {
      * @return
      */
     PageInfo<BoothDTO> getWebList(Pageable pageable);
+
+    /**
+     * 查询明细摊位 分页
+     * @param pageable
+     * @return
+     */
+    PageInfo<BoothVO> getList(Pageable pageable);
+
+
 
 }

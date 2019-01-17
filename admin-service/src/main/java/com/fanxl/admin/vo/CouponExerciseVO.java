@@ -8,6 +8,6 @@ import lombok.Data;
  * @date: 2019/1/17 0017 12:10
  */
 @Data
-public class AdvertImageVO extends ImageItemVO {
+public class CouponExerciseVO extends ImageItemVO {
 
 }

@@ -1,6 +1,7 @@
 package com.fanxl.admin.rest;
 
 import com.fanxl.admin.service.AdvertImageService;
+import com.fanxl.admin.service.CouponExerciseService;
 import com.fanxl.admin.service.WheelPictureService;
 import com.fanxl.admin.utils.ResultUtil;
 import com.fanxl.admin.vo.ApiResponse;
@@ -24,6 +25,9 @@ public class HomeRestController {
     @Autowired
     private AdvertImageService advertImageService;
 
+    @Autowired
+    private CouponExerciseService couponExerciseService;
+
     @GetMapping("wheel")
     public ApiResponse getWheel() {
         return ResultUtil.success(wheelPictureService.getWheel());
@@ -32,6 +36,11 @@ public class HomeRestController {
     @GetMapping("advert")
     public ApiResponse advert() {
         return ResultUtil.success(advertImageService.getAdvertList());
+    }
+
+    @GetMapping("coupon")
+    public ApiResponse coupon() {
+        return ResultUtil.success(couponExerciseService.getCouponUrl());
     }
 
 

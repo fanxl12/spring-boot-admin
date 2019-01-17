@@ -1,6 +1,11 @@
 package com.fanxl.admin.service;
 
 import com.fanxl.admin.entity.FoodMenu;
+import com.fanxl.admin.form.FoodMenuForm;
+import com.fanxl.admin.vo.FoodMenuIDetailVO;
+import com.fanxl.admin.vo.FoodMenuItemVO;
+import com.github.pagehelper.PageInfo;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -46,5 +51,20 @@ public interface FoodMenuService {
      * @return
      */
     FoodMenu getById(Long id);
+
+    /**
+     * 获取列表
+     * @param form
+     * @param pageable
+     * @return
+     */
+    PageInfo<FoodMenuItemVO> getList(FoodMenuForm form, Pageable pageable);
+
+    /**
+     * 查询详情
+     * @param id
+     * @return
+     */
+    FoodMenuIDetailVO getDetail(Long id);
 
 }

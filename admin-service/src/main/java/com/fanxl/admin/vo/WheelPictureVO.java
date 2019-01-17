@@ -8,12 +8,6 @@ import lombok.Data;
  * @date: 2019/1/17 0017 12:10
  */
 @Data
-public class WheelPictureVO {
-
-    private String url;
-
-    private Integer width;
-
-    private Integer height;
+public class WheelPictureVO extends ImageItemVO {
 
 }

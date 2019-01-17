@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fanxl.admin.dao.FoodMenuDao">
+
+    <!--获取菜单列表-->
+    <select id="getList" parameterType="Map" resultType="com.fanxl.admin.vo.FoodMenuItemVO">
+        select a.id, a.name, a.url, a.cuisine, a.cooking
+        from admin_food_menu a
+        where a.food_menu_category_id =#{categoryId}
+        <if test="keyword!=null">
+            and a.name like CONCAT('%','${keyword}','%' )
+        </if>
+    </select>
+
+    <!--获取流行列表-->
+    <select id="getPopularList" parameterType="String" resultType="com.fanxl.admin.vo.FoodMenuItemVO">
+        select a.id, a.name, a.url, a.cuisine, a.cooking
+        from admin_food_menu a
+        where a.popular = 1
+        <if test="keyword!=null">
+            and a.name like CONCAT('%','${keyword}','%' )
+        </if>
+    </select>
+
+
+
+</mapper>

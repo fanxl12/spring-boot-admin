@@ -1,6 +1,7 @@
 package com.fanxl.admin.service;
 
 import com.fanxl.admin.entity.CouponExercise;
+import com.fanxl.admin.vo.CouponExerciseVO;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -47,5 +48,11 @@ public interface CouponExerciseService {
      * @return
      */
     boolean download(Long id, HttpServletResponse response);
+
+    /**
+     * 获取优惠活动的图片
+     * @return
+     */
+    CouponExerciseVO getCouponUrl();
 
 }

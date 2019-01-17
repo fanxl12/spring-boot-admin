@@ -2,6 +2,7 @@ package com.fanxl.admin.dao;
 
 import com.fanxl.admin.dto.BoothDTO;
 import com.fanxl.admin.entity.Booth;
+import com.fanxl.admin.vo.BoothVO;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -21,6 +22,12 @@ public interface BoothDao extends Mapper<Booth> {
      * @return
      */
     List<BoothDTO> getWebList();
+
+    /**
+     * 获取5星级摊位
+     * @return
+     */
+    List<BoothVO> getList();
 
 
 }
