@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  * @date: 2018/12/10 0010 13:20
  */
 @RestController
-@RequestMapping(value = "/api/v1/booth")
+@RequestMapping(value = "/api/v1/food-menu")
 public class FoodMenuRestController {
 
     @Autowired
@@ -27,7 +27,7 @@ public class FoodMenuRestController {
     }
 
     @GetMapping("{id}")
-    public ApiResponse get(@PathVariable Long id) {
+    public ApiResponse detail(@PathVariable Long id) {
         return ResultUtil.success(foodMenuService.getDetail(id));
     }
 

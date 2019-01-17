@@ -3,10 +3,13 @@ package com.fanxl.admin.service.impl;
 import com.fanxl.admin.dao.FoodMenuCategoryDao;
 import com.fanxl.admin.entity.FoodMenuCategory;
 import com.fanxl.admin.service.FoodMenuCategoryService;
+import com.fanxl.admin.vo.FoodMenuCategoryVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @description
@@ -42,5 +45,19 @@ public class FoodMenuCategoryServiceImpl implements FoodMenuCategoryService {
     @Override
     public FoodMenuCategory getById(Long id) {
         return foodMenuCategoryDao.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<FoodMenuCategoryVO> getCategoryList() {
+        List<FoodMenuCategoryVO> list = getAll().stream().map(item -> {
+            FoodMenuCategoryVO categoryVO = new FoodMenuCategoryVO();
+            BeanUtils.copyProperties(item, categoryVO);
+            return categoryVO;
+        }).collect(Collectors.toList());
+        FoodMenuCategoryVO index = new FoodMenuCategoryVO();
+        index.setId(0L);
+        index.setName("本周最受欢迎");
+        list.add(0, index);
+        return list;
     }
 }

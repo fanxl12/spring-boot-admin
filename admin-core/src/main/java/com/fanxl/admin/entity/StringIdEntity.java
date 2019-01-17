@@ -14,7 +14,7 @@ import javax.persistence.Id;
 public abstract class StringIdEntity extends BaseEntity {
 
     @Id
-    @GeneratedValue(generator = "UUID")
+    @GeneratedValue(generator = "JDBC")
     private String id;
 
 }

@@ -1,6 +1,7 @@
 package com.fanxl.admin.rest;
 
 import com.fanxl.admin.service.CategoryService;
+import com.fanxl.admin.service.FoodMenuCategoryService;
 import com.fanxl.admin.utils.ResultUtil;
 import com.fanxl.admin.vo.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,17 @@ public class CategoryRestController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private FoodMenuCategoryService foodMenuCategoryService;
+
     @GetMapping()
     public ApiResponse get() {
         return ResultUtil.success(categoryService.getCategoryList());
+    }
+
+    @GetMapping("food-menu")
+    public ApiResponse foodMenuCategory() {
+        return ResultUtil.success(foodMenuCategoryService.getCategoryList());
     }
 
 

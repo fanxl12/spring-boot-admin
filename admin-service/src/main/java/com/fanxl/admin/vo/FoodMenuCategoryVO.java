@@ -8,6 +8,7 @@ import lombok.Data;
  * @date: 2019/1/17 0017 12:10
  */
 @Data
-public class CategoryVO extends IdNameVO {
+public class FoodMenuCategoryVO extends IdNameVO {
+
 
 }

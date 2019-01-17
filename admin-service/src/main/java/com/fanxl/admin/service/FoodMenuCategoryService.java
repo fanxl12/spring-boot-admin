@@ -1,6 +1,7 @@
 package com.fanxl.admin.service;
 
 import com.fanxl.admin.entity.FoodMenuCategory;
+import com.fanxl.admin.vo.FoodMenuCategoryVO;
 
 import java.util.List;
 
@@ -44,5 +45,11 @@ public interface FoodMenuCategoryService {
      * @return
      */
     FoodMenuCategory getById(Long id);
+
+    /**
+     * 获取分类
+     * @return
+     */
+    List<FoodMenuCategoryVO> getCategoryList();
 
 }
