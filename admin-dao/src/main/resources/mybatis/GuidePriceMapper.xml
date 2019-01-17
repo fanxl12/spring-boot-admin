@@ -19,4 +19,21 @@
         where price_date =#{lastPriceDate};
     </select>
 
+    <!--获取上一次的价格日期-->
+    <select id="getLastPriceDate" resultType="Date">
+        select price_date
+        from admin_guide_price
+        order by price_date desc
+        limit 1;
+    </select>
+
+    <!--根据分类获取指导价-->
+    <select id="list" parameterType="Long" resultType="com.fanxl.admin.vo.GuidePriceVO">
+        SELECT a.`average_price`, a.`low_price`, a.`max_price`, a.`low_price_trend`,
+               a.`max_price_trend`, b.`name`
+        FROM `admin_guide_price` a
+        LEFT JOIN `admin_food` b ON b.id = a.`food_id`
+        WHERE b.`category_id` =#{categoryId}
+    </select>
+
 </mapper>

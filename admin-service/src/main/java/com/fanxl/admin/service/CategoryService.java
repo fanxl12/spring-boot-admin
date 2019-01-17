@@ -1,6 +1,7 @@
 package com.fanxl.admin.service;
 
 import com.fanxl.admin.entity.Category;
+import com.fanxl.admin.vo.CategoryVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.data.domain.Pageable;
 
@@ -53,5 +54,13 @@ public interface CategoryService {
      * @return
      */
     Category getById(Long id);
+
+    /**
+     * 获取分类
+     * @return
+     */
+    List<CategoryVO> getCategoryList();
+
+
 
 }

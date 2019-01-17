@@ -7,7 +7,9 @@ import com.fanxl.admin.exception.AdminException;
 import com.fanxl.admin.properties.AdminProperties;
 import com.fanxl.admin.service.WheelPictureService;
 import com.fanxl.admin.utils.FileUtil;
+import com.fanxl.admin.vo.WheelPictureVO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @description
@@ -78,5 +81,14 @@ public class WheelPictureServiceImpl implements WheelPictureService {
             return FileUtil.deleteFile(adminProperties.getFileUpload() + wheelPicture.getUrl());
         }
         throw new AdminException(ResultEnum.FAIL);
+    }
+
+    @Override
+    public List<WheelPictureVO> getWheel() {
+        return wheelPictureDao.getWheel().stream().map(item -> {
+            WheelPictureVO wheelPictureVO = new WheelPictureVO();
+            BeanUtils.copyProperties(item, wheelPictureVO);
+            return wheelPictureVO;
+        }).collect(Collectors.toList());
     }
 }

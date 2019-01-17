@@ -2,6 +2,7 @@ package com.fanxl.admin.dao;
 
 import com.fanxl.admin.entity.User;
 import org.springframework.stereotype.Repository;
+import tk.mybatis.mapper.common.Mapper;
 
 /**
  * @description
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * @date: 2018/12/9 0009 21:49
  */
 @Repository
-public interface UserDao {
+public interface UserDao extends Mapper<User> {
 
     /**
      * 创建用户

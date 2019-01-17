@@ -2,6 +2,8 @@ package com.fanxl.admin.service;
 
 import com.fanxl.admin.entity.User;
 
+import java.util.List;
+
 /**
  * @description
  * @author: fanxl
@@ -22,5 +24,27 @@ public interface UserService {
      * @return
      */
     User get(String id);
+
+    /**
+     * 查找用户
+     * @return
+     */
+    List<User> findAll();
+
+    /**
+     * 更新
+     * @param user
+     * @return
+     */
+    boolean update(User user);
+
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
+    boolean delete(String id);
+
+
 
 }

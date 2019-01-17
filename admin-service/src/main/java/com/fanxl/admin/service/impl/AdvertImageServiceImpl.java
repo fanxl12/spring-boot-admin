@@ -7,7 +7,9 @@ import com.fanxl.admin.exception.AdminException;
 import com.fanxl.admin.properties.AdminProperties;
 import com.fanxl.admin.service.AdvertImageService;
 import com.fanxl.admin.utils.FileUtil;
+import com.fanxl.admin.vo.AdvertImageVO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @description
@@ -71,5 +74,14 @@ public class AdvertImageServiceImpl implements AdvertImageService {
             return FileUtil.deleteFile(adminProperties.getFileUpload() + advertImage.getUrl());
         }
         throw new AdminException(ResultEnum.FAIL);
+    }
+
+    @Override
+    public List<AdvertImageVO> getAdvertList() {
+        return advertImageDao.getAdvert().stream().map(item -> {
+            AdvertImageVO advertImageVO = new AdvertImageVO();
+            BeanUtils.copyProperties(item, advertImageVO);
+            return advertImageVO;
+        }).collect(Collectors.toList());
     }
 }

@@ -10,6 +10,7 @@ import com.fanxl.admin.excel.bean.GuidePriceExcelBean;
 import com.fanxl.admin.excel.listener.ExcelGuidePriceListener;
 import com.fanxl.admin.exception.AdminException;
 import com.fanxl.admin.service.GuidePriceService;
+import com.fanxl.admin.vo.GuidePriceVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -55,7 +56,7 @@ public class GuidePriceServiceImpl implements GuidePriceService {
                 throw new AdminException(ResultEnum.FILE_NOT_FOUND.getCode(), "未解析出数据");
             }
 
-            List<GuidePrice> lastPriceList = guidePriceDao.getLastGuidePrice(null);
+            List<GuidePrice> lastPriceList = guidePriceDao.getLastGuidePrice(guidePriceDao.getLastPriceDate());
 
             List<GuidePrice> guidePrices = new ArrayList<>();
             for (GuidePriceExcelBean item : guidePriceList) {
@@ -95,6 +96,14 @@ public class GuidePriceServiceImpl implements GuidePriceService {
     public PageInfo<GuidePrice> getList(Pageable pageable) {
         PageHelper.startPage(pageable.getPageNumber(), pageable.getPageSize());
         List<GuidePrice> list = guidePriceDao.selectAll();
+        PageInfo pageInfo = new PageInfo<>(list, 6);
+        return pageInfo;
+    }
+
+    @Override
+    public PageInfo<GuidePriceVO> getList4Api(Pageable pageable, Long categoryId) {
+        PageHelper.startPage(pageable.getPageNumber(), pageable.getPageSize());
+        List<GuidePriceVO> list = guidePriceDao.list(categoryId);
         PageInfo pageInfo = new PageInfo<>(list, 6);
         return pageInfo;
     }

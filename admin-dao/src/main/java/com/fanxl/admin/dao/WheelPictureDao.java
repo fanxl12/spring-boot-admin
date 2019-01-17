@@ -21,5 +21,10 @@ public interface WheelPictureDao extends Mapper<WheelPicture> {
      */
     int saveList(List<WheelPicture> list);
 
+    /**
+     * 获取轮播图
+     * @return
+     */
+    List<WheelPicture> getWheel();
 
 }

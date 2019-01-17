@@ -1,6 +1,7 @@
 package com.fanxl.admin.service;
 
 import com.fanxl.admin.entity.TodayPrice;
+import com.fanxl.admin.vo.TodayPriceVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,5 +26,12 @@ public interface TodayPriceService {
      * @return
      */
     PageInfo<TodayPrice> getList(Pageable pageable);
+
+    /**
+     * 查询所有分类 分页
+     * @param pageable
+     * @return
+     */
+    PageInfo<TodayPriceVO> getList4Api(Pageable pageable);
 
 }

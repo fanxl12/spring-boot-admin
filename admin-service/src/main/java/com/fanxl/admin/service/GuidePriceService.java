@@ -1,6 +1,7 @@
 package com.fanxl.admin.service;
 
 import com.fanxl.admin.entity.GuidePrice;
+import com.fanxl.admin.vo.GuidePriceVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,5 +26,13 @@ public interface GuidePriceService {
      * @return
      */
     PageInfo<GuidePrice> getList(Pageable pageable);
+
+    /**
+     * 获取指导价格
+     * @param pageable
+     * @param categoryId
+     * @return
+     */
+    PageInfo<GuidePriceVO> getList4Api(Pageable pageable, Long categoryId);
 
 }

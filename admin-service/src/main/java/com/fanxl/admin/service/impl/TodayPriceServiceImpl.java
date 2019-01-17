@@ -10,9 +10,12 @@ import com.fanxl.admin.excel.bean.TodayPriceExcelBean;
 import com.fanxl.admin.excel.listener.ExcelTodayPriceListener;
 import com.fanxl.admin.exception.AdminException;
 import com.fanxl.admin.service.TodayPriceService;
+import com.fanxl.admin.vo.TodayPriceVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -21,8 +24,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -84,5 +90,26 @@ public class TodayPriceServiceImpl implements TodayPriceService {
         List<TodayPrice> list = todayPriceDao.selectAll();
         PageInfo pageInfo = new PageInfo<>(list, 6);
         return pageInfo;
+    }
+
+    @Override
+    public PageInfo<TodayPriceVO> getList4Api(Pageable pageable) {
+        PageHelper.startPage(pageable.getPageNumber(), pageable.getPageSize());
+        try {
+            String time = DateFormatUtils.format(new Date(), "yyyy-MM-dd");
+            Date start = DateUtils.parseDate(time + " 00:00:00", "yyyy-MM-dd HH:mm:ss");
+            Date end = DateUtils.parseDate(time + " 23:59:59", "yyyy-MM-dd HH:mm:ss");
+
+            Map<String, Object> param = new HashMap<>();
+            param.put("start", start);
+            param.put("end", end);
+
+            List<TodayPriceVO> list = todayPriceDao.list(param);
+            PageInfo pageInfo = new PageInfo<>(list, 6);
+            return pageInfo;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

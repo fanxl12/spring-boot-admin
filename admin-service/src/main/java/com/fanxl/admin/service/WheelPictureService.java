@@ -1,6 +1,7 @@
 package com.fanxl.admin.service;
 
 import com.fanxl.admin.entity.WheelPicture;
+import com.fanxl.admin.vo.WheelPictureVO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -31,5 +32,13 @@ public interface WheelPictureService {
      * @return
      */
     boolean delete(Long id);
+
+    /**
+     * 获取轮播图
+     * @return
+     */
+    List<WheelPictureVO> getWheel();
+
+
 
 }

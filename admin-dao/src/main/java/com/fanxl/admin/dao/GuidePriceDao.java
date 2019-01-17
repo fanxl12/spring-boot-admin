@@ -1,6 +1,7 @@
 package com.fanxl.admin.dao;
 
 import com.fanxl.admin.entity.GuidePrice;
+import com.fanxl.admin.vo.GuidePriceVO;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -28,5 +29,18 @@ public interface GuidePriceDao extends Mapper<GuidePrice> {
      * @return
      */
     List<GuidePrice> getLastGuidePrice(Date lastPriceDate);
+
+    /**
+     * 获取
+     * @return
+     */
+    Date getLastPriceDate();
+
+    /**
+     * 获取分类的指导价格
+     * @param categoryId
+     * @return
+     */
+    List<GuidePriceVO> list(Long categoryId);
 
 }

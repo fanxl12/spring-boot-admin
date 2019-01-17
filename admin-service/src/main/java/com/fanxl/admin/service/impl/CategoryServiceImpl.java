@@ -3,13 +3,16 @@ package com.fanxl.admin.service.impl;
 import com.fanxl.admin.dao.CategoryDao;
 import com.fanxl.admin.entity.Category;
 import com.fanxl.admin.service.CategoryService;
+import com.fanxl.admin.vo.CategoryVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @description
@@ -53,5 +56,14 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category getById(Long id) {
         return categoryDao.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<CategoryVO> getCategoryList() {
+        return getAll().stream().map(item -> {
+            CategoryVO categoryVO = new CategoryVO();
+            BeanUtils.copyProperties(item, categoryVO);
+            return categoryVO;
+        }).collect(Collectors.toList());
     }
 }

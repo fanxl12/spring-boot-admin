@@ -11,6 +11,14 @@
         </foreach>;
     </insert>
 
+    <!--获取轮播图-->
+    <select id="getWheel" resultType="WheelPicture">
+        select url, width, height
+        from admin_wheel_picture
+        order by create_date desc
+        limit 10;
+    </select>
+
 
 
 </mapper>

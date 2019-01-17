@@ -11,4 +11,13 @@
         </foreach>;
     </insert>
 
+    <!--根据分类获取指导价-->
+    <select id="list" parameterType="Date" resultType="com.fanxl.admin.vo.TodayPriceVO">
+        SELECT c.`name` AS booth_name, b.`name` AS food_name, a.`price`, a.`special_price`
+        FROM `admin_today_price` a
+             LEFT JOIN `admin_food` b ON b.id = a.`food_id`
+             LEFT JOIN `admin_booth` c ON c.id = a.`booth_id`
+        WHERE a.`price_date` > #{start} and #{end} > a.price_date
+    </select>
+
 </mapper>

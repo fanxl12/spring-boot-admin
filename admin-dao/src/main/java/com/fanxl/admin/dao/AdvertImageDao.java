@@ -4,6 +4,8 @@ import com.fanxl.admin.entity.AdvertImage;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.util.List;
+
 /**
  * @description
  * @author: fanxl
@@ -11,5 +13,11 @@ import tk.mybatis.mapper.common.Mapper;
  */
 @Repository
 public interface AdvertImageDao extends Mapper<AdvertImage> {
+
+    /**
+     * 获取广告
+     * @return
+     */
+    List<AdvertImage> getAdvert();
 
 }
