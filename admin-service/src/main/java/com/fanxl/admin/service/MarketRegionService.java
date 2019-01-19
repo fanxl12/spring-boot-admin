@@ -1,6 +1,7 @@
 package com.fanxl.admin.service;
 
 import com.fanxl.admin.entity.MarketRegion;
+import com.fanxl.admin.vo.MarketRegionVO;
 
 import java.util.List;
 
@@ -52,5 +53,11 @@ public interface MarketRegionService {
      * @return
      */
     MarketRegion getById(Long id);
+
+    /**
+     * 查询菜场分区
+     * @return
+     */
+    List<MarketRegionVO> getList();
 
 }

@@ -1,25 +1,18 @@
-package com.fanxl.admin.entity;
+package com.fanxl.admin.vo;
 
 import lombok.Data;
 
-import javax.persistence.Table;
-
 /**
- * @description 摊位
+ * @description
  * @author: fanxl
- * @date: 2018/12/28 0028 19:35
+ * @date: 2019/1/17 0017 12:10
  */
-@Table(name = "admin_booth")
 @Data
-public class Booth extends IdNameEntity {
+public class BoothImageVO {
 
-    private Long marketRegionId;
+    private String marketName;
 
-    private Long categoryId;
-
-    private String url;
-
-    private Integer star;
+    private String marketRegionName;
 
     /**
      * 位置
@@ -53,5 +46,4 @@ public class Booth extends IdNameEntity {
     private Integer heathWidth;
 
     private Integer heathHeight;
-
 }

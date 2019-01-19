@@ -3,6 +3,7 @@ package com.fanxl.admin.service.impl;
 import com.fanxl.admin.dao.MarketRegionDao;
 import com.fanxl.admin.entity.MarketRegion;
 import com.fanxl.admin.service.MarketRegionService;
+import com.fanxl.admin.vo.MarketRegionVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -50,5 +51,10 @@ public class MarketRegionServiceImpl implements MarketRegionService {
     @Override
     public MarketRegion getById(Long id) {
         return marketRegionDao.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<MarketRegionVO> getList() {
+        return marketRegionDao.list();
     }
 }

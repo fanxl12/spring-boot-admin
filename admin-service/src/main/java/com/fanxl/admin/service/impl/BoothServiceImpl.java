@@ -8,6 +8,7 @@ import com.fanxl.admin.exception.AdminException;
 import com.fanxl.admin.properties.AdminProperties;
 import com.fanxl.admin.service.BoothService;
 import com.fanxl.admin.utils.FileUtil;
+import com.fanxl.admin.vo.BoothImageVO;
 import com.fanxl.admin.vo.BoothVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -17,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
 
@@ -42,17 +45,31 @@ public class BoothServiceImpl implements BoothService {
     }
 
     @Override
-    public boolean create(Booth booth, MultipartFile file, MultipartFile businessLicense, MultipartFile license, MultipartFile heathLicense) {
+    public boolean create(Booth booth, MultipartFile file, MultipartFile businessLicense,
+                          MultipartFile license, MultipartFile heathLicense) {
         try {
             String fileName = FileUtil.saveFile(file, adminProperties.getFileUpload() + FOLDER_NAME);
-            String businessLicenseName = FileUtil.saveFile(businessLicense, adminProperties.getFileUpload() + FOLDER_NAME);
             booth.setUrl(FOLDER_NAME + fileName);
+
+            BufferedImage sourceImg = ImageIO.read(businessLicense.getInputStream());
+            booth.setBusinessWidth(sourceImg.getWidth());
+            booth.setBusinessHeight(sourceImg.getHeight());
+
+            String businessLicenseName = FileUtil.saveFile(businessLicense, adminProperties.getFileUpload() + FOLDER_NAME);
             booth.setBusinessLicense(FOLDER_NAME + businessLicenseName);
             if (license != null) {
+                BufferedImage licenseImg = ImageIO.read(license.getInputStream());
+                booth.setLicenseWidth(licenseImg.getWidth());
+                booth.setLicenseHeight(licenseImg.getHeight());
+
                 String licenseName = FileUtil.saveFile(license, adminProperties.getFileUpload() + FOLDER_NAME);
                 booth.setLicense(FOLDER_NAME + licenseName);
             }
             if (heathLicense != null) {
+                BufferedImage heathImg = ImageIO.read(heathLicense.getInputStream());
+                booth.setHeathWidth(heathImg.getWidth());
+                booth.setHeathHeight(heathImg.getHeight());
+
                 String heathLicenseName = FileUtil.saveFile(heathLicense, adminProperties.getFileUpload() + FOLDER_NAME);
                 booth.setHeathLicense(FOLDER_NAME + heathLicenseName);
             }
@@ -89,10 +106,15 @@ public class BoothServiceImpl implements BoothService {
 
     @Override
     public PageInfo<BoothVO> getList(Pageable pageable) {
-        PageHelper.startPage(pageable.getPageNumber(), pageable.getPageSize());
+        PageHelper.startPage(2, 10);
         List<BoothVO> list = boothDao.getList();
-        PageInfo pageInfo = new PageInfo<>(list, 6);
+        PageInfo pageInfo = new PageInfo<>(list);
         return pageInfo;
+    }
+
+    @Override
+    public BoothImageVO getImageDetail(Long id) {
+        return boothDao.imageDetail(id);
     }
 
     @Override

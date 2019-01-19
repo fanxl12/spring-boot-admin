@@ -2,6 +2,7 @@ package com.fanxl.admin.service;
 
 import com.fanxl.admin.dto.BoothDTO;
 import com.fanxl.admin.entity.Booth;
+import com.fanxl.admin.vo.BoothImageVO;
 import com.fanxl.admin.vo.BoothVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.data.domain.Pageable;
@@ -68,6 +69,11 @@ public interface BoothService {
      */
     PageInfo<BoothVO> getList(Pageable pageable);
 
-
+    /**
+     * 获取摊位图片详情
+     * @param id
+     * @return
+     */
+    BoothImageVO getImageDetail(Long id);
 
 }

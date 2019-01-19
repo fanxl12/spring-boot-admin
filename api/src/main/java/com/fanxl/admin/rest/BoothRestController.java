@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,6 +26,11 @@ public class BoothRestController {
     @GetMapping()
     public ApiResponse get(@PageableDefault Pageable pageable) {
         return ResultUtil.success(boothService.getList(pageable));
+    }
+
+    @GetMapping("{id}")
+    public ApiResponse detail(@PathVariable Long id) {
+        return ResultUtil.success(boothService.getImageDetail(id));
     }
 
 

@@ -103,6 +103,7 @@ public class GuidePriceServiceImpl implements GuidePriceService {
     @Override
     public PageInfo<GuidePriceVO> getList4Api(Pageable pageable, Long categoryId) {
         PageHelper.startPage(pageable.getPageNumber(), pageable.getPageSize());
+        log.info("page:" + pageable.getPageNumber() + "--size:" + pageable.getPageSize());
         List<GuidePriceVO> list = guidePriceDao.list(categoryId);
         PageInfo pageInfo = new PageInfo<>(list, 6);
         return pageInfo;

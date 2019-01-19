@@ -1,6 +1,5 @@
 package com.fanxl.admin;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
@@ -12,7 +11,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
  */
 @SpringBootApplication
 @ServletComponentScan
-@MapperScan("com.fanxl.admin.dao")
+@tk.mybatis.spring.annotation.MapperScan("com.fanxl.admin.dao")
 public class ApiApplication {
 
     public static void main(String[] args) {

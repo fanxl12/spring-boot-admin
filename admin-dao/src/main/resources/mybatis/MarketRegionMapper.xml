@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fanxl.admin.dao.MarketRegionDao">
+
+    <resultMap id="listMap" type="com.fanxl.admin.vo.MarketRegionVO" autoMapping="true">
+        <id column="id" property="id"/>
+        <collection property="childList" columnPrefix="child_" ofType="com.fanxl.admin.vo.MarketRegionItemVO" autoMapping="true">
+            <id property="id" column="id"/>
+        </collection>
+    </resultMap>
+
+    <!--根据分类获取指导价-->
+    <select id="list" resultMap="listMap">
+        SELECT a.id, a.name, b.id as child_id, b.position as child_name
+        FROM `admin_market_region` a
+             LEFT JOIN admin_booth b on b.market_region_id = a.id
+        WHERE a.market_id = 1
+    </select>
+
+</mapper>

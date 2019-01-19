@@ -18,4 +18,20 @@ ALTER TABLE `admin_system`.`admin_booth`
   ADD COLUMN `position` varchar(32) not null comment '摊位位置' AFTER `update_date`;
 
 
+ALTER TABLE `admin_system`.`admin_booth`
+  ADD COLUMN `business_width` int not null comment '宽' AFTER `update_date`;
 
+ALTER TABLE `admin_system`.`admin_booth`
+  ADD COLUMN `business_height` int not null comment '高' AFTER `update_date`;
+
+ALTER TABLE `admin_system`.`admin_booth`
+  ADD COLUMN `license_width` int not null comment '宽' AFTER `update_date`;
+
+ALTER TABLE `admin_system`.`admin_booth`
+  ADD COLUMN `license_height` int not null comment '高' AFTER `update_date`;
+
+ALTER TABLE `admin_system`.`admin_booth`
+  ADD COLUMN `heath_width` int not null comment '宽' AFTER `update_date`;
+
+ALTER TABLE `admin_system`.`admin_booth`
+  ADD COLUMN `heath_height` int not null comment '高' AFTER `update_date`;

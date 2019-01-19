@@ -32,7 +32,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public PageInfo<Category> getList(Pageable pageable) {
-        PageHelper.startPage(pageable.getPageNumber(), 4);
+        PageHelper.startPage(pageable.getPageNumber(), pageable.getPageSize());
         List<Category> list = categoryDao.selectAll();
         PageInfo pageInfo = new PageInfo<>(list, 6);
         return pageInfo;

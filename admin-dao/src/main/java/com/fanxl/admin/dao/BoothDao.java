@@ -2,6 +2,7 @@ package com.fanxl.admin.dao;
 
 import com.fanxl.admin.dto.BoothDTO;
 import com.fanxl.admin.entity.Booth;
+import com.fanxl.admin.vo.BoothImageVO;
 import com.fanxl.admin.vo.BoothVO;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
@@ -28,6 +29,13 @@ public interface BoothDao extends Mapper<Booth> {
      * @return
      */
     List<BoothVO> getList();
+
+    /**
+     * 获取图片的详情
+     * @param id
+     * @return
+     */
+    BoothImageVO imageDetail(Long id);
 
 
 }
