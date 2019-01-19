@@ -45,6 +45,13 @@ public interface UserService {
      */
     boolean delete(String id);
 
+    /**
+     * 用户名查找
+     * @param username
+     * @return
+     */
+    User findByUsername(String username);
+
 
 
 }

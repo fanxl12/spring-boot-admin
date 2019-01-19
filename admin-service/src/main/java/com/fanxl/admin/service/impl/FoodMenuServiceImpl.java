@@ -4,7 +4,6 @@ import com.fanxl.admin.dao.FoodMenuDao;
 import com.fanxl.admin.entity.FoodMenu;
 import com.fanxl.admin.enums.ResultEnum;
 import com.fanxl.admin.exception.AdminException;
-import com.fanxl.admin.form.FoodMenuForm;
 import com.fanxl.admin.properties.AdminProperties;
 import com.fanxl.admin.service.FoodMenuService;
 import com.fanxl.admin.utils.FileUtil;
@@ -86,18 +85,18 @@ public class FoodMenuServiceImpl implements FoodMenuService {
     }
 
     @Override
-    public PageInfo<FoodMenuItemVO> getList(FoodMenuForm form, Pageable pageable) {
+    public PageInfo<FoodMenuItemVO> getList(Long categoryId, String keyword, Pageable pageable) {
         PageHelper.startPage(pageable.getPageNumber(), pageable.getPageSize());
         List<FoodMenuItemVO> list;
-        if (form.getCategoryId() == null) {
-            list = foodMenuDao.getPopularList(form.getKeyword());
+        if (categoryId == 0) {
+            list = foodMenuDao.getPopularList(keyword);
         } else {
             Map<String, Object> param = new HashMap<>();
-            param.put("categoryId", form.getCategoryId());
-            param.put("keyword", form.getKeyword());
+            param.put("categoryId", categoryId);
+            param.put("keyword", keyword);
             list = foodMenuDao.getList(param);
         }
-        PageInfo pageInfo = new PageInfo<>(list, 6);
+        PageInfo pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
 

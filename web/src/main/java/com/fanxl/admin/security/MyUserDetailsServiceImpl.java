@@ -1,14 +1,12 @@
 package com.fanxl.admin.security;
 
+import com.fanxl.admin.entity.User;
 import com.fanxl.admin.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,17 +19,14 @@ import org.springframework.stereotype.Component;
 public class MyUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
     private UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-
-        String password = passwordEncoder.encode("123456");
-        log.info("password:{}", password);
-        return new User(username, password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+        User user = userService.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("用户不存在");
+        }
+        return user;
     }
 }

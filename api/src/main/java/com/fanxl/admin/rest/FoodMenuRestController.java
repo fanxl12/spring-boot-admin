@@ -1,6 +1,5 @@
 package com.fanxl.admin.rest;
 
-import com.fanxl.admin.form.FoodMenuForm;
 import com.fanxl.admin.service.FoodMenuService;
 import com.fanxl.admin.utils.ResultUtil;
 import com.fanxl.admin.vo.ApiResponse;
@@ -22,8 +21,9 @@ public class FoodMenuRestController {
     private FoodMenuService foodMenuService;
 
     @GetMapping()
-    public ApiResponse get(@PageableDefault Pageable pageable, @RequestParam FoodMenuForm form) {
-        return ResultUtil.success(foodMenuService.getList(form, pageable));
+    public ApiResponse get(@PageableDefault Pageable pageable, @RequestParam Long categoryId,
+                           @RequestParam(required = false) String keyword) {
+        return ResultUtil.success(foodMenuService.getList(categoryId, keyword, pageable));
     }
 
     @GetMapping("{id}")

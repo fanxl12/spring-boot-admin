@@ -1,7 +1,6 @@
 package com.fanxl.admin.service;
 
 import com.fanxl.admin.entity.FoodMenu;
-import com.fanxl.admin.form.FoodMenuForm;
 import com.fanxl.admin.vo.FoodMenuIDetailVO;
 import com.fanxl.admin.vo.FoodMenuItemVO;
 import com.github.pagehelper.PageInfo;
@@ -54,11 +53,12 @@ public interface FoodMenuService {
 
     /**
      * 获取列表
-     * @param form
+     * @param categoryId
+     * @param keyword
      * @param pageable
      * @return
      */
-    PageInfo<FoodMenuItemVO> getList(FoodMenuForm form, Pageable pageable);
+    PageInfo<FoodMenuItemVO> getList(Long categoryId, String keyword, Pageable pageable);
 
     /**
      * 查询详情
