@@ -43,5 +43,10 @@ public class HomeRestController {
         return ResultUtil.success(couponExerciseService.getCouponUrl());
     }
 
+    @GetMapping("test")
+    public ApiResponse test() {
+        return ResultUtil.success("连接正常");
+    }
+
 
 }

@@ -57,7 +57,7 @@ public class BoothServiceImpl implements BoothService {
 
             String businessLicenseName = FileUtil.saveFile(businessLicense, adminProperties.getFileUpload() + FOLDER_NAME);
             booth.setBusinessLicense(FOLDER_NAME + businessLicenseName);
-            if (license != null) {
+            if (license != null && !license.isEmpty()) {
                 BufferedImage licenseImg = ImageIO.read(license.getInputStream());
                 booth.setLicenseWidth(licenseImg.getWidth());
                 booth.setLicenseHeight(licenseImg.getHeight());
@@ -65,7 +65,7 @@ public class BoothServiceImpl implements BoothService {
                 String licenseName = FileUtil.saveFile(license, adminProperties.getFileUpload() + FOLDER_NAME);
                 booth.setLicense(FOLDER_NAME + licenseName);
             }
-            if (heathLicense != null) {
+            if (heathLicense != null && !heathLicense.isEmpty()) {
                 BufferedImage heathImg = ImageIO.read(heathLicense.getInputStream());
                 booth.setHeathWidth(heathImg.getWidth());
                 booth.setHeathHeight(heathImg.getHeight());
