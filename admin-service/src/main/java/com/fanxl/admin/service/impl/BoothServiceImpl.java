@@ -2,6 +2,7 @@ package com.fanxl.admin.service.impl;
 
 import com.fanxl.admin.dao.BoothDao;
 import com.fanxl.admin.dto.BoothDTO;
+import com.fanxl.admin.dto.ImageDTO;
 import com.fanxl.admin.entity.Booth;
 import com.fanxl.admin.enums.ResultEnum;
 import com.fanxl.admin.exception.AdminException;
@@ -18,8 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
 
@@ -46,32 +45,48 @@ public class BoothServiceImpl implements BoothService {
 
     @Override
     public boolean create(Booth booth, MultipartFile file, MultipartFile businessLicense,
-                          MultipartFile license, MultipartFile heathLicense) {
+                          MultipartFile license, MultipartFile heathLicense) throws Exception {
+
+        String folderPath = adminProperties.getFileUpload() + FOLDER_NAME;
+        String fileName = FileUtil.saveFile(file, folderPath);
+        booth.setUrl(FOLDER_NAME + fileName);
+
+        ImageDTO businessImage = null;
+        if (businessLicense!=null && !businessLicense.isEmpty()) {
+            businessImage = FileUtil.saveWidthAndHeightFile(businessLicense, folderPath);
+        } else if (booth.getBusinessLicense()!=null) {
+            businessImage = FileUtil.downLoadImage(booth.getBusinessLicense(), folderPath);
+        }
+        if (businessImage != null) {
+            booth.setBusinessWidth(businessImage.getWidth());
+            booth.setBusinessHeight(businessImage.getHeight());
+            booth.setBusinessLicense(FOLDER_NAME + businessImage.getName());
+        } else {
+            throw new AdminException(40010, "营业执照不能为空");
+        }
         try {
-            String fileName = FileUtil.saveFile(file, adminProperties.getFileUpload() + FOLDER_NAME);
-            booth.setUrl(FOLDER_NAME + fileName);
-
-            BufferedImage sourceImg = ImageIO.read(businessLicense.getInputStream());
-            booth.setBusinessWidth(sourceImg.getWidth());
-            booth.setBusinessHeight(sourceImg.getHeight());
-
-            String businessLicenseName = FileUtil.saveFile(businessLicense, adminProperties.getFileUpload() + FOLDER_NAME);
-            booth.setBusinessLicense(FOLDER_NAME + businessLicenseName);
+            ImageDTO licenseImage = null;
             if (license != null && !license.isEmpty()) {
-                BufferedImage licenseImg = ImageIO.read(license.getInputStream());
-                booth.setLicenseWidth(licenseImg.getWidth());
-                booth.setLicenseHeight(licenseImg.getHeight());
-
-                String licenseName = FileUtil.saveFile(license, adminProperties.getFileUpload() + FOLDER_NAME);
-                booth.setLicense(FOLDER_NAME + licenseName);
+                licenseImage = FileUtil.saveWidthAndHeightFile(license, folderPath);
+            } else if (booth.getLicense()!=null){
+                licenseImage = FileUtil.downLoadImage(booth.getLicense(), folderPath);
             }
-            if (heathLicense != null && !heathLicense.isEmpty()) {
-                BufferedImage heathImg = ImageIO.read(heathLicense.getInputStream());
-                booth.setHeathWidth(heathImg.getWidth());
-                booth.setHeathHeight(heathImg.getHeight());
+            if (licenseImage != null) {
+                booth.setLicenseWidth(licenseImage.getWidth());
+                booth.setLicenseHeight(licenseImage.getHeight());
+                booth.setLicense(FOLDER_NAME + licenseImage.getName());
+            }
 
-                String heathLicenseName = FileUtil.saveFile(heathLicense, adminProperties.getFileUpload() + FOLDER_NAME);
-                booth.setHeathLicense(FOLDER_NAME + heathLicenseName);
+            ImageDTO heathLicenseImage = null;
+            if (heathLicense != null && !heathLicense.isEmpty()) {
+                heathLicenseImage = FileUtil.saveWidthAndHeightFile(heathLicense, folderPath);
+            } else if (booth.getHeathLicense()!=null){
+                heathLicenseImage = FileUtil.downLoadImage(booth.getHeathLicense(), folderPath);
+            }
+            if (heathLicenseImage != null) {
+                booth.setHeathWidth(heathLicenseImage.getWidth());
+                booth.setHeathHeight(heathLicenseImage.getHeight());
+                booth.setHeathLicense(FOLDER_NAME + heathLicenseImage.getName());
             }
         } catch (IOException e) {
             e.printStackTrace();

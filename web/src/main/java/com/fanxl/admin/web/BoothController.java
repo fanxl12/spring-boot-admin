@@ -57,10 +57,10 @@ public class BoothController {
 
     @PostMapping(value = "/create", produces = MediaType.TEXT_HTML_VALUE)
     public String create(Booth booth, @RequestParam("file") MultipartFile file,
-                         @RequestParam("businessLicenseFile") MultipartFile businessLicense,
+                         @RequestParam(value = "businessLicenseFile", required = false) MultipartFile businessLicense,
                          @RequestParam(value = "licenseFile", required = false) MultipartFile license,
                          @RequestParam(value = "heathLicenseFile", required = false) MultipartFile heathLicense,
-                         RedirectAttributes ra, Model model){
+                         RedirectAttributes ra, Model model) throws Exception{
         if (boothService.create(booth, file, businessLicense, license, heathLicense)) {
             ra.addFlashAttribute("msg", "创建成功");
             return "redirect:/booth";

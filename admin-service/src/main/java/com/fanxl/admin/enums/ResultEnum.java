@@ -16,6 +16,7 @@ public enum ResultEnum {
     FILE_NOT_FOUND(4004, "文件找不到"),
     FILE_NOT_EMPTY(4005, "文件不能为空"),
     FILE_CREATE_FAIL(4006, "文件创建失败"),
+    FILE_DOWNLOAD_FAIL(4007, "文件下载失败"),
     ;
 
     private Integer code;

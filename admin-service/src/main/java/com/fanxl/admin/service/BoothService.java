@@ -25,8 +25,10 @@ public interface BoothService {
      * @param license
      * @param heathLicense
      * @return
+     * @throws Exception
      */
-    boolean create(Booth booth, MultipartFile file, MultipartFile businessLicense, MultipartFile license, MultipartFile heathLicense);
+    boolean create(Booth booth, MultipartFile file, MultipartFile businessLicense,
+                   MultipartFile license, MultipartFile heathLicense) throws Exception;
 
     /**
      * 查找详情
