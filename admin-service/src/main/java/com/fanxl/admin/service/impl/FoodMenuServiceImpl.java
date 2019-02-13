@@ -7,7 +7,7 @@ import com.fanxl.admin.exception.AdminException;
 import com.fanxl.admin.properties.AdminProperties;
 import com.fanxl.admin.service.FoodMenuService;
 import com.fanxl.admin.utils.FileUtil;
-import com.fanxl.admin.vo.FoodMenuIDetailVO;
+import com.fanxl.admin.vo.FoodMenuDetailVO;
 import com.fanxl.admin.vo.FoodMenuItemVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -101,9 +101,9 @@ public class FoodMenuServiceImpl implements FoodMenuService {
     }
 
     @Override
-    public FoodMenuIDetailVO getDetail(Long id) {
+    public FoodMenuDetailVO getDetail(Long id) {
         FoodMenu foodMenu = foodMenuDao.selectByPrimaryKey(id);
-        FoodMenuIDetailVO detail = new FoodMenuIDetailVO();
+        FoodMenuDetailVO detail = new FoodMenuDetailVO();
         BeanUtils.copyProperties(foodMenu, detail);
         return detail;
     }
