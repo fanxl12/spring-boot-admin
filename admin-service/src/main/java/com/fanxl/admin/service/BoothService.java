@@ -46,9 +46,11 @@ public interface BoothService {
     /**
      * 更新
      * @param booth
+     * @param file
      * @return
+     * @throws Exception
      */
-    boolean update(Booth booth);
+    boolean update(Booth booth, MultipartFile file) throws Exception;
 
     /**
      * 删除

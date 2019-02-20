@@ -54,4 +54,6 @@ public class Booth extends IdNameEntity {
 
     private Integer heathHeight;
 
+    private String licenseUrl;
+
 }

@@ -64,6 +64,8 @@ public class TodayPriceServiceImpl implements TodayPriceService {
                 BeanUtils.copyProperties(item, todayPrice);
                 if (todayPrice.getPriceDate()==null) {
                     todayPrice.setPriceDate(new Date());
+                } else {
+                    log.info("价格时间:" + DateFormatUtils.format(todayPrice.getPriceDate(), "yyyy-MM-dd HH:mm:ss"));
                 }
                 return todayPrice;
             }).collect(Collectors.toList());

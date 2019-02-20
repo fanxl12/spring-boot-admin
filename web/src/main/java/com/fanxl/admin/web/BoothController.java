@@ -2,8 +2,8 @@ package com.fanxl.admin.web;
 
 import com.fanxl.admin.dto.BoothDTO;
 import com.fanxl.admin.entity.Booth;
-import com.fanxl.admin.service.CategoryService;
 import com.fanxl.admin.service.BoothService;
+import com.fanxl.admin.service.CategoryService;
 import com.fanxl.admin.service.MarketRegionService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -83,9 +82,9 @@ public class BoothController {
 
 
     @PostMapping(value = "/update", produces = MediaType.TEXT_HTML_VALUE)
-    public String update(Booth booth, BindingResult result,
-                         RedirectAttributes ra, Model model){
-        if (boothService.update(booth)){
+    public String update(Booth booth, @RequestParam(value = "file", required = false) MultipartFile file,
+                         RedirectAttributes ra, Model model) throws Exception{
+        if (boothService.update(booth, file)){
             ra.addFlashAttribute("msg", "更新成功");
             return "redirect:/booth";
         }else {

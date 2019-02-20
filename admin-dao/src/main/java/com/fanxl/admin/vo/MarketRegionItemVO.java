@@ -14,4 +14,6 @@ public class MarketRegionItemVO {
 
     private String name;
 
+    private String licenseUrl;
+
 }

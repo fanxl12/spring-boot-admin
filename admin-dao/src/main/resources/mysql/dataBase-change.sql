@@ -35,3 +35,7 @@ ALTER TABLE `admin_system`.`admin_booth`
 
 ALTER TABLE `admin_system`.`admin_booth`
   ADD COLUMN `heath_height` int not null comment '高' AFTER `update_date`;
+
+#02-13
+ALTER TABLE `admin_system`.`admin_booth`
+  ADD COLUMN `license_url` varchar(128) not null comment '授权地址' AFTER `update_date`;

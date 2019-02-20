@@ -72,57 +72,10 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">营业执照</label>
+                    <label class="layui-form-label">营业执照等信息</label>
                     <div class="layui-input-block">
-                        <input type="file" name="businessLicenseFile"/>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">营业执照Url上传</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="businessLicense" placeholder="请输入营业执照网址" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item" th:if="${not #strings.isEmpty(booth.businessLicense)}">
-                    <label class="layui-form-label">营业执照</label>
-                    <div class="layui-input-block">
-                        <img th:src="|/resources/${booth.businessLicense}|" style="height: 100px">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">上传许可证</label>
-                    <div class="layui-input-block">
-                        <input type="file" name="licenseFile"/>
-                    </div>
-                </div>
-                <div class="layui-form-item" th:if="${not #strings.isEmpty(booth.license)}">
-                    <label class="layui-form-label">许可证</label>
-                    <div class="layui-input-block">
-                        <img th:src="|/resources/${booth.license}|" style="height: 100px">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">许可证Url上传</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="license" placeholder="请输入许可证网址" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">上传健康证</label>
-                    <div class="layui-input-block">
-                        <input type="file" name="heathLicenseFile"/>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">健康证Url上传</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="heathLicense" placeholder="请输入健康证网址" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item" th:if="${not #strings.isEmpty(booth.heathLicense)}">
-                    <label class="layui-form-label">健康证</label>
-                    <div class="layui-input-block">
-                        <img th:src="|/resources/${booth.heathLicense}|" style="height: 100px">
+                        <input type="text" name="licenseUrl" required lay-verify="required" placeholder="请输入网址"
+                               class="layui-input" th:value="${booth.licenseUrl}">
                     </div>
                 </div>
 

@@ -47,6 +47,9 @@ public class BoothServiceImpl implements BoothService {
     public boolean create(Booth booth, MultipartFile file, MultipartFile businessLicense,
                           MultipartFile license, MultipartFile heathLicense) throws Exception {
 
+        if (file == null || file.isEmpty()) {
+            throw new AdminException(40012, "摊位图片不能为空");
+        }
         String folderPath = adminProperties.getFileUpload() + FOLDER_NAME;
         String fileName = FileUtil.saveFile(file, folderPath);
         booth.setUrl(FOLDER_NAME + fileName);
@@ -61,8 +64,6 @@ public class BoothServiceImpl implements BoothService {
             booth.setBusinessWidth(businessImage.getWidth());
             booth.setBusinessHeight(businessImage.getHeight());
             booth.setBusinessLicense(FOLDER_NAME + businessImage.getName());
-        } else {
-            throw new AdminException(40010, "营业执照不能为空");
         }
         try {
             ImageDTO licenseImage = null;
@@ -133,8 +134,21 @@ public class BoothServiceImpl implements BoothService {
     }
 
     @Override
-    public boolean update(Booth booth) {
-        return boothDao.updateByPrimaryKeySelective(booth)>0;
+    public boolean update(Booth booth, MultipartFile file) throws Exception {
+        String oldFileUrl = null;
+        if (file!=null && !file.isEmpty()) {
+            String folderPath = adminProperties.getFileUpload() + FOLDER_NAME;
+            String fileName = FileUtil.saveFile(file, folderPath);
+            oldFileUrl = booth.getUrl();
+            booth.setUrl(FOLDER_NAME + fileName);
+        }
+        if (boothDao.updateByPrimaryKeySelective(booth)>0) {
+            if (oldFileUrl != null) {
+                FileUtil.deleteFile(adminProperties.getFileUpload() + oldFileUrl);
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override

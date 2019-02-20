@@ -18,8 +18,7 @@
 
     <!--获取图片详情-->
     <select id="imageDetail" parameterType="Long" resultType="com.fanxl.admin.vo.BoothImageVO">
-        SELECT a.position, a.business_license, a.business_width, a.business_height, a.license, a.license_height, a.license_width,
-               a.heath_license, a.heath_height, a.heath_width, b.name as marketRegionName, c.name as marketName
+        SELECT a.position, a.license_url, b.name as marketRegionName, c.name as marketName
         FROM admin_booth a
         left join admin_market_region b on b.id = a.market_region_id
         left join admin_market c on c.id = b.market_id

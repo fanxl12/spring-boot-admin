@@ -9,12 +9,13 @@
         </collection>
     </resultMap>
 
-    <!--根据分类获取指导价-->
+    <!--根据菜场分区-->
     <select id="list" resultMap="listMap">
-        SELECT a.id, a.name, b.id as child_id, b.position as child_name
+        SELECT a.id, a.name, b.id as child_id, b.position as child_name, b.license_url as child_licenseUrl
         FROM `admin_market_region` a
              LEFT JOIN admin_booth b on b.market_region_id = a.id
         WHERE a.market_id = 1
+        ORDER BY a.`name`, b.`position`
     </select>
 
 </mapper>
