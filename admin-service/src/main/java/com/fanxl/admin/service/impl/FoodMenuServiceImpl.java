@@ -1,6 +1,7 @@
 package com.fanxl.admin.service.impl;
 
 import com.fanxl.admin.dao.FoodMenuDao;
+import com.fanxl.admin.dto.ImageDTO;
 import com.fanxl.admin.entity.FoodMenu;
 import com.fanxl.admin.enums.ResultEnum;
 import com.fanxl.admin.exception.AdminException;
@@ -17,8 +18,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -50,15 +49,7 @@ public class FoodMenuServiceImpl implements FoodMenuService {
         if (file.isEmpty()) {
             throw new AdminException(ResultEnum.FILE_NOT_EMPTY);
         }
-        try {
-            BufferedImage sourceImg = ImageIO.read(file.getInputStream());
-            foodMenu.setWidth(sourceImg.getWidth());
-            foodMenu.setHeight(sourceImg.getHeight());
-            String fileName = FileUtil.saveFile(file, adminProperties.getFileUpload() + FOLDER_NAME);
-            foodMenu.setUrl(FOLDER_NAME + fileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        saveFile(foodMenu, file);
         return foodMenuDao.insert(foodMenu)>0;
     }
 
@@ -74,8 +65,23 @@ public class FoodMenuServiceImpl implements FoodMenuService {
         throw new AdminException(ResultEnum.FAIL);
     }
 
+    private void saveFile(FoodMenu foodMenu, MultipartFile file) {
+        try {
+            ImageDTO imageDTO = FileUtil.saveWidthAndHeightFile(file, adminProperties.getFileUpload() + FOLDER_NAME);
+            foodMenu.setWidth(imageDTO.getWidth());
+            foodMenu.setHeight(imageDTO.getHeight());
+            foodMenu.setUrl(FOLDER_NAME + imageDTO.getName());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
-    public boolean update(FoodMenu foodMenu) {
+    public boolean update(FoodMenu foodMenu, MultipartFile file) {
+        if (file != null && !file.isEmpty()) {
+            FileUtil.deleteFile(adminProperties.getFileUpload() + foodMenu.getUrl());
+            saveFile(foodMenu, file);
+        }
         return foodMenuDao.updateByPrimaryKeySelective(foodMenu)>0;
     }
 

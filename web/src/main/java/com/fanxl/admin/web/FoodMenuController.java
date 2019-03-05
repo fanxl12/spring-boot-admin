@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -76,9 +75,8 @@ public class FoodMenuController {
 
 
     @PostMapping(value = "/update", produces = MediaType.TEXT_HTML_VALUE)
-    public String update(FoodMenu foodMenu, BindingResult result,
-                         RedirectAttributes ra, Model model){
-        if (foodMenuService.update(foodMenu)){
+    public String update(FoodMenu foodMenu, @RequestParam(value = "file", required = false) MultipartFile file, RedirectAttributes ra, Model model){
+        if (foodMenuService.update(foodMenu, file)){
             ra.addFlashAttribute("msg", "更新成功");
             return "redirect:/foodMenu";
         }else {

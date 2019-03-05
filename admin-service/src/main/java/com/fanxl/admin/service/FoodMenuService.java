@@ -40,9 +40,10 @@ public interface FoodMenuService {
     /**
      * 更新
      * @param foodMenu
+     * @param file
      * @return
      */
-    boolean update(FoodMenu foodMenu);
+    boolean update(FoodMenu foodMenu, MultipartFile file);
 
     /**
      * 查询详情

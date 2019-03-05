@@ -45,11 +45,11 @@
             <id>rdc-private-repo</id>
             <repositories>
                 <repository>
-                    <id>rdc-releases</id>
+                    <id>high-sport-releases</id>
                     <url>https://repo.rdc.aliyun.com/repository/27867-release-O46Key/</url>
                 </repository>
                 <repository>
-                    <id>rdc-snapshots</id>
+                    <id>high-sport-snapshots</id>
                     <url>https://repo.rdc.aliyun.com/repository/27867-snapshot-gEzqBr/</url>
                 </repository>
             </repositories>

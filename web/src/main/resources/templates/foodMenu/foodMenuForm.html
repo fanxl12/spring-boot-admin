@@ -23,6 +23,7 @@
         <div style="padding: 15px;">
             <form class="layui-form" action="#" th:action="|/foodMenu/${action}|" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" th:if="${foodMenu.id !=null }" th:value="${foodMenu.id}"/>
+                <input type="hidden" name="url" th:if="${foodMenu.url !=null }" th:value="${foodMenu.url}"/>
                 <div class="layui-form-item">
                     <label class="layui-form-label">名称</label>
                     <div class="layui-input-block">
