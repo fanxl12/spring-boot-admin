@@ -4,9 +4,10 @@ import com.fanxl.admin.service.FoodMenuService;
 import com.fanxl.admin.utils.ResultUtil;
 import com.fanxl.admin.vo.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @description
@@ -21,9 +22,8 @@ public class FoodMenuRestController {
     private FoodMenuService foodMenuService;
 
     @GetMapping()
-    public ApiResponse get(@PageableDefault Pageable pageable, @RequestParam Long categoryId,
-                           @RequestParam(required = false) String keyword) {
-        return ResultUtil.success(foodMenuService.getList(categoryId, keyword, pageable));
+    public ApiResponse get() {
+        return ResultUtil.success(foodMenuService.getAll());
     }
 
     @GetMapping("{id}")

@@ -38,4 +38,9 @@ public class GuidePriceVO {
      * 最低价趋势 默认0无变化 1走高 -1走低
      */
     private Integer lowPriceTrend;
+
+    private Long id;
+
+    private Long categoryId;
+
 }

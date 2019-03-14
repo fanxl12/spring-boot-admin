@@ -22,7 +22,7 @@ public class MarketRegionRestController {
 
     @GetMapping()
     public ApiResponse get() {
-        return ResultUtil.success(marketRegionService.getList());
+        return ResultUtil.success(marketRegionService.getAll());
     }
 
 

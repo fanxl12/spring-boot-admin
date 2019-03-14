@@ -4,8 +4,6 @@ import com.fanxl.admin.service.BoothService;
 import com.fanxl.admin.utils.ResultUtil;
 import com.fanxl.admin.vo.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +22,8 @@ public class BoothRestController {
     private BoothService boothService;
 
     @GetMapping()
-    public ApiResponse get(@PageableDefault Pageable pageable) {
-        return ResultUtil.success(boothService.getList(pageable));
+    public ApiResponse get() {
+        return ResultUtil.success(boothService.getAll());
     }
 
     @GetMapping("{id}")

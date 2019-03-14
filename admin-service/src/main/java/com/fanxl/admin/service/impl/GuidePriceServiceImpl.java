@@ -107,4 +107,9 @@ public class GuidePriceServiceImpl implements GuidePriceService {
         PageInfo pageInfo = new PageInfo<>(list, 6);
         return pageInfo;
     }
+
+    @Override
+    public List<GuidePriceVO> all() {
+        return guidePriceDao.all();
+    }
 }

@@ -31,7 +31,7 @@ public class CategoryRestController {
 
     @GetMapping("food-menu")
     public ApiResponse foodMenuCategory() {
-        return ResultUtil.success(foodMenuCategoryService.getCategoryList());
+        return ResultUtil.success(foodMenuCategoryService.getAll());
     }
 
 

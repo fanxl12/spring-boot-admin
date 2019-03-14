@@ -9,13 +9,6 @@
         left join admin_category b on b.id = a.category_id
     </select>
 
-    <!--获取5星级摊位-->
-    <select id="getList" resultType="com.fanxl.admin.vo.BoothVO">
-        select a.id, a.star, a.name, a.url
-        from admin_booth a
-        where a.star = 5
-    </select>
-
     <!--获取图片详情-->
     <select id="imageDetail" parameterType="Long" resultType="com.fanxl.admin.vo.BoothImageVO">
         SELECT a.position, a.license_url, b.name as marketRegionName, c.name as marketName

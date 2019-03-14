@@ -6,6 +6,8 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 /**
  * @description
  * @author: fanxl
@@ -34,5 +36,11 @@ public interface GuidePriceService {
      * @return
      */
     PageInfo<GuidePriceVO> getList4Api(Pageable pageable, Long categoryId);
+
+    /**
+     * 指导价格列表
+     * @return
+     */
+    List<GuidePriceVO> all();
 
 }

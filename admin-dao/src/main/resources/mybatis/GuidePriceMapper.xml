@@ -36,4 +36,12 @@
         WHERE b.`category_id` =#{categoryId}
     </select>
 
+    <!--获取所有指导价-->
+    <select id="all" resultType="com.fanxl.admin.vo.GuidePriceVO">
+        SELECT a.id, a.`average_price`, a.`low_price`, a.`max_price`, a.`low_price_trend`,
+               a.`max_price_trend`, b.`name`, b.category_id
+        FROM `admin_guide_price` a
+                 LEFT JOIN `admin_food` b ON b.id = a.`food_id`;
+    </select>
+
 </mapper>

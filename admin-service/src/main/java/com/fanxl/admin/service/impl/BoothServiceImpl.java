@@ -10,7 +10,6 @@ import com.fanxl.admin.properties.AdminProperties;
 import com.fanxl.admin.service.BoothService;
 import com.fanxl.admin.utils.FileUtil;
 import com.fanxl.admin.vo.BoothImageVO;
-import com.fanxl.admin.vo.BoothVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,14 +116,6 @@ public class BoothServiceImpl implements BoothService {
         PageHelper.startPage(pageable.getPageNumber(), pageable.getPageSize());
         List<BoothDTO> list = boothDao.getWebList();
         PageInfo pageInfo = new PageInfo<>(list, 6);
-        return pageInfo;
-    }
-
-    @Override
-    public PageInfo<BoothVO> getList(Pageable pageable) {
-        PageHelper.startPage(2, 10);
-        List<BoothVO> list = boothDao.getList();
-        PageInfo pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
 
