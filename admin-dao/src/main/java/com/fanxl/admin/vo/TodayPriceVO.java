@@ -3,6 +3,7 @@ package com.fanxl.admin.vo;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * @description
@@ -12,6 +13,8 @@ import java.math.BigDecimal;
 @Data
 public class TodayPriceVO {
 
+    private Long id;
+
     private String boothName;
 
     private String foodName;
@@ -19,5 +22,7 @@ public class TodayPriceVO {
     private BigDecimal price;
 
     private BigDecimal specialPrice;
+
+    private Date priceDate;
 
 }

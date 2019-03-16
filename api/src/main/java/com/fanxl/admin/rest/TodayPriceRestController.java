@@ -23,8 +23,8 @@ public class TodayPriceRestController {
     private TodayPriceService todayPriceService;
 
     @GetMapping()
-    public ApiResponse get(@PageableDefault Pageable pageable) {
-        return ResultUtil.success(todayPriceService.getList4Api(pageable));
+    public ApiResponse get() {
+        return ResultUtil.success(todayPriceService.getList4Api());
     }
 
 

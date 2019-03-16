@@ -93,15 +93,11 @@ public class TodayPriceServiceImpl implements TodayPriceService {
     }
 
     @Override
-    public PageInfo<TodayPriceVO> getList4Api(Pageable pageable) {
-        PageHelper.startPage(pageable.getPageNumber(), pageable.getPageSize());
+    public List<TodayPriceVO> getList4Api() {
         String time = DateFormatUtils.format(new Date(), "yyyy-MM-dd");
         Map<String, Object> param = new HashMap<>();
         param.put("start", time + " 00:00:00");
         param.put("end", time + " 23:59:59");
-
-        List<TodayPriceVO> list = todayPriceDao.list(param);
-        PageInfo pageInfo = new PageInfo<>(list);
-        return pageInfo;
+        return todayPriceDao.list(param);
     }
 }
