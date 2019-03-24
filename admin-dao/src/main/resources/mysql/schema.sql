@@ -111,7 +111,7 @@ create table `admin_guide_price` (
 
 create table `admin_today_price` (
    `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
-   `price_date` DATETIME not null comment '价格时间',
+   `price_date` DATETIME comment '价格时间',
    `food_id` int not null comment '食品id',
    `booth_id` int not null comment '商铺id',
    `price` decimal(8, 2) default 0 comment '价格',

@@ -14,7 +14,6 @@ import com.fanxl.admin.vo.TodayPriceVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -23,10 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -43,6 +39,7 @@ public class TodayPriceServiceImpl implements TodayPriceService {
 
     @Override
     public boolean importData(MultipartFile multipartFile) {
+        todayPriceDao.deleteByExample(null);
         InputStream inputStream = null;
         try {
             inputStream = multipartFile.getInputStream();
@@ -62,11 +59,6 @@ public class TodayPriceServiceImpl implements TodayPriceService {
             List<TodayPrice> todayPrices = todayPriceList.stream().map(item -> {
                 TodayPrice todayPrice = new TodayPrice();
                 BeanUtils.copyProperties(item, todayPrice);
-                if (todayPrice.getPriceDate()==null) {
-                    todayPrice.setPriceDate(new Date());
-                } else {
-                    log.info("价格时间:" + DateFormatUtils.format(todayPrice.getPriceDate(), "yyyy-MM-dd HH:mm:ss"));
-                }
                 return todayPrice;
             }).collect(Collectors.toList());
             return todayPriceDao.saveList(todayPrices)>0;
@@ -94,10 +86,10 @@ public class TodayPriceServiceImpl implements TodayPriceService {
 
     @Override
     public List<TodayPriceVO> getList4Api() {
-        String time = DateFormatUtils.format(new Date(), "yyyy-MM-dd");
-        Map<String, Object> param = new HashMap<>();
-        param.put("start", time + " 00:00:00");
-        param.put("end", time + " 23:59:59");
-        return todayPriceDao.list(param);
+        return todayPriceDao.selectAll().stream().map(item -> {
+            TodayPriceVO todayPriceVO = new TodayPriceVO();
+            BeanUtils.copyProperties(item, todayPriceVO);
+            return todayPriceVO;
+        }).collect(Collectors.toList());
     }
 }
