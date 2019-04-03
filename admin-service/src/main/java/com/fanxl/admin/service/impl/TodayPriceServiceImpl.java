@@ -86,10 +86,6 @@ public class TodayPriceServiceImpl implements TodayPriceService {
 
     @Override
     public List<TodayPriceVO> getList4Api() {
-        return todayPriceDao.selectAll().stream().map(item -> {
-            TodayPriceVO todayPriceVO = new TodayPriceVO();
-            BeanUtils.copyProperties(item, todayPriceVO);
-            return todayPriceVO;
-        }).collect(Collectors.toList());
+        return todayPriceDao.getAll();
     }
 }

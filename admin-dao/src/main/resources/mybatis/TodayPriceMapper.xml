@@ -11,4 +11,12 @@
         </foreach>;
     </insert>
 
+    <!--获取今日特价-->
+    <select id="getAll" resultType="com.fanxl.admin.vo.TodayPriceVO">
+        select a.id, a.price, a.special_price, b.name as foodName, c.`name` as boothName, a.`price_date`
+        from `admin_today_price` a
+        left join `admin_food` b on b.id = a.food_id
+        left join `admin_booth` c on c.id = a.`booth_id`
+    </select>
+
 </mapper>

@@ -1,6 +1,7 @@
 package com.fanxl.admin.dao;
 
 import com.fanxl.admin.entity.TodayPrice;
+import com.fanxl.admin.vo.TodayPriceVO;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -20,5 +21,11 @@ public interface TodayPriceDao extends Mapper<TodayPrice> {
      * @return
      */
     int saveList(List<TodayPrice> list);
+
+    /**
+     * 获取今日特价
+     * @return
+     */
+    List<TodayPriceVO> getAll();
 
 }
