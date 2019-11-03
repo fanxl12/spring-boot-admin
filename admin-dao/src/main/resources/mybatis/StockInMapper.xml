@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fanxl.admin.dao.StockInDao">
+
+    <!--批量创建-->
+    <insert id="saveList" parameterType="List">
+        insert into admin_stock_in (shop_code, goods_code, goods_number, goods_name, purchase_type, purchase_total,
+            purchase_money, purchase_price, purchase_batch, supplier_name, brand_name, product_place, purchase_date, purchase_status)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.shopCode}, #{item.goodsCode}, #{item.goodsNumber}, #{item.goodsName}, #{item.purchaseType},#{item.purchaseTotal},
+             #{item.purchaseTotal}, #{item.purchasePrice}, #{item.purchaseBatch}, #{item.supplierName}, #{item.brandName},
+            #{item.productPlace}, #{item.purchaseDate}, #{item.purchaseStatus})
+        </foreach>;
+    </insert>
+
+</mapper>

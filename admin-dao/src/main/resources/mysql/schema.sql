@@ -175,5 +175,43 @@ CREATE TABLE persistent_logins (
   series VARCHAR(64) PRIMARY KEY,
   token VARCHAR(64) NOT NULL,
   last_used TIMESTAMP NOT NULL
-)
+);
 
+create table `admin_pesticide_check` (
+ `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
+ `check_date` DATETIME not null comment '检测日期',
+ `booth` varchar(32) not null default '' comment '摊位',
+ `category` varchar(32) not null default '' comment '品种',
+ `check_project` varchar(32) not null default '' comment '检测项目',
+ `place` varchar(32) not null default '' comment '产地',
+ `check_value` double comment '实测值',
+ `result` varchar(32) not null default '' comment '定性值',
+ `check_user` varchar(32) not null default '' comment '检测人',
+ `recheck_user` varchar(32) not null default '' comment '复检人',
+ `check_org` varchar(32) not null default '' comment '检测机构',
+ `remark` varchar(512) not null default '' comment '说明',
+ `create_date` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+ `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
+ PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '农残检测表';
+
+create table `admin_stock_in` (
+ `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
+ `shop_code` varchar(32) not null default '' comment '商铺编号',
+ `goods_code` varchar(32) not null default '' comment '货品编号',
+ `goods_number` varchar(32) not null default '' comment '商品编码',
+ `goods_name` varchar(32) not null default '' comment '商品名称',
+ `purchase_type` varchar(32) not null default '' comment '采购模式',
+ `purchase_total` double not null default 0 comment '采购总量',
+ `purchase_money` decimal(8, 2) default 0 comment '采购总金额',
+ `purchase_price` decimal(8, 2) default 0 comment '采购单价',
+ `purchase_batch` varchar(32) not null default '' comment '采购批次',
+ `supplier_name` varchar(32) not null default '' comment '供应商名称',
+ `brand_name` varchar(32) not null default '' comment '品牌商名称',
+ `product_place` varchar(32) not null default '' comment '生产基地',
+ `purchase_date` DATETIME not null comment '采购日期',
+ `purchase_status` varchar(32) not null default '' comment '采购状态',
+ `create_date` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+ `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
+ PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '进货录入表';

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fanxl.admin.dao.PesticideCheckDao">
+
+    <!--批量创建-->
+    <insert id="saveList" parameterType="List">
+        insert into admin_pesticide_check (check_date, booth, category, check_project, place,
+                                           check_value, result, check_user, recheck_user, check_org, remark)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.checkDate}, #{item.booth}, #{item.category}, #{item.checkProject}, #{item.place},#{item.checkValue},
+             #{item.result}, #{item.checkUser}, #{item.recheckUser}, #{item.checkOrg}, #{item.remark})
+        </foreach>;
+    </insert>
+
+</mapper>

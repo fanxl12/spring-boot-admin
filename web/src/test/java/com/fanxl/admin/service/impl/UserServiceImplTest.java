@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
@@ -27,11 +28,15 @@ public class UserServiceImplTest {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Test
     public void create() throws Exception{
         User user = new User();
         user.setId(UUID.randomUUID().toString().replace("-", ""));
         user.setPassword("123");
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setSalt("123");
         user.setPhone("17621190028");
         user.setUsername("fanxl12");
