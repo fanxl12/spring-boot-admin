@@ -14,6 +14,7 @@ import com.fanxl.admin.excel.listener.ExcelStockInListener;
 import com.fanxl.admin.exception.AdminException;
 import com.fanxl.admin.service.StockInService;
 import com.fanxl.admin.utils.SetValueUtils;
+import com.fanxl.admin.vo.StockInVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -83,5 +84,15 @@ public class StockInServiceImpl implements StockInService {
         List<StockIn> list = stockInDao.selectAll();
         PageInfo pageInfo = new PageInfo<>(list, 6);
         return pageInfo;
+    }
+
+    @Override
+    public List<StockInVO> all() {
+        List<StockIn> list = stockInDao.selectAll();
+        return list.stream().map(item -> {
+            StockInVO stockInVO = new StockInVO();
+            BeanUtils.copyProperties(item, stockInVO);
+            return stockInVO;
+        }).collect(Collectors.toList());
     }
 }

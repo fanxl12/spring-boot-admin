@@ -1,9 +1,13 @@
 package com.fanxl.admin.service;
 
 import com.fanxl.admin.entity.PesticideCheck;
+import com.fanxl.admin.vo.PesticideCheckVO;
+import com.fanxl.admin.vo.StockInVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * @description
@@ -25,6 +29,12 @@ public interface PesticideCheckService {
      * @return
      */
     PageInfo<PesticideCheck> getList(Pageable pageable);
+
+    /**
+     * 获取农残检测
+     * @return
+     */
+    List<PesticideCheckVO> all();
 
 
 }

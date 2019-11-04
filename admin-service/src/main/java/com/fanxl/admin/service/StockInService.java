@@ -1,9 +1,13 @@
 package com.fanxl.admin.service;
 
 import com.fanxl.admin.entity.StockIn;
+import com.fanxl.admin.vo.GuidePriceVO;
+import com.fanxl.admin.vo.StockInVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * @description
@@ -25,6 +29,12 @@ public interface StockInService {
      * @return
      */
     PageInfo<StockIn> getList(Pageable pageable);
+
+    /**
+     * 获取进货录入
+     * @return
+     */
+    List<StockInVO> all();
     
 
 }

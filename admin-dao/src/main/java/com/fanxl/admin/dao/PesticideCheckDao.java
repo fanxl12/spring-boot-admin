@@ -21,11 +21,4 @@ public interface PesticideCheckDao extends Mapper<PesticideCheck> {
      */
     int saveList(List<PesticideCheck> list);
 
-
-    /**
-     * 获取列表
-     * @return
-     */
-    List<PesticideCheck> list();
-
 }

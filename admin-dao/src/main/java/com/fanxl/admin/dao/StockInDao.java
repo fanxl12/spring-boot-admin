@@ -21,11 +21,4 @@ public interface StockInDao extends Mapper<StockIn> {
      */
     int saveList(List<StockIn> list);
 
-    
-    /**
-     * 获取列表
-     * @return
-     */
-    List<StockIn> list();
-
 }

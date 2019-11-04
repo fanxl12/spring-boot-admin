@@ -6,12 +6,15 @@ import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.metadata.Sheet;
 import com.fanxl.admin.dao.PesticideCheckDao;
 import com.fanxl.admin.entity.PesticideCheck;
+import com.fanxl.admin.entity.StockIn;
 import com.fanxl.admin.enums.ResultEnum;
 import com.fanxl.admin.excel.bean.PesticideCheckExcelBean;
 import com.fanxl.admin.excel.listener.ExcelPesticideCheckListener;
 import com.fanxl.admin.exception.AdminException;
 import com.fanxl.admin.service.PesticideCheckService;
 import com.fanxl.admin.utils.SetValueUtils;
+import com.fanxl.admin.vo.PesticideCheckVO;
+import com.fanxl.admin.vo.StockInVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -84,5 +87,15 @@ public class PesticideCheckServiceImpl implements PesticideCheckService {
         List<PesticideCheck> list = pesticideCheckDao.selectAll();
         PageInfo pageInfo = new PageInfo<>(list, 6);
         return pageInfo;
+    }
+
+    @Override
+    public List<PesticideCheckVO> all() {
+        List<PesticideCheck> list = pesticideCheckDao.selectAll();
+        return list.stream().map(item -> {
+            PesticideCheckVO pesticideCheckVO = new PesticideCheckVO();
+            BeanUtils.copyProperties(item, pesticideCheckVO);
+            return pesticideCheckVO;
+        }).collect(Collectors.toList());
     }
 }
