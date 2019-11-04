@@ -13,7 +13,7 @@ import java.util.Date;
  * @date: 2018/12/28 0028 17:44
  */
 @Data
-public class TodayPriceExcelBean extends BaseRowModel {
+public class TodayPriceExcelBean {
 
     @ExcelProperty(index = 0)
     private Long foodId;

@@ -1,5 +1,6 @@
 package com.fanxl.admin.service.impl;
 
+import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.metadata.Sheet;
@@ -10,6 +11,7 @@ import com.fanxl.admin.excel.bean.PesticideCheckExcelBean;
 import com.fanxl.admin.excel.listener.ExcelPesticideCheckListener;
 import com.fanxl.admin.exception.AdminException;
 import com.fanxl.admin.service.PesticideCheckService;
+import com.fanxl.admin.utils.SetValueUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -45,10 +47,7 @@ public class PesticideCheckServiceImpl implements PesticideCheckService {
 
             // 解析每行结果在listener中处理
             AnalysisEventListener listener = new ExcelPesticideCheckListener();
-
-            ExcelReader excelReader = new ExcelReader(inputStream, null, listener);
-
-            excelReader.read(new Sheet(1, 1, PesticideCheckExcelBean.class));
+            EasyExcel.read(inputStream, PesticideCheckExcelBean.class, listener).sheet().doRead();
 
             List<PesticideCheckExcelBean> pesticideCheckList = ((ExcelPesticideCheckListener) listener).getDataList();
             if (pesticideCheckList.size()==0) {
@@ -61,6 +60,7 @@ public class PesticideCheckServiceImpl implements PesticideCheckService {
                 if (StringUtils.isNotBlank(item.getCheckValueStr())) {
                     pesticideCheck.setCheckValue(Double.parseDouble(item.getCheckValueStr().substring(0, item.getCheckValueStr().length()-1)));
                 }
+                SetValueUtils.setValue(pesticideCheck);
                 return pesticideCheck;
             }).collect(Collectors.toList());
             return pesticideCheckDao.saveList(pesticideChecks)>0;

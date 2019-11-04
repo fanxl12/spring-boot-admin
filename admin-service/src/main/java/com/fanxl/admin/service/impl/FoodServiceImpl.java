@@ -1,5 +1,6 @@
 package com.fanxl.admin.service.impl;
 
+import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.metadata.Sheet;
@@ -7,6 +8,7 @@ import com.fanxl.admin.dao.FoodDao;
 import com.fanxl.admin.entity.Food;
 import com.fanxl.admin.enums.ResultEnum;
 import com.fanxl.admin.excel.bean.FoodExcelBean;
+import com.fanxl.admin.excel.bean.PesticideCheckExcelBean;
 import com.fanxl.admin.excel.listener.FoodExcelListener;
 import com.fanxl.admin.exception.AdminException;
 import com.fanxl.admin.service.FoodService;
@@ -44,10 +46,7 @@ public class FoodServiceImpl implements FoodService {
 
             // 解析每行结果在listener中处理
             AnalysisEventListener listener = new FoodExcelListener();
-
-            ExcelReader excelReader = new ExcelReader(inputStream, null, listener);
-
-            excelReader.read(new Sheet(1, 1, FoodExcelBean.class));
+            EasyExcel.read(inputStream, PesticideCheckExcelBean.class, listener).sheet().doRead();
 
             List<FoodExcelBean> foodList = ((FoodExcelListener) listener).getDatas();
             log.info("数据:{}", foodList.size());

@@ -1,6 +1,8 @@
 package com.fanxl.admin.excel.bean;
 
 import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.format.DateTimeFormat;
+import com.alibaba.excel.annotation.format.NumberFormat;
 import com.alibaba.excel.metadata.BaseRowModel;
 import lombok.Data;
 
@@ -12,12 +14,10 @@ import java.util.Date;
  * @date: 2018/12/28 0028 17:44
  */
 @Data
-public class PesticideCheckExcelBean extends BaseRowModel {
-
-    @ExcelProperty(index = 0)
-    private Integer index;
+public class PesticideCheckExcelBean {
 
     @ExcelProperty(index = 1)
+    @DateTimeFormat("yyyy-MM-dd HH:mm")
     private Date checkDate;
 
     @ExcelProperty(index = 2)
@@ -33,6 +33,7 @@ public class PesticideCheckExcelBean extends BaseRowModel {
     private String place;
 
     @ExcelProperty(index = 6)
+    @NumberFormat("#.##%")
     private String checkValueStr;
 
     @ExcelProperty(index = 7)

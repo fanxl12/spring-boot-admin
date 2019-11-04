@@ -10,7 +10,7 @@ import lombok.Data;
  * @date: 2018/12/28 0028 17:44
  */
 @Data
-public class FoodExcelBean extends BaseRowModel {
+public class FoodExcelBean {
 
     @ExcelProperty(index = 0)
     private Long id;

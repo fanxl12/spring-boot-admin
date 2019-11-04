@@ -1,5 +1,6 @@
 package com.fanxl.admin.service.impl;
 
+import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.metadata.Sheet;
@@ -7,6 +8,7 @@ import com.fanxl.admin.dao.GuidePriceDao;
 import com.fanxl.admin.entity.GuidePrice;
 import com.fanxl.admin.enums.ResultEnum;
 import com.fanxl.admin.excel.bean.GuidePriceExcelBean;
+import com.fanxl.admin.excel.bean.PesticideCheckExcelBean;
 import com.fanxl.admin.excel.listener.ExcelGuidePriceListener;
 import com.fanxl.admin.exception.AdminException;
 import com.fanxl.admin.service.GuidePriceService;
@@ -47,9 +49,7 @@ public class GuidePriceServiceImpl implements GuidePriceService {
             // 解析每行结果在listener中处理
             AnalysisEventListener listener = new ExcelGuidePriceListener();
 
-            ExcelReader excelReader = new ExcelReader(inputStream, null, listener);
-
-            excelReader.read(new Sheet(1, 1, GuidePriceExcelBean.class));
+            EasyExcel.read(inputStream, PesticideCheckExcelBean.class, listener).sheet().doRead();
 
             List<GuidePriceExcelBean> guidePriceList = ((ExcelGuidePriceListener) listener).getDataList();
             if (guidePriceList.size()==0) {

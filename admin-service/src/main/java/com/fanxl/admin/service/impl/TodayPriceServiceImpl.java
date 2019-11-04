@@ -1,11 +1,13 @@
 package com.fanxl.admin.service.impl;
 
+import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.metadata.Sheet;
 import com.fanxl.admin.dao.TodayPriceDao;
 import com.fanxl.admin.entity.TodayPrice;
 import com.fanxl.admin.enums.ResultEnum;
+import com.fanxl.admin.excel.bean.PesticideCheckExcelBean;
 import com.fanxl.admin.excel.bean.TodayPriceExcelBean;
 import com.fanxl.admin.excel.listener.ExcelTodayPriceListener;
 import com.fanxl.admin.exception.AdminException;
@@ -47,9 +49,7 @@ public class TodayPriceServiceImpl implements TodayPriceService {
             // 解析每行结果在listener中处理
             AnalysisEventListener listener = new ExcelTodayPriceListener();
 
-            ExcelReader excelReader = new ExcelReader(inputStream, null, listener);
-
-            excelReader.read(new Sheet(1, 1, TodayPriceExcelBean.class));
+            EasyExcel.read(inputStream, PesticideCheckExcelBean.class, listener).sheet().doRead();
 
             List<TodayPriceExcelBean> todayPriceList = ((ExcelTodayPriceListener) listener).getDataList();
             if (todayPriceList.size()==0) {

@@ -1,15 +1,19 @@
 package com.fanxl.admin.service.impl;
 
+import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.metadata.Sheet;
 import com.fanxl.admin.dao.StockInDao;
 import com.fanxl.admin.entity.StockIn;
 import com.fanxl.admin.enums.ResultEnum;
+import com.fanxl.admin.excel.bean.PesticideCheckExcelBean;
 import com.fanxl.admin.excel.bean.StockInExcelBean;
+import com.fanxl.admin.excel.listener.ExcelPesticideCheckListener;
 import com.fanxl.admin.excel.listener.ExcelStockInListener;
 import com.fanxl.admin.exception.AdminException;
 import com.fanxl.admin.service.StockInService;
+import com.fanxl.admin.utils.SetValueUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -45,9 +49,7 @@ public class StockInServiceImpl implements StockInService {
             // 解析每行结果在listener中处理
             AnalysisEventListener listener = new ExcelStockInListener();
 
-            ExcelReader excelReader = new ExcelReader(inputStream, null, listener);
-
-            excelReader.read(new Sheet(1, 1, StockInExcelBean.class));
+            EasyExcel.read(inputStream, StockInExcelBean.class, listener).sheet().doRead();
 
             List<StockInExcelBean> stockInList = ((ExcelStockInListener) listener).getDataList();
             if (stockInList.size()==0) {
@@ -57,6 +59,7 @@ public class StockInServiceImpl implements StockInService {
             List<StockIn> stockIns = stockInList.stream().map(item -> {
                 StockIn stockIn = new StockIn();
                 BeanUtils.copyProperties(item, stockIn);
+                SetValueUtils.setValue(stockIn);
                 return stockIn;
             }).collect(Collectors.toList());
             return stockInDao.saveList(stockIns)>0;
