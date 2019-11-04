@@ -27,14 +27,26 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>日期</th>
+                        <th>检测日期</th>
+                        <th>摊位</th>
+                        <th>品种</th>
+                        <th>检测项目</th>
+                        <th>实测值</th>
+                        <th>定性值</th>
+                        <th>检测人</th>
                     </tr>
                 </thead>
                 <tbody>
 
                 <tr th:each="item : ${pageInfo.getList()}">
                     <td th:text="${item.id}"></td>
-                    <td th:text="${#dates.format(item.checkDate,'yyyy-MM-dd')}"></td>
+                    <td th:text="${#dates.format(item.checkDate,'yyyy-MM-dd HH:mm')}"></td>
+                    <td th:text="${item.booth}"></td>
+                    <td th:text="${item.category}"></td>
+                    <td th:text="${item.checkProject}"></td>
+                    <td th:text="${item.checkValue + '%'}"></td>
+                    <td th:text="${item.result}"></td>
+                    <td th:text="${item.checkUser}"></td>
                 </tr>
                 </tbody>
             </table>

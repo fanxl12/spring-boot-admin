@@ -27,14 +27,28 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>日期</th>
+                        <th>采购日期</th>
+                        <th>商品编号</th>
+                        <th>商品名称</th>
+                        <th>采购总量</th>
+                        <th>采购金额</th>
+                        <th>采购单价</th>
+                        <th>供应商名称</th>
+                        <th>采购单状态</th>
                     </tr>
                 </thead>
                 <tbody>
 
                 <tr th:each="item : ${pageInfo.getList()}">
                     <td th:text="${item.id}"></td>
-                    <td th:text="${#dates.format(item.purchaseDate,'yyyy-MM-dd')}"></td>
+                    <td th:text="${#dates.format(item.purchaseDate,'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td th:text="${item.shopCode}"></td>
+                    <td th:text="${item.goodsName}"></td>
+                    <td th:text="${item.purchaseTotal}"></td>
+                    <td th:text="${item.purchaseMoney}"></td>
+                    <td th:text="${item.purchasePrice}"></td>
+                    <td th:text="${item.supplierName}"></td>
+                    <td th:text="${item.purchaseStatus}"></td>
                 </tr>
                 </tbody>
             </table>

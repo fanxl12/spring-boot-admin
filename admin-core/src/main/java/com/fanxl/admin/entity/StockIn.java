@@ -27,7 +27,7 @@ public class StockIn extends IdEntity {
 
     private String purchaseType;
 
-    private double purchaseTotal;
+    private Double purchaseTotal;
 
     private BigDecimal purchaseMoney;
 

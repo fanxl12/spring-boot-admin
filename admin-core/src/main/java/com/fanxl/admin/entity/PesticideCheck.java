@@ -24,7 +24,7 @@ public class PesticideCheck extends IdEntity {
 
     private String place;
 
-    private double checkValue;
+    private Double checkValue;
 
     private String result;
 
