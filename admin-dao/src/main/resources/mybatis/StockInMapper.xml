@@ -4,6 +4,7 @@
 
     <!--批量创建-->
     <insert id="saveList" parameterType="List">
+        delete from admin_stock_in;
         insert into admin_stock_in (shop_code, goods_code, goods_number, goods_name, purchase_type, purchase_total,
             purchase_money, purchase_price, purchase_batch, supplier_name, brand_name, product_place, purchase_date, purchase_status)
         VALUES

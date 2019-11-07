@@ -4,6 +4,7 @@
 
     <!--批量创建-->
     <insert id="saveList" parameterType="List">
+        delete from admin_pesticide_check;
         insert into admin_pesticide_check (check_date, booth, category, check_project, place,
                                            check_value, result, check_user, recheck_user, check_org, remark)
         VALUES

@@ -63,7 +63,8 @@ public class StockInServiceImpl implements StockInService {
                 SetValueUtils.setValue(stockIn);
                 return stockIn;
             }).collect(Collectors.toList());
-            return stockInDao.saveList(stockIns)>0;
+            stockInDao.saveList(stockIns);
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
