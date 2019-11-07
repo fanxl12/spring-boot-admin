@@ -66,7 +66,8 @@ public class PesticideCheckServiceImpl implements PesticideCheckService {
                 SetValueUtils.setValue(pesticideCheck);
                 return pesticideCheck;
             }).collect(Collectors.toList());
-            return pesticideCheckDao.saveList(pesticideChecks)>0;
+            pesticideCheckDao.saveList(pesticideChecks);
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
