@@ -1,6 +1,7 @@
 package com.fanxl.admin.excel.bean;
 
 import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.format.DateTimeFormat;
 import com.alibaba.excel.metadata.BaseRowModel;
 import lombok.Data;
 
@@ -19,6 +20,7 @@ public class GuidePriceExcelBean {
     private Long foodId;
 
     @ExcelProperty(index = 1)
+    @DateTimeFormat("yyyy-MM-dd")
     private Date priceDate;
 
     @ExcelProperty(index = 2)
