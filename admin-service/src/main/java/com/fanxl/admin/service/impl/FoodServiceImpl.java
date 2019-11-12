@@ -46,7 +46,7 @@ public class FoodServiceImpl implements FoodService {
 
             // 解析每行结果在listener中处理
             AnalysisEventListener listener = new FoodExcelListener();
-            EasyExcel.read(inputStream, PesticideCheckExcelBean.class, listener).sheet().doRead();
+            EasyExcel.read(inputStream, FoodExcelBean.class, listener).sheet().doRead();
 
             List<FoodExcelBean> foodList = ((FoodExcelListener) listener).getDatas();
             log.info("数据:{}", foodList.size());

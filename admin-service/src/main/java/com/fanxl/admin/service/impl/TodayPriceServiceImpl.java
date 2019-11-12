@@ -49,7 +49,7 @@ public class TodayPriceServiceImpl implements TodayPriceService {
             // 解析每行结果在listener中处理
             AnalysisEventListener listener = new ExcelTodayPriceListener();
 
-            EasyExcel.read(inputStream, PesticideCheckExcelBean.class, listener).sheet().doRead();
+            EasyExcel.read(inputStream, TodayPriceExcelBean.class, listener).sheet().doRead();
 
             List<TodayPriceExcelBean> todayPriceList = ((ExcelTodayPriceListener) listener).getDataList();
             if (todayPriceList.size()==0) {

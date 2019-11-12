@@ -49,7 +49,7 @@ public class GuidePriceServiceImpl implements GuidePriceService {
             // 解析每行结果在listener中处理
             AnalysisEventListener listener = new ExcelGuidePriceListener();
 
-            EasyExcel.read(inputStream, PesticideCheckExcelBean.class, listener).sheet().doRead();
+            EasyExcel.read(inputStream, GuidePriceExcelBean.class, listener).sheet().doRead();
 
             List<GuidePriceExcelBean> guidePriceList = ((ExcelGuidePriceListener) listener).getDataList();
             if (guidePriceList.size()==0) {
