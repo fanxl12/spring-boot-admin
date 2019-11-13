@@ -49,4 +49,10 @@ public interface GuidePriceDao extends Mapper<GuidePrice> {
      */
     List<GuidePriceVO> all();
 
+    /**
+     * 删除所有的指定菜价
+     * @return
+     */
+    int deleteAll();
+
 }

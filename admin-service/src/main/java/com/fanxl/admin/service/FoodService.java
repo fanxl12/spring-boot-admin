@@ -26,4 +26,12 @@ public interface FoodService {
      */
     PageInfo<Food> getList(Pageable pageable);
 
+    /**
+     * 检查是否存在该食物
+     * @param name
+     * @param categoryId
+     * @return
+     */
+    Long checkFood(String name, Long categoryId);
+
 }

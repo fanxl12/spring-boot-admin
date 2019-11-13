@@ -1,16 +1,15 @@
 package com.fanxl.admin.service.impl;
 
 import com.alibaba.excel.EasyExcel;
-import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.event.AnalysisEventListener;
-import com.alibaba.excel.metadata.Sheet;
 import com.fanxl.admin.dao.FoodDao;
+import com.fanxl.admin.entity.Category;
 import com.fanxl.admin.entity.Food;
 import com.fanxl.admin.enums.ResultEnum;
 import com.fanxl.admin.excel.bean.FoodExcelBean;
-import com.fanxl.admin.excel.bean.PesticideCheckExcelBean;
 import com.fanxl.admin.excel.listener.FoodExcelListener;
 import com.fanxl.admin.exception.AdminException;
+import com.fanxl.admin.service.CategoryService;
 import com.fanxl.admin.service.FoodService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -20,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import tk.mybatis.mapper.entity.Example;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,6 +37,9 @@ public class FoodServiceImpl implements FoodService {
 
     @Autowired
     private FoodDao foodDao;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @Override
     public boolean importData(MultipartFile multipartFile) {
@@ -79,5 +82,27 @@ public class FoodServiceImpl implements FoodService {
         List<Food> list = foodDao.selectAll();
         PageInfo pageInfo = new PageInfo<>(list, 6);
         return pageInfo;
+    }
+
+    @Override
+    public Long checkFood(String name, Long categoryId) {
+        Category category = categoryService.getById(categoryId);
+        if (category == null) {
+            throw new AdminException(1003, categoryId + " not found, please create first!");
+        }
+        Example example = new Example(Food.class);
+        example.createCriteria().andEqualTo("name", name).andEqualTo("categoryId", categoryId);
+        List<Food> foodList = foodDao.selectByExample(example);
+        if (foodList.size()==0) {
+            Food food = new Food();
+            food.setName(name);
+            food.setCategoryId(categoryId);
+            if (foodDao.insertSelective(food)>0) {
+                foodList.add(food);
+            } else {
+                throw new AdminException(1002, name + " create fail!");
+            }
+        }
+        return foodList.get(0).getId();
     }
 }
