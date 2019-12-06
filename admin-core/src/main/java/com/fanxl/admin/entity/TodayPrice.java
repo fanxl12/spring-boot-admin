@@ -15,7 +15,7 @@ import java.util.Date;
 @Data
 public class TodayPrice extends IdEntity {
 
-    private Long foodId;
+    private String food;
 
     private Long boothId;
 

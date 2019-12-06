@@ -45,10 +45,10 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">选择分类</label>
                     <div class="layui-input-block">
-                        <select name="categoryId" lay-verify="required">
+                        <select name="categoryCode" lay-verify="required">
                             <option value=""></option>
-                            <option th:value="${item.id}" th:each="item : ${categoryList}"  th:text="${item.name}"
-                                    th:selected="${item.id == booth.categoryId}"></option>
+                            <option th:value="${item.code}" th:each="item : ${categoryList}"  th:text="${item.name}"
+                                    th:selected="${item.code == booth.categoryCode}"></option>
                         </select>
                     </div>
                 </div>

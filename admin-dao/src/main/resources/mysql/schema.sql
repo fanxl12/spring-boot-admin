@@ -21,6 +21,7 @@ CREATE TABLE `admin_user`(
 create table `admin_category` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
   `name` varchar(32) not null comment '名称',
+  `code` varchar(32) not null comment '名称',
   `create_date` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
   `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -48,7 +49,7 @@ create table `admin_home_picture` (
 
 create table `admin_booth` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `category_id` int not null comment '分类id',
+  `category_code` varchar(32) not null comment '分类id',
   `market_region_id` int not null comment '区域id',
   `position` varchar(32) not null comment '摊位位置',
   `name` varchar(32) not null comment '名称',
@@ -98,7 +99,7 @@ create table `admin_food` (
 create table `admin_guide_price` (
    `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
    `price_date` DATETIME not null comment '价格时间',
-   `food_id` int not null comment '食品id',
+   `food` varchar(32) not null comment '食品',
    `max_price` decimal(8, 2) default 0 comment '最高价',
    `max_price_trend` tinyint(2) default 0 comment '最高价趋势 默认0无变化 1走高 -1走低',
    `average_price` decimal(8, 2) default 0 comment '平均价',
@@ -112,7 +113,7 @@ create table `admin_guide_price` (
 create table `admin_today_price` (
    `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
    `price_date` DATETIME comment '价格时间',
-   `food_id` int not null comment '食品id',
+   `food` varchar(32) not null comment '食品',
    `booth_id` int not null comment '商铺id',
    `price` decimal(8, 2) default 0 comment '价格',
    `special_price` decimal(8, 2) default 0 comment '特价',

@@ -17,7 +17,6 @@ ALTER TABLE `admin_system`.`admin_booth`
 ALTER TABLE `admin_system`.`admin_booth`
   ADD COLUMN `position` varchar(32) not null comment '摊位位置' AFTER `update_date`;
 
-
 ALTER TABLE `admin_system`.`admin_booth`
   ADD COLUMN `business_width` int not null comment '宽' AFTER `update_date`;
 
@@ -39,3 +38,16 @@ ALTER TABLE `admin_system`.`admin_booth`
 #02-13
 ALTER TABLE `admin_system`.`admin_booth`
   ADD COLUMN `license_url` varchar(128) not null comment '授权地址' AFTER `update_date`;
+
+#12-06
+ALTER TABLE `admin_system`.`admin_category`
+    ADD COLUMN `code` varchar(32) not null comment '编号' AFTER `update_date`;
+
+ALTER TABLE `admin_system`.`admin_booth` CHANGE `category_id`
+    `category_code` VARCHAR(32) NOT NULL COMMENT '分类code';
+
+ALTER TABLE `admin_system`.`admin_guide_price` CHANGE `food_id`
+    `food` varchar(32) not null comment '食品';
+
+ALTER TABLE `admin_system`.`admin_today_price` CHANGE `food_id`
+    `food` varchar(32) not null comment '食品';

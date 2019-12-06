@@ -15,7 +15,7 @@ public class Booth extends IdNameEntity {
 
     private Long marketRegionId;
 
-    private Long categoryId;
+    private String categoryCode;
 
     private String url;
 

@@ -6,7 +6,7 @@
     <select id="getWebList" resultType="com.fanxl.admin.dto.BoothDTO">
         select a.id, a.name, a.star, b.name as categoryName
         from admin_booth a
-        left join admin_category b on b.id = a.category_id
+        left join admin_category b on b.code = a.category_code
     </select>
 
     <!--获取图片详情-->

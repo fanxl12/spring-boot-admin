@@ -69,7 +69,7 @@
                         <a href="/marketRegion">区域</a>
                     </dd>
                     <dd th:class="${child=='booth'}?'layui-this':''">
-                        <a href="/booth">摊位</a>
+                        <a href="/booth">明星摊位</a>
                     </dd>
                     <dd th:class="${child=='city'}?'layui-this':''">
                         <a href="/city">城市</a>
@@ -81,9 +81,6 @@
                 <dl class="layui-nav-child">
                     <dd th:class="${child == 'category'}? 'layui-this' : ''">
                         <a href="/category">分类管理</a>
-                    </dd>
-                    <dd th:class="${child=='food'}?'layui-this':''">
-                        <a href="/food">食品</a>
                     </dd>
                     <dd th:class="${child=='guidePrice'}?'layui-this':''">
                         <a href="/guidePrice">指导菜价</a>

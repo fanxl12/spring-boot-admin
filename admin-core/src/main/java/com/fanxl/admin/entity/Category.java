@@ -13,4 +13,6 @@ import javax.persistence.Table;
 @Data
 public class Category extends IdNameEntity {
 
+    private String code;
+
 }

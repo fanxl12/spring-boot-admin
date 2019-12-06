@@ -28,6 +28,7 @@
                     <tr>
                         <th>ID</th>
                         <th>名称</th>
+                        <th>编号</th>
                         <th>操作</th>
                     </tr>
                 </thead>
@@ -38,6 +39,7 @@
                         <a th:href="|/category/update/${item.id}|" th:text="${item.id}"></a>
                     </td>
                     <td th:text="${item.name}"></td>
+                    <td th:text="${item.code}"></td>
                     <td>
                         <a th:href="|/category/delete/${item.id}|" class="layui-btn layui-btn-danger">删除</a>
                     </td>

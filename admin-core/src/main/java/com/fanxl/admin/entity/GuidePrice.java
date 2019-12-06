@@ -15,7 +15,7 @@ import java.util.Date;
 @Data
 public class GuidePrice extends IdEntity {
 
-    private Long foodId;
+    private String food;
 
     private Date priceDate;
 
