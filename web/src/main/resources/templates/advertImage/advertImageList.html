@@ -2,7 +2,7 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="base :: common_header(~{::title/text()},~{::link},~{::script})">
 
-    <title>优惠活动列表</title>
+    <title>顶部图片列表</title>
 
 </head>
 <body class="layui-layout-body">
@@ -13,7 +13,7 @@
     <div th:replace="base :: left_nav ('home','advertImage')"></div>
 
     <div class="layui-body">
-        <div th:replace="base :: breadcrumb ('advertImage', '首页', '底部图片')"></div>
+        <div th:replace="base :: breadcrumb ('advertImage', '首页', '顶部图片管理')"></div>
 
         <!--内容主体区域 -->
         <div style="padding: 15px;">
@@ -48,7 +48,7 @@
 
             <a href="/advertImage/create" class="layui-btn">创建</a>
 
-            <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 30px">前台显示最新的三张图片</blockquote>
+            <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 30px">前台显示最新的一张图片</blockquote>
 
         </div>
     </div>

@@ -1,7 +1,7 @@
 spring:
   datasource:
     name: admin
-    url: jdbc:mysql://localhost:3306/admin_system?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://rm-bp139mu5zep4i1d5ao.mysql.rds.aliyuncs.com:3306/admin_system?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: 15316695920
     type: com.alibaba.druid.pool.DruidDataSource
