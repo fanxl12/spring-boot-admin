@@ -215,3 +215,21 @@ create table `admin_stock_in` (
  `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
  PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '进货录入表';
+
+create table `admin_city` (
+    `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
+    `name` varchar(32) not null comment '名称',
+    `code` varchar(32) not null comment '编号',
+    `create_date` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+    `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '城市表';
+
+create table `admin_video` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `name` varchar(32) not null comment '名称',
+  `url` varchar(128) not null comment '地址',
+  `create_date` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+  `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '视频表';

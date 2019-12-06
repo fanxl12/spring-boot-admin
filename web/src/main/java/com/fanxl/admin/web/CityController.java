@@ -1,8 +1,7 @@
 package com.fanxl.admin.web;
 
-import com.fanxl.admin.entity.MarketRegion;
-import com.fanxl.admin.service.MarketRegionService;
-import com.fanxl.admin.service.MarketService;
+import com.fanxl.admin.entity.City;
+import com.fanxl.admin.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -19,71 +18,70 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author: fanxl
  * @date: 2018/12/28 0028 19:36
  */
-@RequestMapping("marketRegion")
+@RequestMapping("city")
 @Controller
-public class MarketRegionController {
+public class CityController {
 
     @Autowired
-    private MarketRegionService marketRegionService;
+    private CityService cityService;
 
     @GetMapping("")
     public String list(Model model){
-        model.addAttribute("list", marketRegionService.getAll());
-        return "marketRegion/marketRegionList";
+        model.addAttribute("list", cityService.getAll());
+        return "city/cityList";
     }
 
     @GetMapping("/create")
     public String createForm(Model model){
-        model.addAttribute("marketRegion", new MarketRegion());
+        model.addAttribute("city", new City());
         model.addAttribute("action", "create");
-        return "marketRegion/marketRegionForm";
+        return "city/cityForm";
     }
 
-
-
     @PostMapping(value = "/create", produces = MediaType.TEXT_HTML_VALUE)
-    public String create(MarketRegion marketRegion, RedirectAttributes ra, Model model){
-        if (marketRegionService.create(marketRegion)) {
+    public String create(City city, RedirectAttributes ra, Model model){
+        if (cityService.create(city)) {
             ra.addFlashAttribute("msg", "创建成功");
-            return "redirect:/marketRegion";
+            return "redirect:/city";
         } else {
             model.addAttribute("msg", "创建失败");
-            model.addAttribute("marketRegion", marketRegion);
+            model.addAttribute("city", city);
             model.addAttribute("action", "create");
-            return "marketRegion/marketRegionForm";
+            return "city/cityForm";
         }
     }
 
     @GetMapping("update/{id}")
     public String updateForm(@PathVariable(value = "id") Long id, Model model){
-        MarketRegion marketRegion = marketRegionService.getById(id);
-        model.addAttribute("marketRegion", marketRegion);
+        City city = cityService.getById(id);
+        model.addAttribute("city", city);
         model.addAttribute("action", "update");
-        return "marketRegion/marketRegionForm";
+        return "city/cityForm";
     }
 
+
     @PostMapping(value = "/update", produces = MediaType.TEXT_HTML_VALUE)
-    public String update(MarketRegion marketRegion, BindingResult result,
+    public String update(City city, BindingResult result,
                          RedirectAttributes ra, Model model){
-        if (marketRegionService.update(marketRegion)){
+        if (cityService.update(city)){
             ra.addFlashAttribute("msg", "更新成功");
-            return "redirect:/marketRegion";
+            return "redirect:/city";
         }else {
             model.addAttribute("msg", "更新失败");
-            model.addAttribute("marketRegion", marketRegion);
+            model.addAttribute("city", city);
             model.addAttribute("action", "update");
-            return "marketRegion/marketRegionForm";
+            return "city/cityForm";
         }
     }
 
     @GetMapping("/delete/{id}")
     public String delete(RedirectAttributes ra, @PathVariable(value = "id") Long id){
-        if (marketRegionService.delete(id)){
+        if (cityService.delete(id)){
             ra.addFlashAttribute("msg", "删除成功");
         }else {
             ra.addFlashAttribute("msg", "删除失败");
         }
-        return "redirect:/marketRegion/";
+        return "redirect:/city/";
     }
 
 }

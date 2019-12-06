@@ -54,6 +54,9 @@
                     <dd th:class="${child=='advertImage'}?'layui-this':''">
                         <a href="/advertImage">顶部图片管理</a>
                     </dd>
+                    <dd th:class="${child=='video'}?'layui-this':''">
+                        <a href="/video">视频管理</a>
+                    </dd>
                 </dl>
             </li>
             <li class="layui-nav-item" th:classappend="${parent=='market'}?'layui-nav-itemed':''">
@@ -67,6 +70,9 @@
                     </dd>
                     <dd th:class="${child=='booth'}?'layui-this':''">
                         <a href="/booth">摊位</a>
+                    </dd>
+                    <dd th:class="${child=='city'}?'layui-this':''">
+                        <a href="/city">城市</a>
                     </dd>
                 </dl>
             </li>
