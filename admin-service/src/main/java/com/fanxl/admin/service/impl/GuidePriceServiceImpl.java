@@ -1,16 +1,14 @@
 package com.fanxl.admin.service.impl;
 
 import com.alibaba.excel.EasyExcel;
-import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.event.AnalysisEventListener;
-import com.alibaba.excel.metadata.Sheet;
 import com.fanxl.admin.dao.GuidePriceDao;
 import com.fanxl.admin.entity.GuidePrice;
 import com.fanxl.admin.enums.ResultEnum;
 import com.fanxl.admin.excel.bean.GuidePriceExcelBean;
-import com.fanxl.admin.excel.bean.PesticideCheckExcelBean;
 import com.fanxl.admin.excel.listener.ExcelGuidePriceListener;
 import com.fanxl.admin.exception.AdminException;
+import com.fanxl.admin.service.FoodService;
 import com.fanxl.admin.service.GuidePriceService;
 import com.fanxl.admin.vo.GuidePriceVO;
 import com.github.pagehelper.PageHelper;
@@ -40,10 +38,14 @@ public class GuidePriceServiceImpl implements GuidePriceService {
     @Autowired
     private GuidePriceDao guidePriceDao;
 
+    @Autowired
+    private FoodService foodService;
+
     @Override
     public boolean importData(MultipartFile multipartFile) {
         InputStream inputStream = null;
         try {
+
             inputStream = multipartFile.getInputStream();
 
             // 解析每行结果在listener中处理
@@ -60,6 +62,9 @@ public class GuidePriceServiceImpl implements GuidePriceService {
 
             List<GuidePrice> guidePrices = new ArrayList<>();
             for (GuidePriceExcelBean item : guidePriceList) {
+                //先检查是否存在该食品，没有就创建
+                item.setFoodId(foodService.checkFood(item.getFoodName(), item.getCategoryId()));
+
                 GuidePrice guidePrice = new GuidePrice();
                 BeanUtils.copyProperties(item, guidePrice);
 
@@ -77,6 +82,7 @@ public class GuidePriceServiceImpl implements GuidePriceService {
                 }
                 guidePrices.add(guidePrice);
             }
+            guidePriceDao.deleteAll();
             return guidePriceDao.saveList(guidePrices)>0;
         } catch (IOException e) {
             e.printStackTrace();

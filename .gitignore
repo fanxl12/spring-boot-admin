@@ -50,3 +50,5 @@ web/target
 admin-service/target
 admin-dao/target
 admin-core/target
+web/src/main/resources/rebel.xml
+api/src/main/resources/rebel.xml

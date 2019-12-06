@@ -2,7 +2,6 @@ package com.fanxl.admin.excel.bean;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.format.DateTimeFormat;
-import com.alibaba.excel.metadata.BaseRowModel;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -17,18 +16,23 @@ import java.util.Date;
 public class GuidePriceExcelBean {
 
     @ExcelProperty(index = 0)
-    private Long foodId;
+    private Long categoryId;
 
     @ExcelProperty(index = 1)
+    private String foodName;
+
+    @ExcelProperty(index = 2)
     @DateTimeFormat("yyyy-MM-dd")
     private Date priceDate;
 
-    @ExcelProperty(index = 2)
+    @ExcelProperty(index = 3)
     private BigDecimal maxPrice;
 
-    @ExcelProperty(index = 3)
+    @ExcelProperty(index = 4)
     private BigDecimal averagePrice;
 
-    @ExcelProperty(index = 4)
+    @ExcelProperty(index = 5)
     private BigDecimal lowPrice;
+
+    private Long foodId;
 }

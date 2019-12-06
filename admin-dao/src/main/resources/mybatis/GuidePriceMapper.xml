@@ -44,4 +44,8 @@
                  LEFT JOIN `admin_food` b ON b.id = a.`food_id`;
     </select>
 
+    <delete id="deleteAll">
+        delete from admin_guide_price;
+    </delete>
+
 </mapper>
