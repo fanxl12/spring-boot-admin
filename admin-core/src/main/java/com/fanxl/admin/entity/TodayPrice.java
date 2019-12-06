@@ -17,7 +17,7 @@ public class TodayPrice extends IdEntity {
 
     private String food;
 
-    private Long boothId;
+    private String booth;
 
     private Date priceDate;
 

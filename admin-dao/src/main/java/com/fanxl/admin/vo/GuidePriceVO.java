@@ -41,6 +41,6 @@ public class GuidePriceVO {
 
     private Long id;
 
-    private Long categoryId;
+    private String categoryCode;
 
 }

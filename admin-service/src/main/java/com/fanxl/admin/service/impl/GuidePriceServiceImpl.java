@@ -38,9 +38,6 @@ public class GuidePriceServiceImpl implements GuidePriceService {
     @Autowired
     private GuidePriceDao guidePriceDao;
 
-    @Autowired
-    private FoodService foodService;
-
     @Override
     public boolean importData(MultipartFile multipartFile) {
         InputStream inputStream = null;
@@ -62,15 +59,13 @@ public class GuidePriceServiceImpl implements GuidePriceService {
 
             List<GuidePrice> guidePrices = new ArrayList<>();
             for (GuidePriceExcelBean item : guidePriceList) {
-                //先检查是否存在该食品，没有就创建
-                item.setFoodId(foodService.checkFood(item.getFoodName(), item.getCategoryId()));
 
                 GuidePrice guidePrice = new GuidePrice();
                 BeanUtils.copyProperties(item, guidePrice);
 
                 if (lastPriceList!=null && lastPriceList.size()>0) {
                     for (GuidePrice last : lastPriceList) {
-                        if (item.getFoodId().equals(last.getFoodId())) {
+                        if (item.getFood().equals(last.getFood())) {
                             guidePrice.setMaxPriceTrend(item.getMaxPrice().compareTo(last.getMaxPrice()));
                             guidePrice.setLowPriceTrend(item.getLowPrice().compareTo(last.getLowPrice()));
                             break;
@@ -107,9 +102,9 @@ public class GuidePriceServiceImpl implements GuidePriceService {
     }
 
     @Override
-    public PageInfo<GuidePriceVO> getList4Api(Pageable pageable, Long categoryId) {
+    public PageInfo<GuidePriceVO> getList4Api(Pageable pageable, String categoryCode) {
         PageHelper.startPage(pageable.getPageNumber(), pageable.getPageSize());
-        List<GuidePriceVO> list = guidePriceDao.list(categoryId);
+        List<GuidePriceVO> list = guidePriceDao.list(categoryCode);
         PageInfo pageInfo = new PageInfo<>(list, 6);
         return pageInfo;
     }

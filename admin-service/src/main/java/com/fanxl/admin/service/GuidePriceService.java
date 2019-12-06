@@ -35,7 +35,7 @@ public interface GuidePriceService {
      * @param categoryId
      * @return
      */
-    PageInfo<GuidePriceVO> getList4Api(Pageable pageable, Long categoryId);
+    PageInfo<GuidePriceVO> getList4Api(Pageable pageable, String categoryCode);
 
     /**
      * 指导价格列表

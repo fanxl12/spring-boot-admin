@@ -23,9 +23,9 @@ public class GuidePriceRestController {
     @Autowired
     private GuidePriceService guidePriceService;
 
-    @GetMapping("{categoryId}")
-    public ApiResponse get(@PathVariable Long categoryId, @PageableDefault(page = 1) Pageable pageable) {
-        return ResultUtil.success(guidePriceService.getList4Api(pageable, categoryId));
+    @GetMapping("{categoryCode}")
+    public ApiResponse get(@PathVariable String categoryCode, @PageableDefault(page = 1) Pageable pageable) {
+        return ResultUtil.success(guidePriceService.getList4Api(pageable, categoryCode));
     }
 
     @GetMapping("")

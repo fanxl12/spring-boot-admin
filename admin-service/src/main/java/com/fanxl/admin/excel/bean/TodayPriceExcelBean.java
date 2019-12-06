@@ -16,10 +16,10 @@ import java.util.Date;
 public class TodayPriceExcelBean {
 
     @ExcelProperty(index = 0)
-    private Long foodId;
+    private String food;
 
     @ExcelProperty(index = 1)
-    private Long boothId;
+    private String booth;
 
     @ExcelProperty(index = 2)
     private Date priceDate;

@@ -16,10 +16,10 @@ import java.util.Date;
 public class GuidePriceExcelBean {
 
     @ExcelProperty(index = 0)
-    private Long categoryId;
+    private String categoryCode;
 
     @ExcelProperty(index = 1)
-    private String foodName;
+    private String food;
 
     @ExcelProperty(index = 2)
     @DateTimeFormat("yyyy-MM-dd")
@@ -33,6 +33,4 @@ public class GuidePriceExcelBean {
 
     @ExcelProperty(index = 5)
     private BigDecimal lowPrice;
-
-    private Long foodId;
 }

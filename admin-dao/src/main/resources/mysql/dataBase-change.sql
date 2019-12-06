@@ -51,3 +51,21 @@ ALTER TABLE `admin_system`.`admin_guide_price` CHANGE `food_id`
 
 ALTER TABLE `admin_system`.`admin_today_price` CHANGE `food_id`
     `food` varchar(32) not null comment '食品';
+
+ALTER TABLE `admin_system`.`admin_guide_price`
+    ADD COLUMN `category_code` varchar(32) not null comment '分类code' AFTER `update_date`;
+
+ALTER TABLE `admin_system`.`admin_today_price` CHANGE booth_id
+    `booth` varchar(32) not null comment '商铺';
+
+ALTER TABLE `admin_system`.`admin_food_menu` CHANGE cuisine
+    `cuisine` varchar(32) default '' comment '菜系';
+
+ALTER TABLE `admin_system`.`admin_food_menu` CHANGE cooking
+    `cooking` varchar(32) default '' comment '烹饪方式';
+
+ALTER TABLE `admin_system`.`admin_food_menu` CHANGE effect
+    `effect` varchar(256) default '' comment '功效';
+
+ALTER TABLE `admin_system`.`admin_food_menu` CHANGE pick_material
+    `pick_material` varchar(128) default '' comment '调料';

@@ -4,19 +4,18 @@
 
     <!--批量创建-->
     <insert id="saveList" parameterType="List">
-        insert into admin_today_price (booth_id, food_id, price_date, price, special_price)
+        delete from admin_today_price;
+        insert into admin_today_price (booth, food, price_date, price, special_price)
         VALUES
         <foreach collection="list" item="item" separator=",">
-            (#{item.boothId}, #{item.foodId}, #{item.priceDate}, #{item.price}, #{item.specialPrice})
+            (#{item.booth}, #{item.food}, #{item.priceDate}, #{item.price}, #{item.specialPrice})
         </foreach>;
     </insert>
 
     <!--获取今日特价-->
     <select id="getAll" resultType="com.fanxl.admin.vo.TodayPriceVO">
-        select a.id, a.price, a.special_price, b.name as foodName, c.`name` as boothName, a.`price_date`
+        select a.id, a.price, a.special_price, a.food as foodName, a.booth as boothName, a.`price_date`
         from `admin_today_price` a
-        left join `admin_food` b on b.id = a.food_id
-        left join `admin_booth` c on c.id = a.`booth_id`
     </select>
 
 </mapper>

@@ -17,6 +17,8 @@ public class GuidePrice extends IdEntity {
 
     private String food;
 
+    private String categoryCode;
+
     private Date priceDate;
 
     /**

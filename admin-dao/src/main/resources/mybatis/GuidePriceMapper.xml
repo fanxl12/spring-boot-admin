@@ -4,17 +4,17 @@
 
     <!--批量创建-->
     <insert id="saveList" parameterType="List">
-        insert into admin_guide_price (food_id, price_date, max_price, max_price_trend, average_price, low_price, low_price_trend)
+        insert into admin_guide_price (food, price_date, max_price, max_price_trend, average_price, low_price, low_price_trend)
         VALUES
         <foreach collection="list" item="item" separator=",">
-            (#{item.foodId}, #{item.priceDate}, #{item.maxPrice}, #{item.maxPriceTrend}, #{item.averagePrice},
+            (#{item.food}, #{item.priceDate}, #{item.maxPrice}, #{item.maxPriceTrend}, #{item.averagePrice},
              #{item.lowPrice}, #{item.lowPriceTrend})
         </foreach>;
     </insert>
 
     <!--获取上一次的价格日期的价格-->
     <select id="getLastGuidePrice" parameterType="Date" resultType="GuidePrice">
-        select food_id, max_price, low_price
+        select food, max_price, low_price
         from admin_guide_price
         where price_date =#{lastPriceDate};
     </select>
@@ -28,20 +28,18 @@
     </select>
 
     <!--根据分类获取指导价-->
-    <select id="list" parameterType="Long" resultType="com.fanxl.admin.vo.GuidePriceVO">
+    <select id="list" parameterType="String" resultType="com.fanxl.admin.vo.GuidePriceVO">
         SELECT a.`average_price`, a.`low_price`, a.`max_price`, a.`low_price_trend`,
-               a.`max_price_trend`, b.`name`
+               a.`max_price_trend`, a.food as name
         FROM `admin_guide_price` a
-        LEFT JOIN `admin_food` b ON b.id = a.`food_id`
-        WHERE b.`category_id` =#{categoryId}
+        WHERE a.category_code =#{categoryCode}
     </select>
 
     <!--获取所有指导价-->
     <select id="all" resultType="com.fanxl.admin.vo.GuidePriceVO">
         SELECT a.id, a.`average_price`, a.`low_price`, a.`max_price`, a.`low_price_trend`,
-               a.`max_price_trend`, b.`name`, b.category_id
+               a.`max_price_trend`, a.food as name, a.category_code
         FROM `admin_guide_price` a
-                 LEFT JOIN `admin_food` b ON b.id = a.`food_id`;
     </select>
 
     <delete id="deleteAll">

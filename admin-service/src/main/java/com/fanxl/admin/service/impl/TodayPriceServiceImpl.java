@@ -61,7 +61,8 @@ public class TodayPriceServiceImpl implements TodayPriceService {
                 BeanUtils.copyProperties(item, todayPrice);
                 return todayPrice;
             }).collect(Collectors.toList());
-            return todayPriceDao.saveList(todayPrices)>0;
+            todayPriceDao.saveList(todayPrices);
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
         }finally {

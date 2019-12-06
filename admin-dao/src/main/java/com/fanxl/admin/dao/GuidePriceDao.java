@@ -38,10 +38,10 @@ public interface GuidePriceDao extends Mapper<GuidePrice> {
 
     /**
      * 获取分类的指导价格
-     * @param categoryId
+     * @param categoryCode
      * @return
      */
-    List<GuidePriceVO> list(Long categoryId);
+    List<GuidePriceVO> list(String categoryCode);
 
     /**
      * 指导价格列表
