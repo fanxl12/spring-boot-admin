@@ -1,6 +1,7 @@
 package com.fanxl.admin.service;
 
 import com.fanxl.admin.entity.City;
+import com.fanxl.admin.vo.CityVO;
 
 import java.util.List;
 
@@ -45,5 +46,11 @@ public interface CityService {
      * @return
      */
     City getById(Long id);
+
+    /**
+     * 获取一个城市
+     * @return
+     */
+    CityVO getOneCity();
 
 }
