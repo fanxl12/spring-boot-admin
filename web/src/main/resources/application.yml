@@ -20,6 +20,10 @@ spring:
           paths: /**
   session:
     store-type: none
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
 
 mybatis:
   type-aliases-package: com.fanxl.admin.entity
