@@ -4,6 +4,7 @@ import com.fanxl.admin.entity.Video;
 import com.fanxl.admin.vo.FileVO;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -38,5 +39,11 @@ public interface VideoService {
      * @return
      */
     List<FileVO> getVideo();
+
+    /**
+     * 下载文件
+     * @param res
+     */
+    void download(HttpServletResponse res);
 
 }
