@@ -4,10 +4,10 @@
 
     <!--批量创建-->
     <insert id="saveList" parameterType="List">
-        insert into admin_guide_price (food, price_date, max_price, max_price_trend, average_price, low_price, low_price_trend)
+        insert into admin_guide_price (food, price_date, category_code, max_price, max_price_trend, average_price, low_price, low_price_trend)
         VALUES
         <foreach collection="list" item="item" separator=",">
-            (#{item.food}, #{item.priceDate}, #{item.maxPrice}, #{item.maxPriceTrend}, #{item.averagePrice},
+            (#{item.food}, #{item.priceDate}, #{item.categoryCode}, #{item.maxPrice}, #{item.maxPriceTrend}, #{item.averagePrice},
              #{item.lowPrice}, #{item.lowPriceTrend})
         </foreach>;
     </insert>
