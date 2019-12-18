@@ -1,6 +1,7 @@
 package com.fanxl.admin.web;
 
 import com.fanxl.admin.entity.City;
+import com.fanxl.admin.exception.AdminException;
 import com.fanxl.admin.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

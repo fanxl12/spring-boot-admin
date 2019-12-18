@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>系统错误</title>
+</head>
+<body style="text-align: center">
+    <h1 style="margin-top: 200px">系统错误</h1>
+<!--    timestamp:<h3 th:text="${timestamp}"></h3>-->
+<!--    status:<h3 th:text="${status}"></h3>-->
+<!--    error:<h3 th:text="${error}"></h3>-->
+<!--    exception:<h3 th:text="${exception}"></h3>-->
+    错误信息:<h3 th:text="${message}"></h3>
+<!--    trace:<h3 th:text="${trace}"></h3>-->
+<!--    path:<h3 th:text="${path}"></h3>-->
+    <a href="javascript :history.back(-1)">返回</a>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.fanxl.admin.rest;
 
+import com.fanxl.admin.exception.AdminException;
 import com.fanxl.admin.service.AdvertImageService;
 import com.fanxl.admin.service.CouponExerciseService;
 import com.fanxl.admin.service.WheelPictureService;

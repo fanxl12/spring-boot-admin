@@ -4,7 +4,9 @@ import com.fanxl.admin.dao.UserDao;
 import com.fanxl.admin.entity.User;
 import com.fanxl.admin.service.UserService;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -20,6 +22,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public boolean create(User user) {
@@ -39,6 +44,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean update(User user) {
+        if (StringUtils.isNotEmpty(user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         return userDao.updateByPrimaryKeySelective(user)>0;
     }
 
