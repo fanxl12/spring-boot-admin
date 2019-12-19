@@ -34,6 +34,10 @@ public class User extends StringIdEntity implements SocialUserDetails {
 
     private Date accountExpired;
 
+    private String newPassword;
+
+    private String oldPassword;
+
     @Override
     public String getUserId() {
         return getId();

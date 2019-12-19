@@ -32,6 +32,11 @@ public class ImportController {
     @PostMapping(value = "/{action}", produces = MediaType.TEXT_HTML_VALUE)
     public String create(@RequestParam("file") MultipartFile file, @PathVariable String action,
                          RedirectAttributes ra, Model model){
+        if (file == null || file.isEmpty()) {
+            model.addAttribute("msg", "文件为空，请上传文件");
+            model.addAttribute("action", action);
+            return "import/importForm";
+        }
         if (importService.create(action, file)) {
             ra.addFlashAttribute("msg", "导入成功");
             return "redirect:/" + action;

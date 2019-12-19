@@ -34,8 +34,12 @@ public class VideoController {
     }
 
     @PostMapping(value = "/create", produces = MediaType.TEXT_HTML_VALUE)
-    public String create(@RequestParam("file") MultipartFile fileList, RedirectAttributes ra, Model model){
-        if (videoService.saveList(fileList)) {
+    public String create(@RequestParam("file") MultipartFile file, RedirectAttributes ra, Model model){
+        if (file == null || file.isEmpty()) {
+            model.addAttribute("msg", "文件为空，请上传文件");
+            return "import/importForm";
+        }
+        if (videoService.saveList(file)) {
             ra.addFlashAttribute("msg", "创建成功");
             return "redirect:/video";
         } else {

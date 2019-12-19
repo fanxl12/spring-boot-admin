@@ -1,6 +1,7 @@
 package com.fanxl.admin.web;
 
 import com.fanxl.admin.entity.User;
+import com.fanxl.admin.exception.AdminException;
 import com.fanxl.admin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -69,17 +70,19 @@ public class UserController {
 
 
     @PostMapping(value = "/update", produces = MediaType.TEXT_HTML_VALUE)
-    public String update(User user, BindingResult result,
-                         RedirectAttributes ra, Model model){
-        if (userService.update(user)){
-            ra.addFlashAttribute("msg", "更新成功");
-            return "redirect:/user";
-        }else {
+    public String update(User user, RedirectAttributes ra, Model model){
+        try {
+            if (userService.update(user)){
+                ra.addFlashAttribute("msg", "更新成功");
+                return "redirect:/user";
+            }
             model.addAttribute("msg", "更新失败");
-            model.addAttribute("user", user);
-            model.addAttribute("action", "update");
-            return "user/userForm";
+        } catch (AdminException e) {
+            model.addAttribute("msg", e.getMessage());
         }
+        model.addAttribute("user", user);
+        model.addAttribute("action", "update");
+        return "user/userForm";
     }
 
     @GetMapping("/delete/{id}")

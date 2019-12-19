@@ -12,7 +12,7 @@
 
     <!--查找详情-->
     <select id="get" parameterType="String" resultType="User">
-        select id, username, phone, head, email
+        select id, username, phone, head, email, password
         from admin_user
         where id =#{id};
     </select>
