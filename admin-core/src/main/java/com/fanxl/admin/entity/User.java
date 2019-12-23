@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.social.security.SocialUserDetails;
 
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.util.Collection;
 import java.util.Date;
 
@@ -34,8 +35,10 @@ public class User extends StringIdEntity implements SocialUserDetails {
 
     private Date accountExpired;
 
+    @Transient
     private String newPassword;
 
+    @Transient
     private String oldPassword;
 
     @Override
