@@ -5,7 +5,7 @@ server:
 
 spring:
   profiles:
-    active: dev
+    active: test
   resources:
     static-locations: C:/upload/images
   mvc:
