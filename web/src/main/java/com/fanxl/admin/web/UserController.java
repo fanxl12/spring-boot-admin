@@ -3,12 +3,12 @@ package com.fanxl.admin.web;
 import com.fanxl.admin.entity.User;
 import com.fanxl.admin.exception.AdminException;
 import com.fanxl.admin.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,6 +72,16 @@ public class UserController {
     @PostMapping(value = "/update", produces = MediaType.TEXT_HTML_VALUE)
     public String update(User user, RedirectAttributes ra, Model model){
         try {
+            if (StringUtils.isEmpty(user.getOldPassword())) {
+                throw new AdminException(10030, "请输入旧密码");
+            }
+            if (StringUtils.isEmpty(user.getNewPassword())) {
+                throw new AdminException(10032, "新密码不能为空");
+            }
+            if (!passwordEncoder.matches(user.getOldPassword(), user.getPassword())) {
+                throw new AdminException(10031, "旧密码错误");
+            }
+            user.setPassword(passwordEncoder.encode(user.getNewPassword()));
             if (userService.update(user)){
                 ra.addFlashAttribute("msg", "更新成功");
                 return "redirect:/user";
