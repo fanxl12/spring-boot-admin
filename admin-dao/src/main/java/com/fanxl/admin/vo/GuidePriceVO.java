@@ -20,24 +20,11 @@ public class GuidePriceVO {
     private BigDecimal averagePrice;
 
     /**
-     * 最高价趋势 默认0无变化 1走高 -1走低
-     */
-    private Integer maxPriceTrend;
-
-    /**
-     * 最高价
-     */
-    private BigDecimal maxPrice;
-
-    /**
      * 最低价
      */
-    private BigDecimal lowPrice;
+    private BigDecimal guidePrice;
 
-    /**
-     * 最低价趋势 默认0无变化 1走高 -1走低
-     */
-    private Integer lowPriceTrend;
+
 
     private Long id;
 

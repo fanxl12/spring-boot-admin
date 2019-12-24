@@ -87,3 +87,6 @@ create table `admin_video` (
    `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
    PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '视频表';
+
+ALTER TABLE `admin_system`.`admin_guide_price`
+    ADD COLUMN `guide_price` decimal(8, 2) default 0 comment '指导价' AFTER `update_date`;

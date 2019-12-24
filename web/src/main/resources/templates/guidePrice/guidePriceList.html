@@ -30,9 +30,8 @@
                         <th>分类编号</th>
                         <th>食品名称</th>
                         <th>日期</th>
-                        <th>最高价</th>
-                        <th>最低价</th>
                         <th>平均价</th>
+                        <th>指导价</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,9 +41,8 @@
                     <td th:text="${item.categoryCode}"></td>
                     <td th:text="${item.food}"></td>
                     <td th:text="${#dates.format(item.priceDate,'yyyy-MM-dd')}"></td>
-                    <td th:text="${item.maxPrice}"></td>
-                    <td th:text="${item.lowPrice}"></td>
                     <td th:text="${item.averagePrice}"></td>
+                    <td th:text="${item.guidePrice}"></td>
                 </tr>
                 </tbody>
             </table>

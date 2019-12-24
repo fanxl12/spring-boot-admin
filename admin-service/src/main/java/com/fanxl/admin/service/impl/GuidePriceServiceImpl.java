@@ -55,7 +55,7 @@ public class GuidePriceServiceImpl implements GuidePriceService {
                 throw new AdminException(ResultEnum.FILE_NOT_FOUND.getCode(), "未解析出数据");
             }
 
-            List<GuidePrice> lastPriceList = guidePriceDao.getLastGuidePrice(guidePriceDao.getLastPriceDate());
+//            List<GuidePrice> lastPriceList = guidePriceDao.getLastGuidePrice(guidePriceDao.getLastPriceDate());
 
             List<GuidePrice> guidePrices = new ArrayList<>();
             for (GuidePriceExcelBean item : guidePriceList) {
@@ -63,15 +63,15 @@ public class GuidePriceServiceImpl implements GuidePriceService {
                 GuidePrice guidePrice = new GuidePrice();
                 BeanUtils.copyProperties(item, guidePrice);
 
-                if (lastPriceList!=null && lastPriceList.size()>0) {
-                    for (GuidePrice last : lastPriceList) {
-                        if (item.getFood().equals(last.getFood())) {
-                            guidePrice.setMaxPriceTrend(item.getMaxPrice().compareTo(last.getMaxPrice()));
-                            guidePrice.setLowPriceTrend(item.getLowPrice().compareTo(last.getLowPrice()));
-                            break;
-                        }
-                    }
-                }
+//                if (lastPriceList!=null && lastPriceList.size()>0) {
+//                    for (GuidePrice last : lastPriceList) {
+//                        if (item.getFood().equals(last.getFood())) {
+//                            guidePrice.setMaxPriceTrend(item.getMaxPrice().compareTo(last.getMaxPrice()));
+//                            guidePrice.setLowPriceTrend(item.getLowPrice().compareTo(last.getLowPrice()));
+//                            break;
+//                        }
+//                    }
+//                }
                 if (guidePrice.getPriceDate()==null) {
                     guidePrice.setPriceDate(new Date());
                 }

@@ -106,6 +106,7 @@ create table `admin_guide_price` (
    `average_price` decimal(8, 2) default 0 comment '平均价',
    `low_price` decimal(8, 2) default 0 comment '最低价',
    `low_price_trend` tinyint(2) default 0 comment '最低价趋势 默认0无变化 1走高 -1走低',
+   `guide_price` decimal(8, 2) default 0 comment '指导价',
    `create_date` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
    `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
    PRIMARY KEY (`id`)

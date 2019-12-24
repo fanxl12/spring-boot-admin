@@ -26,11 +26,10 @@ public class GuidePriceExcelBean {
     private Date priceDate;
 
     @ExcelProperty(index = 3)
-    private BigDecimal maxPrice;
-
-    @ExcelProperty(index = 4)
     private BigDecimal averagePrice;
 
-    @ExcelProperty(index = 5)
-    private BigDecimal lowPrice;
+    @ExcelProperty(index = 4)
+    private BigDecimal guidePrice;
+
+
 }

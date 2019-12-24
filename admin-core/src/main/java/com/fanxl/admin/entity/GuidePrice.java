@@ -46,4 +46,9 @@ public class GuidePrice extends IdEntity {
      */
     private Integer lowPriceTrend;
 
+    /**
+     * 指导价
+     */
+    private BigDecimal guidePrice;
+
 }
