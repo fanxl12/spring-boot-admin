@@ -90,3 +90,6 @@ create table `admin_video` (
 
 ALTER TABLE `admin_system`.`admin_guide_price`
     ADD COLUMN `guide_price` decimal(8, 2) default 0 comment '指导价' AFTER `update_date`;
+
+ALTER TABLE `admin_system`.`admin_stock_in`
+    ADD COLUMN `shop_name` varchar(32) not null default '' comment '商铺名称' AFTER `update_date`;

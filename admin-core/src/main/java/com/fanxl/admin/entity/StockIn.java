@@ -17,6 +17,8 @@ public class StockIn extends IdEntity {
 
     private Date purchaseDate;
 
+    private String shopName;
+
     private String shopCode;
 
     private String goodsCode;
