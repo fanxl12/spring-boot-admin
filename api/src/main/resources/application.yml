@@ -5,7 +5,7 @@ server:
 
 spring:
   profiles:
-    active: test
+    active: dev
   resources:
     static-locations: C:/upload/images
   mvc:
@@ -33,6 +33,7 @@ logging:
       fanxl:
         admin:
           dao: DEBUG
+  path: /fan/logs
 
 # 文件上传地址路径
 admin:
