@@ -129,12 +129,12 @@
         </encoder>
     </appender>
 
-<!-- 所有情况都输出日志到控制台 -->
+    <!--所有情况都输出日志到控制台 -->
     <root level="INFO">
         <appender-ref ref="console"/>
     </root>
 
-    <logger name="com.fanxl.admin.service.impl.CityServiceImpl" level="info" additivity="false">
+    <logger name="com.fanxl.admin.service.impl.CityServiceImpl" level="info" additivity="true">
         <appender-ref ref="admin_city_service_impl" />
     </logger>
 
