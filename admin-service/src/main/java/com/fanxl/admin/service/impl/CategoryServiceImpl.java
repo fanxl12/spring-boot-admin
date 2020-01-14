@@ -6,6 +6,7 @@ import com.fanxl.admin.service.CategoryService;
 import com.fanxl.admin.vo.CategoryVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
  * @author: fanxl
  * @date: 2018/12/28 0028 19:46
  */
+@Slf4j
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
@@ -60,6 +62,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryVO> getCategoryList() {
+        log.info("获取分类列表");
         return getAll().stream().map(item -> {
             CategoryVO categoryVO = new CategoryVO();
             BeanUtils.copyProperties(item, categoryVO);

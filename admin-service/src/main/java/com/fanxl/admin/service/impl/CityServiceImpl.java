@@ -6,6 +6,7 @@ import com.fanxl.admin.entity.Market;
 import com.fanxl.admin.service.CityService;
 import com.fanxl.admin.service.MarketService;
 import com.fanxl.admin.vo.CityVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.List;
  * @author: fanxl
  * @date: 2018/12/28 0028 19:46
  */
+@Slf4j
 @Service
 public class CityServiceImpl implements CityService {
 
@@ -53,6 +55,7 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public CityVO getOneCity() {
+        log.info("获取城市");
         List<City> cityList = getAll();
         if (cityList!=null && cityList.size()>0) {
             List<Market> marketList = marketService.getAll();
