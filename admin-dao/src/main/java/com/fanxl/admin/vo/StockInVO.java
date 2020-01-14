@@ -2,7 +2,6 @@ package com.fanxl.admin.vo;
 
 import lombok.Data;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -12,6 +11,8 @@ import java.util.Date;
  */
 @Data
 public class StockInVO {
+
+    private String shopName;
 
     private String shopCode;
 

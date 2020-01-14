@@ -200,6 +200,7 @@ create table `admin_pesticide_check` (
 
 create table `admin_stock_in` (
  `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
+ `shop_name` varchar(32) not null default '' comment '商铺名称',
  `shop_code` varchar(32) not null default '' comment '商铺编号',
  `goods_code` varchar(32) not null default '' comment '货品编号',
  `goods_number` varchar(32) not null default '' comment '商品编码',

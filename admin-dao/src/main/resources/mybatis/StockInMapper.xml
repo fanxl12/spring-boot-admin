@@ -5,11 +5,11 @@
     <!--批量创建-->
     <insert id="saveList" parameterType="List">
         delete from admin_stock_in;
-        insert into admin_stock_in (shop_code, goods_code, goods_number, goods_name, purchase_type, purchase_total,
+        insert into admin_stock_in (shop_name, shop_code, goods_code, goods_number, goods_name, purchase_type, purchase_total,
             purchase_money, purchase_price, purchase_batch, supplier_name, brand_name, product_place, purchase_date, purchase_status)
         VALUES
         <foreach collection="list" item="item" separator=",">
-            (#{item.shopCode}, #{item.goodsCode}, #{item.goodsNumber}, #{item.goodsName}, #{item.purchaseType},#{item.purchaseTotal},
+            (#{item.shopName}, #{item.shopCode}, #{item.goodsCode}, #{item.goodsNumber}, #{item.goodsName}, #{item.purchaseType},#{item.purchaseTotal},
              #{item.purchaseTotal}, #{item.purchasePrice}, #{item.purchaseBatch}, #{item.supplierName}, #{item.brandName},
             #{item.productPlace}, #{item.purchaseDate}, #{item.purchaseStatus})
         </foreach>;

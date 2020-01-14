@@ -28,7 +28,8 @@
                     <tr>
                         <th>ID</th>
                         <th>采购日期</th>
-                        <th>商品编号</th>
+                        <th>商铺名称</th>
+                        <th>商铺编号</th>
                         <th>商品名称</th>
                         <th>采购总量</th>
                         <th>采购金额</th>
@@ -42,6 +43,7 @@
                 <tr th:each="item : ${pageInfo.getList()}">
                     <td th:text="${item.id}"></td>
                     <td th:text="${#dates.format(item.purchaseDate,'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td th:text="${item.shopName}"></td>
                     <td th:text="${item.shopCode}"></td>
                     <td th:text="${item.goodsName}"></td>
                     <td th:text="${item.purchaseTotal}"></td>
