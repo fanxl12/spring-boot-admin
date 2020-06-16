@@ -51,7 +51,7 @@ public class BoothController {
 
     private void getCommonData(Model model) {
         model.addAttribute("categoryList", categoryService.getAll());
-        model.addAttribute("marketRegionList", marketRegionService.getByMarkId(1L));
+        model.addAttribute("marketRegionList", marketRegionService.getAll());
     }
 
     @PostMapping(value = "/create", produces = MediaType.TEXT_HTML_VALUE)
