@@ -247,3 +247,15 @@ create table `admin_plane` (
   `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '平面图表';
+
+create table `admin_stall` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `stall_index` int not null comment '序号',
+  `category_name` varchar(32) not null comment '摊位类型',
+  `name` varchar(32) not null comment '名称',
+  `code` varchar(32) not null comment '编号',
+  `business_license` varchar(128) comment '营业执照',
+  `create_date` TIMESTAMP NOT NULL DEFAULT current_timestamp COMMENT '创建时间',
+  `update_date` TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT '摊位信息表';

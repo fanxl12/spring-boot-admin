@@ -30,6 +30,9 @@ public class ImportServiceImpl implements ImportService {
     @Autowired
     private StockInService stockInService;
 
+    @Autowired
+    private StallService stallService;
+
     @Override
     public boolean create(String action, MultipartFile file) {
         if (file.isEmpty()) {
@@ -45,6 +48,8 @@ public class ImportServiceImpl implements ImportService {
             return stockInService.importData(file);
         } else if (action.equalsIgnoreCase("pesticideCheck")) {
             return pesticideCheckService.importData(file);
+        } else if (action.equalsIgnoreCase("stall")) {
+            return stallService.importData(file);
         }
         return false;
     }

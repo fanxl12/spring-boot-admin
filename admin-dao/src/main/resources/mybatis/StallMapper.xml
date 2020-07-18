@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fanxl.admin.dao.StallDao">
+
+    <!--批量创建-->
+    <insert id="saveList" parameterType="List">
+        insert into admin_stall (stall_index, name, category_name, code, business_license)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.stallIndex}, #{item.name}, #{item.categoryName}, #{item.code}, #{item.businessLicense})
+        </foreach>;
+    </insert>
+
+    <delete id="deleteAll">
+        delete from admin_stall;
+    </delete>
+
+</mapper>
