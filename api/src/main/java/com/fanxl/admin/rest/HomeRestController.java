@@ -1,8 +1,8 @@
 package com.fanxl.admin.rest;
 
-import com.fanxl.admin.exception.AdminException;
 import com.fanxl.admin.service.AdvertImageService;
 import com.fanxl.admin.service.CouponExerciseService;
+import com.fanxl.admin.service.PlaneService;
 import com.fanxl.admin.service.WheelPictureService;
 import com.fanxl.admin.utils.ResultUtil;
 import com.fanxl.admin.vo.ApiResponse;
@@ -31,6 +31,9 @@ public class HomeRestController {
     @Autowired
     private CouponExerciseService couponExerciseService;
 
+    @Autowired
+    private PlaneService planeService;
+
     @GetMapping("wheel")
     public ApiResponse getWheel() {
         return ResultUtil.success(wheelPictureService.getWheel());
@@ -44,6 +47,11 @@ public class HomeRestController {
     @GetMapping("coupon")
     public ApiResponse coupon() {
         return ResultUtil.success(couponExerciseService.getCouponUrl());
+    }
+
+    @GetMapping("plane")
+    public ApiResponse plane() {
+        return ResultUtil.success(planeService.getOne());
     }
 
     @GetMapping("test")
