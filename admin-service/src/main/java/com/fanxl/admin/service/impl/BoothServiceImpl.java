@@ -29,7 +29,7 @@ import java.util.List;
 @Service
 public class BoothServiceImpl implements BoothService {
 
-    private static final String FOLDER_NAME = "images/booth/";
+    private static final String FOLDER_NAME = "images/stall/";
 
     @Autowired
     private BoothDao boothDao;

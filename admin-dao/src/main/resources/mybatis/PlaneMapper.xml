@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fanxl.admin.dao.PlaneDao">
+
+    <!--获取最新的一张图-->
+    <select id="getOne" resultType="Plane">
+        select url, width, height
+        from admin_plane
+        order by create_date desc
+        limit 1;
+    </select>
+
+
+
+</mapper>
