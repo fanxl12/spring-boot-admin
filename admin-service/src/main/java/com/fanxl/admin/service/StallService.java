@@ -6,6 +6,8 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 /**
  * @description
  * @author: fanxl
@@ -29,9 +31,8 @@ public interface StallService {
 
     /**
      * 获取商铺信息
-     * @param pageable
      * @return
      */
-    PageInfo<StallVO> getList4Api(Pageable pageable);
+    List<StallVO> getList4Api();
 
 }

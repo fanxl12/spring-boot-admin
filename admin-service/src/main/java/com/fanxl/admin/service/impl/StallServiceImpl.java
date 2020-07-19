@@ -81,15 +81,12 @@ public class StallServiceImpl implements StallService {
     }
 
     @Override
-    public PageInfo<StallVO> getList4Api(Pageable pageable) {
-        PageHelper.startPage(pageable.getPageNumber(), pageable.getPageSize());
-        List<StallVO> list = stallDao.selectAll().stream().map(item -> {
+    public List<StallVO> getList4Api() {
+        return stallDao.selectAll().stream().map(item -> {
             StallVO stall = new StallVO();
             BeanUtils.copyProperties(item, stall);
             return stall;
         }).collect(Collectors.toList());
-        PageInfo pageInfo = new PageInfo<>(list, 6);
-        return pageInfo;
     }
 
 

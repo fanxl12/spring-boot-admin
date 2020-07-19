@@ -10,6 +10,8 @@ import lombok.Data;
 @Data
 public class StallVO {
 
+    private Long id;
+
     private Long stallIndex;
 
     private String name;
